@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Memoria Логин</title>
+</head>
+<body>
+    <div class="container">
+        <%- include('menu.ejs') %>
+				<% if (Array.isArray(messages) && messages.length > 0) { %> <!-- Проверяем, что messages является массивом -->
+					<div class="error-message">
+							<% messages.forEach(message => { %> <!-- Итерируем только если messages - массив -->
+									<p><%= message %></p>
+							<% }) %>
+					</div>
+				<% } else if (messages.length > 0) { %>
+					<p><%= messages %></p>
+					<% } %>
+        <h1>Авторизация</h1>
+        <form action="/login" method="post">
+            <input type="text" name="userlogin" placeholder="userlogin" required><br>
+            <input type="password" name="password" placeholder="Password" autocomplete="current-password" required><br>
+            <button class="edit-button" type="submit">Login</button>
+        </form>
+        <a href="/forgot-password">Забыли пароль?</a>
+    </div>
+</body>
+</html>

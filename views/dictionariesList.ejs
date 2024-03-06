@@ -1,0 +1,84 @@
+<!-- Ваш шаблон EJS -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Memoria <%= dictionary.name %></title>
+</head>
+<body>
+    <div class="container">
+        <%- include('menu.ejs') %>
+        <a href="/editDictionary/<%= dictionary._id %>">Добавить новое слово</a>
+        <a href="/study/<%= dictionary._id %>">Учить</a>
+        <h1><%= dictionary.name %></h1>
+        <% if (dictionary.words.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Слово</th>
+                    <th>Перевод</th>
+                    <th>Действия</th>
+                    <th>Оставшееся время</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% dictionary.words.forEach(word => { %>
+                <tr>
+                    <td><%= word.word %></td>
+                    <td><%= word.translation %></td>
+                    <td class="td_editWord">
+                        <!-- Формируем ссылки для редактирования и удаления слов -->
+                        <form action="/editWord/<%= word._id %>?dictionaryId=<%= dictionary._id %>" method="GET">
+                            <input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
+                            <button class="edit-button" type="submit">Редактировать</button>
+                        </form>
+                        <form action="/deleteWord/<%= word._id %>" method="POST">
+                            <button class="delete-button" type="submit">Удалить</button>
+                        </form>
+                    </td>
+                    <td id="countdown_<%= word._id %>"></td> <!-- Добавляем место для отображения оставшегося времени -->
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <% } else { %>
+        <p>В этом словаре нет слов.</p>
+        <% } %>
+    </div>
+
+    <!-- JavaScript для обновления времени каждую секунду -->
+    <script>
+        // Функция для форматирования времени
+        function formatTime(milliseconds) {
+            const seconds = Math.floor((milliseconds / 1000) % 60);
+            const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
+            const hours = Math.floor((milliseconds / (1000 * 60 * 60)) % 24);
+            const days = Math.floor((milliseconds / (1000 * 60 * 60 * 24)) % 30); // Учтите, что это не точное преобразование в дни
+            const months = Math.floor((milliseconds / (1000 * 60 * 60 * 24 * 30))); // Учтите, что это не точное преобразование в месяцы
+
+            return `${months} мес., ${days} дн., ${hours} ч., ${minutes} мин., ${seconds} сек.`;
+        }
+
+        // Функция для обновления времени на странице
+        function updateCountdown() {
+    <% dictionary.words.forEach(word => { %>
+        targetDate = new Date("<%= word.waitingTime %>");
+        currentTime = new Date();
+        difference = targetDate - currentTime;
+        
+        // Добавляем условие, чтобы обработать случай, когда targetDate меньше currentTime
+        if (difference < 0) {
+            difference = 0;
+        }
+
+        formattedTime = formatTime(difference);
+        document.getElementById("countdown_<%= word._id %>").innerText = formattedTime;
+    <% }); %>
+}
+        // Обновляем счетчик каждую секунду
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/style.css">
+	<title>Memoria Учить</title>
+</head>
+
+<body>
+
+	<div class="container">
+		<%- include('menu.ejs') %>
+		<a href="/editDictionary/<%= dictionary._id %>">Добавить новое слово</a>
+			<!-- <h1><%= dictionary.name %></h1> -->
+			<a href="/dictionariesList/<%= dictionary._id %>"><h1><%= dictionary.name %></h1></a>
+			
+			<% if (dictionary.words.length> 0) { %>
+
+				<table>
+					<thead>
+						<tr>
+							<th>Слово</th>
+							<th>Перевод</th>
+							<th>Действия</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% dictionary.words.forEach(word=> { %>
+							<% if(word.expectation == 'waited' || word.enum == 'new' ) { %>
+								<tr>
+									<td>
+										<%= word.word %>
+									</td>
+									<td>
+										<%= word.translation %>
+									</td>
+									<td class="td_learnWord">
+										<form action="/study/<%= word._id %>/repeated" method="POST">
+											<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
+											<input type="hidden" name="complexity" value="easy">
+											<!-- Скрытое поле для передачи значения complexity -->
+											<button class="learn-button" type="submit">Легко</button>
+										</form>
+										<p>
+											<%= word.enum %>
+										</p>
+									</td>
+									<td class="td_learnWord">
+										<form action="/study/<%= word._id %>/repeated" method="POST">
+											<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
+											<input type="hidden" name="complexity" value="normal">
+											<!-- Скрытое поле для передачи значения complexity -->
+											<button class="learn-button" type="submit">Нормально</button>
+										</form>
+									</td>
+									<td class="td_learnWord">
+										<form action="/study/<%= word._id %>/repeated" method="POST">
+											<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
+											<input type="hidden" name="complexity" value="hard">
+											<!-- Скрытое поле для передачи значения complexity -->
+											<button class="learn-button" type="submit">Трудно</button>
+										</form>
+									</td>
+								</tr>
+
+								<% }; %>
+									<% }); %>
+					</tbody>
+				</table>
+				<% } else { %>
+					<p>В этом словаре нет слов.</p>
+					<% } %>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Обучение</title>
+</head>
+<body>
+    <div class="container">
+			<%- include('menu.ejs') %>
+        <h1>Обучение</h1>
+        <h2>Словарь: <%= dictionary.name %></h2>
+        <% if (dictionary.words.length > 0) { %>
+            <ul>
+                <% dictionary.words.forEach(word => { %>
+									<!-- <% if (word.enum === 'new') { %> -->
+										<li>
+												<strong><%= word.word %></strong>: <%= word.translation %>
+												<button class="learn-button" onclick="openLearningForm('<%= word.word %>', '<%= word.translation %>')">Запоминать</button>
+										</li>
+								<!-- <% } %> -->
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>В этом словаре пока нет новых слов для обучения.</p>
+        <% } %>
+				<div id="learningForm" style="display: none;">
+					<div>
+							<label for="inputWord">Слово:</label>
+							<div id="inputWord" class="word-value"></div>
+					</div>
+					<div>
+							<label for="inputTranslation">Перевод:</label>
+							<div id="inputTranslation" class="translation-value"></div>
+					</div>
+					<!-- Кнопка "Легко" -->
+					<a href="">/study/id/setTimer/</a>
+					<!-- <button class="easy-button" >Легко</button>  -->
+					<!-- Кнопка "Трудно" -->
+					<button class="hard-button" onclick="onHardClick()">Трудно</button>
+					<!-- Кнопка "Нормально" -->
+					<button class="normal-button" onclick="onNormalClick()">Нормально</button>
+			</div>			
+    </div>
+
+    <script>
+        function openLearningForm(word, translation) {
+            document.getElementById("inputWord").innerText = word;
+						document.getElementById("inputTranslation").innerText = translation;
+            document.getElementById("learningForm").style.display = "block";
+        }
+
+				function onEasyClick() {
+							// Ваш обработчик для кнопки "Легко"
+							// Например, отправка запроса на сервер
+							console.log('Кнопка "Легко" нажата');
+					}
+			
+					function onHardClick() {
+							// Ваш обработчик для кнопки "Трудно"
+							// Например, отправка запроса на сервер
+							console.log('Кнопка "Трудно" нажата');
+					}
+
+					function onNormalClick() {
+							// Ваш обработчик для кнопки "Нормально"
+							// Например, отправка запроса на сервер
+							console.log('Кнопка "Нормально" нажата');
+					}
+    </script>
+</body>
+</html>

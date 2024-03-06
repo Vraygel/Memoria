@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Memoria Профиль</title>
+</head>
+
+<body>
+    <div class="container">
+			<%- include('menu.ejs') %>
+        <h1><%= user.username %></h1>
+				<p>Баланс: <%= user.balance %> рублей</p>
+
+        <!-- Проверяем, подтвержден ли email пользователя -->
+        <% if (user.contactinfo.email.confirmation) { %>
+        <p>Email подтвержден</p>
+        <% } else { %>
+        <p>Email не подтвержден</p>
+        <% } %>
+
+        <form action="/updateUsername" method="POST">
+            <label for="username">Имя:</label>
+            <input type="text" id="username" name="username" value="<%= user.username %>" placeholder="Имя">
+            <button class="edit-button" type="submit">Изменить</button>
+        </form>
+
+        <form action="/updateEmail" method="POST">
+            <label for="useremail">Email:</label>
+            <input type="text" id="useremail" name="useremail" value="<%= user.contactinfo.email.email %>"
+                placeholder="Email">
+            <button class="edit-button" type="submit">Изменить</button>
+        </form>
+
+        <form action="/updatePhoneNumber" method="POST">
+            <label for="phoneNumber">Телефон:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" value="<%= user.contactinfo.phoneNumber %>"
+                placeholder="Телефон">
+            <button class="edit-button" type="submit">Изменить</button>
+        </form>
+
+        <form action="/updateTelegramm" method="POST">
+            <label for="telegramm">Telegramm:</label>
+            <input type="text" id="telegramm" name="telegramm" value="<%= user.contactinfo.telegramm %>"
+                placeholder="Telegramm">
+            <button class="edit-button" type="submit">Изменить</button>
+        </form>
+
+        <form action="/users/deleteProfile" method="POST">
+            <button class="delete-button" type="submit">Удалить профиль</button>
+        </form>
+
+				<h1>Настройки оповещений</h1>
+        <form action="/updateAlerts" method="post">
+            <label>
+                <input type="checkbox" name="email" <% if (user.alerts.email) { %> checked <% } %>>
+                Оповещение по Email
+            </label><br>
+            <label>
+                <input type="checkbox" name="whatsapp" <% if (user.alerts.whatsapp) { %> checked <% } %>>
+                Оповещение по WhatsApp
+            </label><br>
+            <label>
+                <input type="checkbox" name="telegramm" <% if (user.alerts.telegramm) { %> checked <% } %>>
+                Оповещение по Telegramm
+            </label><br>
+            <label>
+                <input type="checkbox" name="push" <% if (user.alerts.push) { %> checked <% } %>>
+                Оповещение по Push-уведомлениям
+            </label><br>
+            <button class="edit-button" type="submit">Сохранить</button>
+        </form>
+
+        <a href="/users/logout">Выйти</a>
+    </div>
+</body>
+
+</html>

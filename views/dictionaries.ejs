@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Memoria Мои Словари</title>
+</head>
+<body>
+		
+    <div class="container">
+			<%- include('menu.ejs') %>
+        <h1>Список моих словарей</h1>
+        <% if (dictionaries.length > 0) { %>
+            <% dictionaries.forEach(dictionary => { %>
+                <div class="dictionary">
+                    <a href="/dictionariesList/<%= dictionary._id %>"><h2><%= dictionary.name %></h2></a>
+                    <!-- Кнопка редактирования -->
+                    <!-- <a href="/editDictionary/<%= dictionary._id %>">Редактировать</a> -->
+										<!-- Кнопка "учить" -->
+										<button class="study-button" onclick="window.location.href='/study/<%= dictionary._id %>'">Учить</button>
+
+										<button class="edit-button" onclick="window.location.href='/editDictionary/<%= dictionary._id %>'">Добавить новое слово</button>
+                    <!-- Кнопка удаления со словарем связана -->
+                    <button class="delete-button" onclick="confirmDelete('<%= dictionary._id %>')">Удалить</button>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>У вас пока нет созданных словарей.</p>
+        <% } %>
+
+        <!-- Форма для создания нового словаря -->
+        <h2>Создать новый словарь</h2>
+        <form action="/createDictionary" method="POST">
+            <label for="dictionaryName">Название словаря:</label>
+            <input type="text" id="dictionaryName" name="dictionaryName" required>
+            <button class="create-button" type="submit">Создать</button>
+        </form>
+    </div>
+
+    <!-- JavaScript для подтверждения удаления словаря -->
+    <script>
+        function confirmDelete(dictionaryId) {
+            if (confirm("Вы уверены, что хотите удалить этот словарь?")) {
+                window.location.href = "/deleteDictionary?id=" + dictionaryId;
+            }
+        }
+    </script>
+</body>
+</html>

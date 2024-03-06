@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/style.css">
+    <title>Memoria Регистрация</title>
+</head>
+<body>
+<!-- Секция для вывода flash сообщений -->
+
+
+	<% if (typeof messages !== 'undefined' && messages !== null) { %>
+		<div class="flash-messages">
+			<div class="message">
+				<div class="alert">
+					<p><%= messages %></p>
+					<span class="close-btn" onclick="closeMessage(this)">x</span>
+				</div>
+			</div>
+		</div>
+		<% } %>
+
+
+
+
+<!-- Основной контент вашего приложения -->
+<div class="container">
+	<%- include('menu.ejs') %>
+	<h1>Регистрация</h1>
+    <form class="form-register" action="/users/register" method="post">
+        <input type="text" name="userlogin" placeholder="Логин" required><br>
+				<input type="email" name="email" placeholder="Email" ><br>
+        <input type="password" name="password" placeholder="Пароль" required><br>
+        <input type="text" name="username" placeholder="Имя" ><br>
+        
+				<label>
+					<span class="question-mark" title="Зачем вводить телефон?"></span>
+					<input type="text" name="phoneNumber" id="phoneNumber" placeholder="Телефон" ><br>
+				</label>
+				<label>
+					<span class="question-mark" title="Зачем вводить 'telegramm'?"></span>
+					<input type="text" name="telegramm" placeholder="telegramm" ><br>
+				</label>
+				
+        <button class="edit-button" type="submit">Зарегистрироваться</button>
+    </form>
+</div>
+
+<script>
+	// Функция для закрытия сообщения
+	function closeMessage(element) {
+			element.closest('.message').remove();
+	}
+
+	// Отображение всплывающих сообщений
+	document.addEventListener('DOMContentLoaded', function () {
+			const flashMessages = document.querySelector('.flash-messages');
+			if (flashMessages) {
+					flashMessages.style.display = 'block';
+					setTimeout(() => {
+							flashMessages.style.display = 'none';
+					}, 2000); // Скрыть сообщения через 5 секунд
+			}
+	});
+
+	
+</script>
+    
+</body>
+</html>

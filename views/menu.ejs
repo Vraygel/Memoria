@@ -1,0 +1,25 @@
+<nav class="menu">
+
+	<% if (typeof userIsVerified === 'undefined') { %>
+			<% var userIsVerified = false; %>
+	<% } %>
+
+	<% if (typeof userIsAdmin === 'undefined') { %>
+			<% var userIsAdmin = false; %>
+	<% } %>
+
+	<% if (userIsVerified) { %>
+			<a href="/dictionaries">Мои Словари</a>
+			<a href="/users/profile">Профиль</a>
+			<% if (userIsAdmin) { %>
+					<a href="/admin">Админ</a>
+			<% } %>
+	<% } else { %>
+			<a href="/login">Вход</a>
+			<a href="/users/register">Регистрация</a>
+	<% } %>
+</nav>
+
+
+
+
