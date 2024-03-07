@@ -1,6 +1,9 @@
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const passport = require('passport');
+const uuid = require('uuid');
+
 const { sendConfirmationEmail } = require('../utils/email');
 
 // Обработка регистрации нового пользователя
@@ -59,3 +62,48 @@ exports.registerUser = async (req, res) => {
         res.redirect('/');
     }
 };
+
+// Аутентификация пользователя
+exports.authenticateUser = (req, res, next) => {
+	passport.authenticate('local', (err, user, info) => {
+			if (err) { // Если произошла ошибка аутентификации
+					return next(err);
+			}
+			if (!user) { // Если пользователь не найден или аутентификация не удалась
+					req.flash('error', 'Invalid username or password');
+					return res.redirect('/auth/login'); // Перенаправляем на страницу входа с сообщением об ошибке
+			}
+			// Если аутентификация прошла успешно
+			req.logIn(user, (err) => {
+					if (err) {
+							return next(err);
+					}
+					return res.redirect('/profile'); // Перенаправляем на страницу профиля после успешной аутентификации
+			});
+	})(req, res, next);
+};
+
+
+// Обработка GET-запроса на страницу входа
+exports.getLoginPage = (req, res) => {
+    if (req.isAuthenticated()) {
+        return res.redirect('/profile');
+    } else {
+        res.render('login');
+    }
+};
+
+// Функция для выхода пользователя из системы
+exports.logoutUser = (req, res) => {
+	// Вызываем метод logout(), предоставленный Passport для выхода пользователя из сеанса
+	req.logout((err) => {
+			if (err) {
+					console.error('Ошибка при выходе пользователя:', err);
+					// Обработка ошибки, если таковая имеется
+					return res.redirect('/'); // Перенаправление пользователя в случае ошибки
+			}
+			// После успешного выхода пользователя перенаправляем его на главную страницу
+			res.redirect('/');
+	});
+};
+

@@ -11,9 +11,9 @@
 <body>
     <div class="container">
         <%- include('menu.ejs') %>
-       
+        <% if (userIsAdmin) { %>
             <h1>Пользователи</h1>
-						<a href="/createUser">Добавить нового пользователя</a>
+						<a href="/users/createUser">Добавить нового пользователя</a>
             <table>
                 <tr>
                     <th>Логин</th>
@@ -42,15 +42,15 @@
                         <td><%= countDictionaries %></td>
                         <td><%= countWords %></td>
                         <td>
-                            <a href="/editUser/<%= user._id %>">Редактировать</a>
-                            <form action="/deleteUser/<%= user._id %>" method="post" onsubmit="return confirm('Вы уверены?')">
+                            <a href="/users/editUser/<%= user._id %>">Редактировать</a>
+                            <form action="/users/deleteUser/<%= user._id %>" method="post" onsubmit="return confirm('Вы уверены?')">
                                 <button type="submit">Удалить</button>
                             </form>
                         </td>
                     </tr>
                 <% }) %>
             </table>
-
+        <% } %>
     </div>
 </body>
 

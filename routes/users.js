@@ -5,9 +5,9 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const uuid = require('uuid');
 const sendConfirmationEmail = require('../middleware/sendConfirmationEmail');
-const TelegramBot = require('node-telegram-bot-api');
-require('dotenv').config();
 
+require('dotenv').config();
+const TelegramBot = require('node-telegram-bot-api');
 const telegrammToken = process.env.telegrammToken
 const bot = new TelegramBot(`${telegrammToken}`, { polling: true });
 
@@ -204,32 +204,32 @@ router.post('/createUser', async (req, res) => {
 	}
 });
 
-router.get('/profile', async (req, res) => {
-	res.render('profile', { user: req.user });
-	try {
-		const user = await User.findById(req.user._id);
-		if (!user) {
-			req.flash('error', 'Пользователь не найден');
-			return res.redirect('/profile');
-		}
+// router.get('/profile', async (req, res) => {
+// 	res.render('profile', { user: req.user });
+// 	try {
+// 		const user = await User.findById(req.user._id);
+// 		if (!user) {
+// 			req.flash('error', 'Пользователь не найден');
+// 			return res.redirect('/profile');
+// 		}
 
-		// Отдельно обрабатываем событие приема сообщения от бота
-		bot.on('message', async (msg) => {
-			let userloginTelegramm = req.user.contactinfo.telegramm.toLowerCase().trim();
-			let userloginTelegrammMemoria = msg.chat.userlogin.toLowerCase().trim();
-			if (userloginTelegramm == userloginTelegrammMemoria) {
-				user.contactinfo.chatId = msg.chat.id;
-				await user.save();
-			}
-		});
+// 		// Отдельно обрабатываем событие приема сообщения от бота
+// 		bot.on('message', async (msg) => {
+// 			let userloginTelegramm = req.user.contactinfo.telegramm.toLowerCase().trim();
+// 			let userloginTelegrammMemoria = msg.chat.userlogin.toLowerCase().trim();
+// 			if (userloginTelegramm == userloginTelegrammMemoria) {
+// 				user.contactinfo.chatId = msg.chat.id;
+// 				await user.save();
+// 			}
+// 		});
 
-	} catch (error) {
-		console.error(error);
-		req.flash('error', 'Произошла ошибка');
-		console.log('ыва фыва фыва фыва фыва');
-		res.redirect('/profile');
-	}
-});
+// 	} catch (error) {
+// 		console.error(error);
+// 		req.flash('error', 'Произошла ошибка');
+// 		console.log('ыва фыва фыва фыва фыва');
+// 		res.redirect('/profile');
+// 	}
+// });
 
 
 router.post('/study/:id/repeated', async (req, res) => {

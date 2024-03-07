@@ -59,7 +59,7 @@
 			<%- include('menu.ejs') %>
 			<% if(user) { %>
         <h1>Редактировать пользователя</h1>
-        <form action="/users/editUser/<%= user._id %>" method="post">
+        <form action="/editUser/<%= user._id %>" method="post">
             <label for="userlogin">Логин:</label>
             <input type="text" id="userlogin" name="userlogin" value ="<%= user.userlogin %>" readonly>
             <input type="hidden" id="password" name="password" value ="<%= user.password %>">

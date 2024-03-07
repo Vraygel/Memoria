@@ -12,7 +12,7 @@
 	<div class="container">
 		<%- include('menu.ejs') %>
 		<h1>Добавить новое слово</h1>
-		<form action="/updateDictionary/<%= dictionary._id %>" method="POST">
+		<form action="/dictionaries/updateDictionary/<%= dictionary._id %>" method="POST">
 			<label for="word">Слово:</label>
 			<textarea type="text" id="word" name="word" value="<%= dictionary.word %>" required></textarea>
 			<!-- <textarea name="" id="" cols="30" rows="10"> -->

@@ -1,5 +1,5 @@
 // Подключение middleware для проверки аутентификации
-const isAuthenticated = require('./isAuthenticated');
+const isAuthenticated = require('./authenticated');
 
 // Middleware для проверки административных прав пользователя
 const isAdmin = function(req, res, next) {

@@ -16,7 +16,7 @@ const crypto = require('crypto');
 const app = express();
 
 
-const isAuthenticated = require('./middleware/isAuthenticated');
+const isAuthenticated = require('./middleware/authenticated');
 const isAdmin = require('./middleware/isAdmin');
 
 
@@ -794,9 +794,7 @@ app.post('/study/:id/repeated', isAuthenticated, async (req, res) => {
 	const userIsVerified = req.isAuthenticated();
 	try {
 		const wordId = req.params.id;
-		console.log(req.user.contactinfo.telegramm); 
 		const chatId = req.user.contactinfo.chatId
-		// console.log(wordId);
 		const complexity = req.body.complexity; // Получаем значение из поля "complexity"
 
 		// Найдем словарь, содержащий слово, по идентификатору слова

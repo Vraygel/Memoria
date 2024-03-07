@@ -1,7 +1,7 @@
 // Создаем middleware для проверки аутентификации пользователя
 const isAuthenticated = function(req, res, next) {
 	// Проверяем, если запрос не направлен на страницу входа '/login'
-	if (req.path !== '/login' && req.path !== '/users/register') {
+	if (req.path !== '/auth/login' && req.path !== '/auth/register') {
 		// Проверяем, авторизован ли пользователь
 		if (req.isAuthenticated()) {
 			// Если пользователь аутентифицирован, устанавливаем переменную userIsVerified в res.locals и продолжаем выполнение запроса
@@ -9,7 +9,7 @@ const isAuthenticated = function(req, res, next) {
 			return next(); // Передаем управление следующему middleware
 		} else {
 			// Если пользователь не аутентифицирован, перенаправляем его на страницу входа
-			res.redirect('/login');
+			res.redirect('/auth/login');
 		}
 	} else {
 		// Если запрос направлен на страницу входа, пропускаем его дальше без проверки аутентификации

@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <%- include('menu.ejs') %>
-        <a href="/editDictionary/<%= dictionary._id %>">Добавить новое слово</a>
+        <a href="/dictionaries/editDictionary/<%= dictionary._id %>">Добавить новое слово</a>
         <a href="/study/<%= dictionary._id %>">Учить</a>
         <h1><%= dictionary.name %></h1>
         <% if (dictionary.words.length > 0) { %>

@@ -21,7 +21,7 @@
         <p>Email не подтвержден</p>
         <% } %>
 
-        <form action="/updateUsername" method="POST">
+			  <form action="/updateUsername" method="POST">
             <label for="username">Имя:</label>
             <input type="text" id="username" name="username" value="<%= user.username %>" placeholder="Имя">
             <button class="edit-button" type="submit">Изменить</button>
@@ -48,7 +48,7 @@
             <button class="edit-button" type="submit">Изменить</button>
         </form>
 
-        <form action="/users/deleteProfile" method="POST">
+        <form action="/deleteProfile" method="POST">
             <button class="delete-button" type="submit">Удалить профиль</button>
         </form>
 
@@ -73,7 +73,7 @@
             <button class="edit-button" type="submit">Сохранить</button>
         </form>
 
-        <a href="/users/logout">Выйти</a>
+        <a href="/auth/logout">Выйти</a>
     </div>
 </body>
 

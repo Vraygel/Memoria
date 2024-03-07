@@ -4,28 +4,31 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const uuid = require('uuid');
+
 const User = require('./models/User');
 const Dictionary = require('./models/Dictionary');
 const flash = require('connect-flash');
-const TelegramBot = require('node-telegram-bot-api');
+// const TelegramBot = require('node-telegram-bot-api');
 const nodemailer = require('nodemailer'); // Для отправки писем подтверждения
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const router = express.Router();
 
 
+require('dotenv').config();
 
-
-const isAuthenticated = require('./middleware/isAuthenticated');
+const isAuthenticated = require('./middleware/authenticated');
 const isAdmin = require('./middleware/isAdmin');
 
 const app = express();
 
 
 
-// Замените 'YOUR_TELEGRAM_BOT_TOKEN' на ваш токен, который вы получили от BotFather
-const bot = new TelegramBot('7054200844:AAGQxaFyS3sweEgLt1_EKRx66kAo1Lq-ze8', { polling: true });
+// // Замените 'YOUR_TELEGRAM_BOT_TOKEN' на ваш токен, который вы получили от BotFather
+// const telegrammToken = process.env.telegrammToken
+// const bot = new TelegramBot(`${telegrammToken}`, { polling: true });
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -56,6 +59,24 @@ app.use((req, res, next) => {
 });
 
 
+
+const users = require('./routes/users');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // // Удаление всех пользователей из базы данных
 // // Dictionary.deleteMany({})
 //   .then(() => {
@@ -76,51 +97,6 @@ app.use((req, res, next) => {
 app.use(express.static('public'));
 
 
-passport.use(new LocalStrategy({
-	usernameField: 'userlogin',
-	passReqToCallback: true
-}, (req, userlogin, password, done) => {
-	// Использование req здесь
-}));
-
-
-
-// Настройка Passport
-passport.use(new LocalStrategy({ usernameField: 'userlogin', passReqToCallback: true }, (req, userlogin, password, done) => {
-	User.findOne({ userlogin: userlogin })
-		.then(user => {
-			if (!user) {
-
-				console.log('НЕ верный логин');
-				req.flash('error', 'ошибка логина')
-				return done(null, false, { message: 'Incorrect name.' }); // Возвращаем сообщение об ошибке
-
-			}
-			bcrypt.compare(password, user.password)
-				.then(res => {
-					if (res) { return done(null, user); }
-					else {
-
-						console.log('НЕ верный пароль');
-						return done(null, false);
-
-					}
-				})
-				.catch(err => done(err));
-		})
-		.catch(err => done(err));
-}));
-
-passport.serializeUser((user, done) => done(null, user.id));
-passport.deserializeUser((id, done) => {
-	User.findById(id)
-		.then(user => {
-			done(null, user);
-		})
-		.catch(err => {
-			done(err, null);
-		});
-});
 
 
 
@@ -134,123 +110,69 @@ app.use(isAdmin);
 
 // Маршруты
 app.get('/', (req, res) => {
-	res.render('register', { messages: null })
-})
-
-app.get('/login', (req, res, next) => {
-
-	// Проверяем, если пользователь уже аутентифицирован, перенаправляем его на главную страницу
-	if (req.isAuthenticated()) {
-		return res.redirect('/profile');
-	} else {
-		console.log(req.flash('message')); // Проверяем, что флеш-сообщения установлены
-		// Иначе рендерим страницу входа
-		// res.render('login', { messages: 'Неверный Логин или пароль'}); // Передаем сообщения об ошибках на страницу
-
-		res.render('login'); // Передаем сообщения об ошибках на страницу
-		// res.render('login');
-	}
-
+  res.redirect('/login');
 });
 
 
-app.post('/login',
-	passport.authenticate('local', {
-		failureRedirect: '/login', // Перенаправление на страницу входа
-		failureFlash: true, // Включение флеш-сообщений
-	}),
-	function (req, res) {
-		res.redirect(req.user.userstatus === 'admin' ? '/admin' : '/profile'); // Перенаправление на главную страницу в случае успешной аутентификации
-	}
-);
 
 
+app.use('/users', users); 
+// app.use('/users/register', users)
 
 
-// app.post('/login', [passport.authenticate('local'), isAdmin], (req, res) => {
-// 	// Если пользователь успешно аутентифицирован и является администратором,
-// 	// он будет перенаправлен на страницу /admin.
-// 	// Если пользователь не администратор, но успешно аутентифицирован,
-// 	// он будет перенаправлен на страницу /profile.
-// 	res.redirect(req.user.userstatus === 'admin' ? '/admin' : '/profile');
+// app.post('/register', async (req, res) => {
+// 	try {
+// 		// Генерация временного токена
+// 		const token = crypto.randomBytes(20).toString('hex');
+
+// 		const existingUser = await User.findOne({ userlogin: req.body.userlogin });
+// 		if (existingUser) {
+// 			req.flash('error', 'Пользователь с таким логином уже существует');
+// 			return res.redirect('/register');
+// 		}
+
+// 		// Хеширование пароля
+// 		const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+// 		// Создание нового пользователя
+// 		const user = new User({
+// 			_id: uuid.v4(),
+// 			userlogin: req.body.userlogin,
+// 			password: hashedPassword,
+// 			name: req.body.username,
+// 			contactinfo: {
+// 				email: {
+// 					email: req.body.email,
+// 					token: token,
+// 					confirmation: false
+// 				},
+// 				phoneNumber: req.body.phoneNumber,
+// 				telegramm: req.body.telegramm
+// 			},
+// 			alerts: {
+// 				email: false,
+// 				whatsapp: false,
+// 				telegramm: false,
+// 				push: false,
+// 			},
+// 		});
+
+// 		// Сохранение пользователя в базе данных
+// 		await user.save();
+
+// 		// Отправка письма для подтверждения email
+// 		sendConfirmationEmail(req.body.email, token);
+
+// 		// Перенаправление пользователя на страницу профиля
+// 		res.redirect('/');
+// 		// res.render('confirm_email', { token, error: 'Неверный код подтверждения. Попробуйте еще раз.' });
+// 	} catch (error) {
+// 		console.error(error);
+// 		res.redirect('/');
+// 	}
 // });
 
 
-// Обработчик POST запроса для регистрации
-app.post('/register', async (req, res) => {
-	try {
-		// Генерация временного токена
-		const token = crypto.randomBytes(20).toString('hex');
-
-		const existingUser = await User.findOne({ userlogin: req.body.userlogin });
-		if (existingUser) {
-			req.flash('error', 'Пользователь с таким логином уже существует');
-			return res.redirect('/register');
-		}
-
-		// Хеширование пароля
-		const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-		// Создание нового пользователя
-		const user = new User({
-			_id: uuid.v4(),
-			userlogin: req.body.userlogin,
-			password: hashedPassword,
-			name: req.body.username,
-			contactinfo: {
-				email: {
-					email: req.body.email,
-					token: token,
-					confirmation: false
-				},
-				phoneNumber: req.body.phoneNumber,
-				telegramm: req.body.telegramm
-			},
-			alerts: {
-				email: false,
-				whatsapp: false,
-				telegramm: false,
-				push: false,
-			},
-		});
-
-		// Сохранение пользователя в базе данных
-		await user.save();
-
-		// Отправка письма для подтверждения email
-		sendConfirmationEmail(req.body.email, token);
-
-		// Перенаправление пользователя на страницу профиля
-		res.redirect('/');
-		// res.render('confirm_email', { token, error: 'Неверный код подтверждения. Попробуйте еще раз.' });
-	} catch (error) {
-		console.error(error);
-		res.redirect('/');
-	}
-});
-
-// Функция для отправки письма подтверждения
-async function sendConfirmationEmail(email, token) {
-	const transporter = nodemailer.createTransport({
-		service: 'Yandex',
-		auth: {
-			user: 'neverhoteb@yandex.ru',
-			pass: 'Ghjcnjqgfhjkm1981_yan'
-		}
-	});
-
-	const mailOptions = {
-		from: 'neverhoteb@yandex.ru',
-		to: email,
-		subject: 'Подтверждение email',
-		html: `
-            <p>Пожалуйста, подтвердите ваш email, перейдя по следующей ссылке:</p>
-            <a href="http://example.com/confirm-email/${token}">Подтвердить email</a>
-        `
-	};
-
-	await transporter.sendMail(mailOptions);
-}
 
 // Обработчик GET запроса для подтверждения email по токену
 app.get('/confirm-email/:token', async (req, res) => {
@@ -287,37 +209,9 @@ app.get('/email-confirmed', (req, res) => {
 
 
 
-app.get('/register', (req, res) => {
-	res.render('register', { messages: 'Пользователь с таким логином уже существует' }); // Передаем flash сообщения в шаблон
 
-});
 
-app.get('/profile', async (req, res) => {
-	res.render('profile', { user: req.user });
-	try {
-		const user = await User.findById(req.user._id);
-		if (!user) {
-			req.flash('error', 'Пользователь не найден');
-			return res.redirect('/profile');
-		}
 
-		// Отдельно обрабатываем событие приема сообщения от бота
-		bot.on('message', async (msg) => {
-			let userloginTelegramm = req.user.contactinfo.telegramm.toLowerCase().trim();
-			let userloginTelegrammMemoria = msg.chat.userlogin.toLowerCase().trim();
-			if (userloginTelegramm == userloginTelegrammMemoria) {
-				user.contactinfo.chatId = msg.chat.id;
-				await user.save();
-			}
-		});
-
-	} catch (error) {
-		console.error(error);
-		req.flash('error', 'Произошла ошибка');
-		console.log('ыва фыва фыва фыва фыва');
-		res.redirect('/profile');
-	}
-});
 
 // app.get('/login', (req, res) => {
 
@@ -518,26 +412,6 @@ app.post('/updateEmail', async (req, res) => {
 	}
 });
 
-app.post('/deleteProfile', async (req, res) => {
-	try {
-		await User.findByIdAndDelete(req.user._id);
-		req.logout(() => {
-			res.redirect('/');
-		});
-	} catch (error) {
-		console.error(error);
-		req.flash('error', 'Произошла ошибка при удалении профиля');
-		res.redirect('/profile');
-	}
-});
-
-app.get('/logout', (req, res) => {
-	req.logout(() => {
-		res.redirect('/');
-	});
-});
-
-
 app.get('/dictionaries', async (req, res) => {
 	try {
 		const userId = req.user._id;
@@ -553,7 +427,6 @@ app.get('/dictionaries', async (req, res) => {
 		res.status(500).send('Internal Server Error');
 	}
 });
-
 
 app.post('/createDictionary', async (req, res) => {
 	try {
@@ -575,7 +448,6 @@ app.post('/createDictionary', async (req, res) => {
 		res.status(500).send('Internal Server Error');
 	}
 });
-
 
 // Маршрут для удаления словаря
 app.get('/deleteDictionary', async (req, res) => {
@@ -773,143 +645,7 @@ app.post('/study/:id', async (req, res) => {
 
 
 
-app.post('/study/:id/repeated', async (req, res) => {
-	try {
-		const wordId = req.params.id;
-		console.log(req.user.contactinfo.telegramm);
-		const chatId = req.user.contactinfo.chatId
-		// console.log(wordId);
-		const complexity = req.body.complexity; // Получаем значение из поля "complexity"
 
-		// Найдем словарь, содержащий слово, по идентификатору слова
-		const dictionary = await Dictionary.findOne({ 'words._id': wordId });
-		if (!dictionary) {
-			return res.status(404).send('Словарь не найден');
-		}
-
-		// Найдем индекс слова в массиве слов
-		const wordIndex = dictionary.words.findIndex(word => word._id == wordId);
-		if (wordIndex === -1) {
-			return res.status(404).send('Слово не найдено');
-		}
-		dictionary.words[wordIndex].expectation = 'wait';
-		let setTime
-
-		switch (dictionary.words[wordIndex].enum) {
-			// В случае, если значение равно 'new'
-			case 'new':
-				// Действие, которое нужно выполнить
-				dictionary.words[wordIndex].enum = 'first';
-				setTime = 60000
-				break; // Обязательный оператор break, чтобы завершить блок switch
-			case 'first':
-				// Действие, которое нужно выполнить
-				dictionary.words[wordIndex].enum = 'third';
-				setTime = 1200000
-				break; // Обязательный оператор break, чтобы завершить блок switch
-			case 'third':
-				// Действие, которое нужно выполнить
-				dictionary.words[wordIndex].enum = 'fourth';
-				setTime = 21600000
-				break; // Обязательный оператор break, чтобы завершить блок switch			
-			case 'fourth':
-				// Действие, которое нужно выполнить
-				dictionary.words[wordIndex].enum = 'fifth';
-				setTime = 1512000000
-				break; // Обязательный оператор break, чтобы завершить блок switch
-			case 'fifth':
-				// Действие, которое нужно выполнить
-				dictionary.words[wordIndex].enum = 'sixth';
-				setTime = 6574365000
-				break; // Обязательный оператор break, чтобы завершить блок switch
-			case 'sixth':
-				// Действие, которое нужно выполнить
-				dictionary.words[wordIndex].enum = 'seventh';
-				setTime = 15768000000
-				break; // Обязательный оператор break, чтобы завершить блок switch
-			case 'seventh':
-				// Действие, которое нужно выполнить
-				dictionary.words[wordIndex].enum = 'eighth';
-				setTime = 31536000000
-				break; // Обязательный оператор break, чтобы завершить блок switch
-			case 'eighth':
-				// Действие, которое нужно выполнить
-				dictionary.words[wordIndex].enum = 'eighth';
-				setTime = 31536000000
-				break; // Обязательный оператор break, чтобы завершить блок switch
-
-			default:
-				// Действие по умолчанию
-				console.log('Это не новое слово');
-				break; // Необязательный оператор break, но его желательно использовать
-		}
-
-		switch (complexity) {
-			case 'easy':
-				setTime = setTime + (setTime * 0.1)
-				console.log(setTime);
-				break;
-			case 'hard':
-				setTime = setTime - setTime * 0.1
-				console.log(setTime);
-				break;
-		}
-
-		function addMillisecondsToCurrentDate(milliseconds) {
-			// Получаем текущую дату
-			let currentDate = new Date();
-			// Прибавляем заданное количество миллисекунд
-			currentDate.setTime(currentDate.getTime() + milliseconds);
-			// Возвращаем полученную дату
-			return currentDate;
-		}
-
-		const newDate = addMillisecondsToCurrentDate(setTime);
-
-		dictionary.words[wordIndex].waitingTime = newDate;
-
-		setTimeout(async () => {
-			try {
-				// Отправка сообщения пользователю после срабатывания таймера
-				console.log('Пора повторить это слово!');
-				// Обновление полей слова в словаре
-				const updatedDictionary = await Dictionary.findByIdAndUpdate(
-					dictionary._id,
-					{
-						$set: {
-							'words.$[word].expectation': 'waited',
-							'words.$[word].waitingTime': '0'
-						}
-					},
-					{
-						arrayFilters: [{ 'word._id': dictionary.words[wordIndex]._id }],
-						new: true
-					}
-				);
-
-				// Здесь может быть ваш код для отправки сообщения пользователю
-				// Функция для отправки сообщения пользователю с ссылкой
-				let chatId = req.user.contactinfo.chatId
-				function sendMessageToUser(chatId, dictionaryId) {
-					const message = `Пора повторить слова из словаря! Начните учиться здесь: http://localhost:3000/study/${dictionaryId}`;
-					bot.sendMessage(chatId, message);
-				}
-				sendMessageToUser(chatId, dictionary._id);
-			} catch (error) {
-				console.error('Error updating word:', error);
-			}
-		}, setTime); // Перевод времени в миллисекунды
-
-		// Сохраняем обновленный словарь в базе данных
-		await dictionary.save();
-
-		// После успешного обновления перенаправляем пользователя обратно на страницу редактирования словаря
-		res.redirect(`/study/${dictionary._id}`);
-	} catch (error) {
-		console.error(error);
-		res.status(500).send('Произошла ошибка при обновлении слова');
-	}
-});
 
 
 
@@ -936,6 +672,8 @@ app.get('/admin', isAdmin, async (req, res) => {
 		// console.log(user);
 		// await user.save();
 
+		const user = await User.findOne();
+		console.log(user);
 
 		const dictionaries = await Dictionary.find({});
 
@@ -998,22 +736,7 @@ app.post('/updateAlerts', isAuthenticated, async (req, res) => {
 	}
 });
 
-app.get('/editUser/:userId', async (req, res) => {
-	try {
-		const userId = req.params.userId;
-		const user = await User.findById(userId);
-		if (!user) {
-			// Обработка случая, когда пользователь не найден
-			return res.status(404).send('Пользователь не найден');
-		}
-		// Рендеринг шаблона страницы редактирования с найденным пользователем
-		res.render('edit-user', { user: user });
-	} catch (error) {
-		console.error(error);
-		// Обработка ошибки
-		res.status(500).send('Произошла ошибка');
-	}
-});
+
 
 app.post('/updateUser/:userId', async (req, res) => {
 	try {
@@ -1037,14 +760,9 @@ app.post('/updateUser/:userId', async (req, res) => {
 	}
 });
 
-app.get('/createUser', (req, res) => {
-	res.render('createUser'); // Рендеринг шаблона страницы создания нового пользователя
-});
-
-app.post('/submitUser', (req, res) => {
-  // Обработка данных формы и сохранение пользователя
-});
-
+// app.get('/createUser', (req, res) => {
+// 	res.render('createUser'); // Рендеринг шаблона страницы создания нового пользователя
+// });
 
 // // Проверка аутентификации
 // function isAuthenticated(req, res, next) {
