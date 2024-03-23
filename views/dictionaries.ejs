@@ -1,50 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <title>Memoria Мои Словари</title>
 </head>
+
 <body>
-		
-    <div class="container">
-			<%- include('menu.ejs') %>
-        <h1>Список моих словарей</h1>
-        <% if (dictionaries.length > 0) { %>
-            <% dictionaries.forEach(dictionary => { %>
-                <div class="dictionary">
-                    <a href="/dictionaries/dictionariesList/<%= dictionary._id %>"><h2><%= dictionary.name %></h2></a>
-                    <!-- Кнопка редактирования -->
-                    <!-- <a href="/editDictionary/<%= dictionary._id %>">Редактировать</a> -->
-										<!-- Кнопка "учить" -->
-										<button class="study-button" onclick="window.location.href='/study/<%= dictionary._id %>'">Учить</button>
+    <%- include('template.ejs') %>
+        <%- include('menu.ejs') %>
+            <div class="container">
+                <div class="wrapper">
 
-										<button class="edit-button" onclick="window.location.href='/dictionaries/editDictionary/<%= dictionary._id %>'">Добавить новое слово</button>
-                    <!-- Кнопка удаления со словарем связана -->
-                    <button class="delete-button" onclick="confirmDelete('<%= dictionary._id %>')">Удалить</button>
+                <h1>Мои разделы</h1>
+                <div class="newDictonaries">
+                    <h2>Создать новый раздел</h2>
+                    <form action="/dictionaries" method="POST">
+                        <label for="dictionaryName">Название раздела:</label>
+                        <input type="text" id="dictionaryName" name="dictionaryName" required>
+                        <button class="create-button" type="submit">Создать</button>
+                    </form>
                 </div>
-            <% }); %>
-        <% } else { %>
-            <p>У вас пока нет созданных словарей.</p>
-        <% } %>
+                
+                <% if (dictionaries.length> 0) { %>
+                    <h2>Список моих разделов</h2>
+                    <% dictionaries.forEach(dictionary=> { %>
+                        <!-- <div class="dictionary"> -->
+                            <a href="/dictionaries/dictionariesList/<%= dictionary._id %>">
+                                <h2 class="dictionaries_h2" >
+                                    <%= dictionary.name %>
+                                </h2>
+                            </a>
+                            <!-- <h2>
+                                <%= dictionary.name %>
+                            </h2> -->
+                            <!-- Кнопка редактирования -->
+                            <!-- <a href="/editDictionary/<%= dictionary._id %>">Редактировать</a> -->
+                            <!-- Кнопка "учить" -->
+                            <!-- <button class="study-button"
+                              onclick="window.location.href='/study/<%= dictionary._id %>'">Учить слова</button> -->
+                            <!-- <form class="dictionary_form" action="/words/addWordPage/<%= dictionary._id %>"
+                                method="GET">
+                                <button class="edit-button" type="submit">Добавить
+                                    новое слово</button>
+                            </form> -->
 
-        <!-- Форма для создания нового словаря -->
-        <h2>Создать новый словарь</h2>
-        <form action="/dictionaries" method="POST">
-            <label for="dictionaryName">Название словаря:</label>
-            <input type="text" id="dictionaryName" name="dictionaryName" required>
-            <button class="create-button" type="submit">Создать</button>
-        </form>
-    </div>
+                            <!-- <form class="dictionary_form" action="/study/words/<%= dictionary._id %>" method="GET">
+                                <button class="edit-button" type="submit">Учить слова</button>
+                            </form> -->
 
-    <!-- JavaScript для подтверждения удаления словаря -->
-    <script>
-        function confirmDelete(dictionaryId) {
-            if (confirm("Вы уверены, что хотите удалить этот словарь?")) {
-                window.location.href = "/dictionaries/deleteDictionary?id=" + dictionaryId;
-            }
-        }
-    </script>
+
+
+                            <!-- <form class="dictionary_form" action="/study/repetition/" method="GET">
+                                <input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
+                                <button class="edit-button" type="submit">Повторять</button>
+                            </form> -->
+
+
+
+
+                            <!-- <button class="edit-button"
+                                onclick="window.location.href='/dictionaries/editDictionary/<%= dictionary._id %>'">Добавить
+                                новое слово</button> -->
+                            <!-- Кнопка удаления со словарем связана -->
+
+                            <!-- <button class="deleteDictionary" onclick="confirmDelete('<%= dictionary._id %>')">Удалить
+                                словарь</button> -->
+                        <!-- </div> -->
+                        <% }); %>
+                            <% } else { %>
+                                <p>У вас пока нет созданных словарей.</p>
+                                <% } %>
+
+                                    <!-- Форма для создания нового словаря -->
+
+            </div>
+        </div>
+
+            <!-- JavaScript для подтверждения удаления словаря -->
+            <script>
+                function confirmDelete(dictionaryId) {
+                    if (confirm("Вы уверены, что хотите удалить этот словарь?")) {
+                        window.location.href = "/dictionaries/deleteDictionary?id=" + dictionaryId;
+                    }
+                }
+            </script>
 </body>
+
 </html>

@@ -194,7 +194,7 @@ app.get('/confirm-email/:token', async (req, res) => {
 		await user.save();
 
 		// Перенаправляем пользователя на страницу, где можно сообщить об успешном подтверждении email
-		res.redirect('/email-confirmed');
+		res.redirect('/profile');
 	} catch (error) {
 		console.error(error);
 		res.status(500).send('Произошла ошибка при подтверждении email.');

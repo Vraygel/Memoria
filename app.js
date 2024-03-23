@@ -4,34 +4,34 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
 
+
 const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/profileRoutes');
-const deleteProfileRoute = require('./routes/deleteProfileRoute');
 const adminRoutes = require('./routes/adminRoutes');
+const resetPassword = require('./routes/PasswordRoutes'); // Подключаем маршрутизатор для сброса пароля
+const emailConfirmationRoutes = require('./routes/emailConfirmationRoutes');
 const dictionaryRoutes = require('./routes/dictionaryRoutes');
 const wordRoutes = require('./routes/wordRoutes');
 const studyRoutes = require('./routes/studyRoutes');
-const forgotPassword = require('./routes/forgotPasswordRoutes'); // Подключаем маршрутизатор для сброса пароля
-const resetPassword = require('./routes/resetPasswordRoutes'); // Подключаем маршрутизатор для сброса пароля
+const purchaseRoutes = require('./routes/purchaseRoutes'); // Импорт роутера для покупок
+
+
 
 
 const isAuthenticated = require('./middleware/authenticated');
 const isAdmin = require('./middleware/isAdmin');
+const user = require('./middleware/user');
+const telEmailRegExp = require('./middleware/telEmailRegExp');
 
 
-
-
-
-
-
+const checkingDate = require('./utils/checkingDate');
 
 
 // Подключение к MongoDB
-mongoose.connect('mongodb://localhost:27017/myapp', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log('Connected to MongoDB'))
+mongoose.connect('mongodb://localhost:27017/passport-example')
+  .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Error connecting to MongoDB:', err));
+
 
 const app = express();
 
@@ -63,49 +63,95 @@ app.use(passport.session());
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
-// Добавляем middleware для проверки аутентификации перед isAdmin
-app.use(isAuthenticated);
+// Добавляем middleware для проверки аутентификации
+// app.use(isAuthenticated);
 
-// Затем добавляем middleware isAdmin
-// app.use(isAdmin);
+// Добавляем middleware user
+app.use(user);
+
+// Добавляем middleware user telEmailRegExp
+app.use(telEmailRegExp);
 
 
 
 
 app.get('/', (req, res) => {
-  res.redirect('/auth/login');
+  res.redirect('/auth/register');
 });
 
 // Подключение маршрутов аутентификации
 app.use('/auth', authRoutes);
 
-// Подключаем маршруты профиля пользователя
-app.use('/', profileRoutes);
 
-// Подключаем маршруты удаления профиля пользователя
-app.use('/', deleteProfileRoute);
+
 
 // Подключаем маршруты для профиля
-app.use('/profile', profileRoutes);
+app.use('/user', isAuthenticated, profileRoutes);
+
+// Подключаем роут для сброса пароля
+app.use('/password', resetPassword);
+
+// Подключаем маршруты для подтверждения email
+app.use('/confirmEmail', emailConfirmationRoutes);
 
 // Подключаем маршруты для администратора
-app.use(adminRoutes);
-app.use('/admin', adminRoutes);
+app.use('/admin', isAdmin, isAuthenticated, adminRoutes);
 
 // Подключение роутов для работы со словарями
-app.use('/dictionaries', dictionaryRoutes);
+app.use('/dictionaries', isAuthenticated, dictionaryRoutes);
 
 // Подключение роутов для слов
-app.use(wordRoutes);
+app.use('/words', isAuthenticated, wordRoutes);
 
 // Подключение роутов для изучения словаря
-app.use(studyRoutes);
+app.use('/study', isAuthenticated, studyRoutes);
 
-// Подключаем роут для сброса пароля
-app.use('/', forgotPassword);
 
-// Подключаем роут для сброса пароля
-app.use('/', resetPassword);
+// Подключаем маршруты для покупки слов и словарей
+app.use('/purchase', isAuthenticated, purchaseRoutes);
+
+
+
+
+
+
+
+
+
+
+// // Функция для сравнения текущей даты с датой из словаря
+// async function compareDates() {
+//   try {
+//       // Извлекаем все записи из словаря
+//       const dictionaries = await Dictionary.find();
+
+//       dictionaries.forEach(dictionary => {
+//         dictionary.words.forEach(word => {
+//           const wordDate = new Date(word.waitingTime);
+//           const wordEnum = word.enum
+//           const currentDate = new Date();
+          
+//           console.log(wordEnum);
+
+//           if (wordDate <= currentDate && wordEnum !== 'new') {
+//             console.log(`It's time to review word "${word.word}" from dictionary "${dictionary.name}"`);
+//             // Implement your logic here, for example, send a notification or update the word's status
+//           }
+//         });
+//       });
+
+
+//   } catch (error) {
+//       console.error('Error comparing dates:', error);
+//   }
+// }
+
+// Устанавливаем интервал для выполнения функции каждые 10 секунд (в миллисекундах)
+setInterval(checkingDate, 10000); // 10000 миллисекунд = 10 секунд
+
+
+
+
 
 
 

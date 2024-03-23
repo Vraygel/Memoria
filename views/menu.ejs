@@ -1,16 +1,30 @@
 <nav class="menu">
 
+	<% if (typeof user === 'undefined') { %>
+			<% var user = false; %>
+	<% } %>
 
-			<a href="/dictionaries">Мои Словари</a>
-			<a href="/profile">Профиль</a>
+
+
+	<% if (user) { %>
+			<a href="/dictionaries"><button>Мои Термины</button></a>
+			<a href="/user/profile"><button>Профиль</button></a>
+			<a href="/auth/logout"><button>Выйти</button></a>
+			<% if (user.userstatus == 'admin') { %>
+        <a href="/admin"><button>Админ</button></a>
+    <% } %>
 		
-					<a href="/admin">Админ</a>
-	
-			<a href="/auth/login">Вход</a>
-			<a href="/auth/register">Регистрация</a>
-	
+	<% } else { %>
+			<a href="/auth/login"><button>Вход</button></a>
+			<a href="/auth/register"><button>Регистрация</button></a>
+	<% } %>
 </nav>
 
 
 
 
+
+			
+			
+			
+			

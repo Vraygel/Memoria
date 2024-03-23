@@ -52,13 +52,14 @@
     </style>
 </head>
 <body>
+    <%- include('template.ejs') %>
 	<% if (typeof user === 'undefined') { %>
 		<% var user = null; %>
 <% } %>
     <div class="container">
 			<%- include('menu.ejs') %>
         <h1>Создание нового пользователя</h1>
-					<form action="/createUser" method="post">
+					<form action="/admin/createUser" method="post">
             <label for="userlogin">Логин:</label>
             <input type="text" id="userlogin" name="userlogin" required>
             <label for="password">Пароль:</label>
@@ -70,14 +71,16 @@
 							<option value="user">simpleUser</option>
 							<option value="admin">admin</option>
 						</select><br>
-            <label for="balance">Баланс:</label>
-            <input type="text" id="balance" name="balance">
+            <label for="memoCoin">Баланс:</label>
+            <input type="text" id="memoCoin" name="memoCoin">
+            <label for="dictionariesMax">Максимум словарей:</label>
+            <input type="text" id="dictionariesMax" name="dictionariesMax">
+            <label for="wordsMax">Максимум Слов:</label>
+            <input type="text" id="wordsMax" name="wordsMax">
             <label for="email">Email:</label>
             <input type="text" id="email" name="email">
             <label for="phoneNumber">Телефон:</label>
             <input type="text" id="phoneNumber" name="phoneNumber">
-            <label for="telegramm">Telegramm:</label>
-            <input type="text" id="telegramm" name="telegramm">
             <label>Оповещение по Email:</label>
             <input type="checkbox" name="emailNotification">
             <label>Оповещение по WhatsApp:</label>

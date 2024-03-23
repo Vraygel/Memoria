@@ -1,55 +1,342 @@
-style.css
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	/* outline: solid red; */
+}
 
 body {
 	font-family: Arial, sans-serif;
-	background-color: #f0f0f0;
-	margin: 0;
-	padding: 0;
-}
-
-.container {
-	width: 70%;
+	font-size: 16px;
+	color: #eaeaea;
+	width: 1024px;
 	margin: 0 auto;
-	padding: 20px;
+	/* font-family: 'Roboto', sans-serif; */
+	background-color: #303030;
 }
-
-h1 {
-	color: #333;
-}
-
-form {
-	display: flex;
-	
-	align-items: center;
-}
-
-.form-register{
-flex-direction: column;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-	padding: 10px;
-	/* margin-bottom: 10px; */
-	border: 1px solid #ccc;
-	border-radius: 5px;
-}
-
-
-
 
 a {
-	color: #007bff;
+	color: #eaeaea;
 	text-decoration: none;
 }
 
 a:hover {
-	text-decoration: underline;
+	color: #febb38;
+	text-decoration: none;
+}
+
+.menu {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	background-color: #222222;
+	padding: 20px 24px;
+	border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.container {
+	/* width: 1024px; */
+	margin: 0 auto;
+	padding: 40px;
+	/* padding-top: 40px; */
+	border: 2px solid #222222;
+	border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	flex-wrap: wrap;
+	/* background-color: #86e4cd; */
+}
+
+h1{
+	margin-top: 20px;
+}
+
+h1,
+h2,
+h3 {
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+button {
+	padding: 10px 20px;
+	background-color: #535353;
+	font-size: 16px;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #3b444b;
+	/* зеленый при наведении */
+	/* color: #9b8fe6; */
+	/* border: 1px solid ; */
+}
+
+.login-button,
+.register-button {
+	width: 100%;
+}
+
+.forgot-password {
+	font-size: 16px;
+	margin-left: auto;
+	margin-bottom: 40px;
 }
 
 
-.flash-messages {
+
+.deleteProfil {
+	font-size: 16px;
+	margin-left: auto;
+}
+
+.login,
+.form-register, .password {
+	width: 480px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	padding: 32px;
+	border: 2px solid #222222;
+	background-color: #2f4f4f;
+	border-radius: 8px;
+}
+
+.login input,
+.form-register input, .password input {
+	width: 100%;
+	margin-bottom: 20px;
+	appearance: none;
+	font-size: 16px;
+
+}
+
+.login label,
+.form-register label, .password label {
+	margin-bottom: 10px;
+}
+
+
+
+
+.newDictonaries{
+	margin-bottom: 60px;
+}
+
+.newDictonaries form {
+	display: flex;
+	flex-direction: column;
+}
+
+.newDictonaries label {
+margin-bottom: 10px;
+}
+
+.newDictonaries input {
+	/* margin-bottom: 20px; */
+	font-size: 16px;
+	}
+
+
+input,
+textarea {
+	padding: 12px;
+	/* margin-bottom: 20px; */
+	border: 1px solid #222222;
+	border-radius: 8px;
+	font-size: 16px;
+
+	
+}
+
+.container .last-input {
+	margin-bottom: 60px;
+}
+
+.wrapper{
+	background-color: #2f4f4f;
+	width: 100%;
+	border-radius: 8px;
+	padding: 16px;
+	padding-bottom: 60px;
+}
+
+.balanceInfo {
+	margin-bottom: 60px;
+	border-radius: 8px;
+	border: 1px solid #ccc;
+	padding: 10px;
+	width: 100%;
+}
+
+.purchase {
+	width: 60px;
+	margin-left: auto;
+	margin-bottom: 20px;
+}
+
+.profilInfo{
+	display: flex;
+	flex-direction: column;
+}
+
+.profilInfo input {
+margin-bottom: 20px;
+font-size: 16px;
+}
+
+.profilInfo label{
+	margin-bottom: 10px;
+}
+
+.delete-button {
+	all: unset;
+}
+
+.delete-button a {
+	cursor: pointer;
+}
+
+.delete-button:hover {
+	all: unset;
+}
+
+
+.header_h1 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* width: 480px; */
+}
+
+.balanceInfo p {
+	margin-bottom: 10px;
+}
+
+.userInfo {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.userInfo label {
+	/* margin-right: 10px; */
+	min-width: 80px;
+	/* width: 100px; */
+}
+
+.updateAlerts {
+	display: flex;
+	/* margin-bottom: 20px; */
+}
+
+.updateAlerts_checkbox {
+	margin-right: 20px;
+}
+
+.edit-button,
+.create-button {
+	margin-top: 20px;
+	width: 100%;
+}
+
+.logout {
+	margin-left: auto;
+	margin-top: 80px;
+}
+
+.dictionary {
+	margin-bottom: 20px;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+}
+
+.dictionaries_h2{
+	text-align: left;
+}
+
+.dictionary_form {
+	margin-bottom: 20px;
+}
+
+
+.updateDictionary textarea {
+	margin-bottom: 20px;
+}
+
+.updateWord textarea {
+	margin-bottom: 20px;
+}
+
+.updateWord label{
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+.updateDictionary_label {
+	min-width: 100px;
+	margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+textarea {
+	width: 100%;
+	height: 100px;
+}
+
+
+.studyWord{
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+}
+
+.studyWord label{
+ display: inline-block;
+ margin-bottom: 10px;
+}
+
+.studyWord input{
+	display: inline-block;
+	margin-bottom: 20px;
+ }
+ 
+
+
+
+
+
+
+
+
+/* input[type="text"],
+input[type="password"],
+input[type="email"] {
+	padding: 10px;
+	/* margin-bottom: 10px; */
+/* border: 1px solid #ccc;
+	border-radius: 5px;
+} */
+/* .flash-messages {
 	position: fixed;
 	top: 20px;
 	left: 50%;
@@ -62,12 +349,21 @@ a:hover {
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 	display: none;
 }
+
 .flash-messages .message {
 	margin-bottom: 10px;
-}
+} */
+
+
+
+
+
+
+
 .flash-messages .alert {
 	position: relative;
 }
+
 .flash-messages .close-btn {
 	position: absolute;
 	top: 5px;
@@ -75,16 +371,32 @@ a:hover {
 	cursor: pointer;
 }
 
-.dictionary {
-	margin-bottom: 10px;
-	padding: 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
+.dictinaries_menu{
+	display: flex;
+	justify-content: space-around;
+	margin-bottom: 20px;
+
 }
 
-.td_editWord{
-	width: auto;
-	display: flex;
+.dictionaryList_td{
+	width: 369px;
+}
+
+
+
+
+.td_editWord {
+	height: auto;
+	/* display: flex; */
+	/* flex-direction: column;
+	align-items: center; */
+	width: 170px;
+}
+
+.td_editWord button{
+
+margin-top: 10px;
+margin-bottom: 10px;
 }
 
 table {
@@ -92,98 +404,33 @@ table {
 	width: 100%;
 }
 
-th, td {
+th,
+td {
 	padding: 8px;
 	text-align: left;
 	border-bottom: 1px solid #ddd;
 }
 
-tr:hover {
-	background-color: #f2f2f2;
-}
 
-.menu {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
 
-.menu a {
-	margin: 0 10px;
-	padding: 10px 20px;
-	background-color: #3498db; /* синий */
-	color: #fff;
-	text-decoration: none;
-	border: none;
-	border-radius: 5px;
-	transition: background-color 0.3s ease;
-}
-
-.menu a:hover {
-	background-color: #2ecc71; /* зеленый при наведении */
-}
-
-.menu a {
-	color: #333;
-	text-decoration: none;
-	transition: color 0.3s ease;
-}
-
-.menu a:hover {
-	color: blue;
-}
-
-.edit-button, .create-button, .delete-button, .study-button, .learn-button {
-	padding: 10px 20px;
-	background-color: #3498db; /* синий */
-	color: #fff;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s ease;
-}
-
-.edit-button:hover, .create-button:hover, .delete-button:hover, .study-button:hover, .learn-button:hover {
-	background-color: #2ecc71; /* зеленый при наведении */
-}
-
-.question-mark{
+.question-mark {
 	position: absolute;
 	left: -25px;
 }
 
+
+/* 
 label {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px; /* Отступ снизу для разделения элементов */
+display: flex;
+  align-items: center; 
+  margin-bottom: 10px; Отступ снизу для разделения элементов 
 	position: relative;
 }
 
 label span {
-  margin-right: 10px; /* Отступ между текстом вопроса и полем ввода */
+  margin-right: 10px;  Отступ между текстом вопроса и полем ввода
 }
-
-label span::after {
-  content: '?'; /* Добавляем символ вопроса */
-  display: inline-block;
-  width: 20px; /* Размер иконки */
-  height: 20px;
-  border-radius: 50%; /* Делаем круглую иконку */
-  background-color: #ccc; /* Цвет фона */
-  text-align: center; /* Выравниваем символ по центру */
-  line-height: 20px; /* Выравниваем символ по вертикали */
-  cursor: pointer; /* Делаем курсор указателем при наведении */
-}
-
-
-
-
-
-
-
-
-
-
+ */
 
 
 table {
@@ -191,16 +438,87 @@ table {
 	border-collapse: collapse;
 }
 
-th,
-td {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
+
+
+
+
+/* Стили для всплывающей подсказки */
+.telegrammTooltip {
+	width: 100%;
+	display: none;
+	/* position: absolute; */
+	background-color: #303030;
+	border: 1px solid #303030;
+	padding: 10px;
+	border-radius: 8px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	z-index: 999;
 }
 
-th {
-	background-color: #f2f2f2;
+.telegrammTooltip .closeTooltip {
+	display: inline-block;
+	width: 100%;
+	margin-top: 20px;
 }
 
+/* Стили для стрелочки всплывающей подсказки
+.telegrammTooltip::after {
+	content: '';
+	position: absolute;
+	top: -10px;
+	left: 50%;
+} */
+
+/* styles.css */
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	/* Полупрозрачный темный фон */
+	z-index: 1000;
+	/* Чтобы модальное окно было выше других элементов */
+}
+
+.modal {
+	position: fixed;
+	background-color: #303030;
+
+	
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 33%;
+	/* Ширина модального окна */
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	z-index: 1001;
+	/* Чтобы модальное окно было выше оверлея */
+}
+
+.modal p{
+	margin-bottom: 20px;
+	border-radius: 8px;
+}
+
+/* .popup {
+	width: 33%;
+	background-color: #fff;
+	padding: 20px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+} */
 
 
+.myDiv {
+	display: none;
+	height: auto;
+	/* background-color: ; */
+}

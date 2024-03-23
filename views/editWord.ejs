@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memoria Редактироваать слово</title>
+    <title>Memoria Редактировать термин</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-		<%- include('menu.ejs') %>
+    <%- include('template.ejs') %>
+    <%- include('menu.ejs') %>
     <div class="container">
-        <h1>Редактирование слова</h1>
-        <form action="/editWord/<%= word._id %>" method="POST">
-            <label for="word">Слово:</label>
+        <div class="wrapper">
+        
+        <h1>Редактирование термина</h1>
+        <form class="updateWord" action="/words/editWord/<%= word._id %>" method="POST">
+            <label for="word">Темин:</label>
             <textarea type="text" id="word" name="word" required><%= word.word %></textarea>
-            <label for="translation">Перевод:</label>
+            <label for="translation">Определение:</label>
             <textarea type="text" id="translation" name="translation" required><%= word.translation %></textarea>
             <button class="create-button" type="submit">Сохранить</button>
         </form>
     </div>
+</div>
 </body>
 </html>

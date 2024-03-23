@@ -1,71 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="/css/style.css">
-    <title>Memoria Регистрация</title>
+	<title>Memoria Регистрация</title>
 </head>
+
 <body>
-<!-- Секция для вывода flash сообщений -->
-
-
-	<% if (typeof messages !== 'undefined' && messages !== null) { %>
-		<div class="flash-messages">
-			<div class="message">
-				<div class="alert">
-					<p><%= messages %></p>
-					<span class="close-btn" onclick="closeMessage(this)">x</span>
-				</div>
-			</div>
-		</div>
-		<% } %>
-
-
-
-
-<!-- Основной контент вашего приложения -->
-<div class="container">
+	<%- include('template.ejs') %>
 	<%- include('menu.ejs') %>
-	<h1>Регистрация</h1>
-    <form class="form-register" action="/auth/register" method="post">
-        <input type="text" name="userlogin" placeholder="Логин" required><br>
-				<input type="email" name="email" placeholder="Email" ><br>
-        <input type="password" name="password" placeholder="Пароль" required><br>
-        <input type="text" name="username" placeholder="Имя" ><br>
-        
-				<label>
-					<span class="question-mark" title="Зачем вводить телефон?"></span>
-					<input type="text" name="phoneNumber" id="phoneNumber" placeholder="Телефон" ><br>
-				</label>
-				<label>
-					<span class="question-mark" title="Зачем вводить 'telegramm'?"></span>
-					<input type="text" name="telegramm" placeholder="telegramm" ><br>
-				</label>
+			<!-- Основной контент вашего приложения -->
+			<div class="container">
 				
-        <button class="edit-button" type="submit">Зарегистрироваться</button>
-    </form>
-</div>
+					<h1>Регистрация</h1>
+					<form class="form-register" action="/auth/register" method="post">
+						<label for="email">Имя:</label>
+						<input type="text" name="username" placeholder="Имя" required>
+						<label for="email">Логин:</label>
+						<input type="text" name="userlogin" placeholder="Логин" required>
+						<label for="email">Email:</label>
+							<input type="email" name="email" placeholder="Email" id="email" oninput="validateEmail(this)">
+							<span class="error-message" id="emailErrorMessage" style="display: none;">Некорректный формат	email</span>
+							<label for="email">Пароль:</label>
+						<input class="last-input" type="password" name="password" placeholder="Пароль" required>
+						
 
-<script>
-	// Функция для закрытия сообщения
-	function closeMessage(element) {
-			element.closest('.message').remove();
-	}
+						<!-- Поле ввода телефона с верификацией по регулярному выражению
+						<label>
+							<span class="question-mark" title="Зачем вводить телефон?"></span>
+							<input type="text" name="phoneNumber" id="phoneNumber" placeholder="Телефон"
+								oninput="validatePhoneNumber(this)">
+							<span class="error-message" id="phoneErrorMessage" style="display: none;">Некорректный формат
+								номера</span>
+						</label><br> -->
 
-	// Отображение всплывающих сообщений
-	document.addEventListener('DOMContentLoaded', function () {
-			const flashMessages = document.querySelector('.flash-messages');
-			if (flashMessages) {
-					flashMessages.style.display = 'block';
-					setTimeout(() => {
-							flashMessages.style.display = 'none';
-					}, 2000); // Скрыть сообщения через 5 секунд
-			}
-	});
+						<!-- <label>
+							<span class="question-mark" title="Зачем вводить 'telegramm'?"></span>
+							<input type="text" name="telegramm" placeholder="telegramm"><br>
+						</label> -->
 
-	
-</script>
-    
+						<button class="register-button" type="submit">Зарегистрироваться</button>
+					</form>
+			</div>
+
+			<script>
+				// Функция для закрытия сообщения
+				function closeMessage(element) {
+					element.closest('.message').remove();
+				}
+
+				// Функция для проверки ввода Emai
+				function validateEmail(input) {
+					const phoneNumberInput = input.value;
+					const phoneErrorMessage = document.getElementById('emailErrorMessage');
+
+					if (!phoneNumberInput.match(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu)) {
+						phoneErrorMessage.style.display = 'inline-block';
+					} else {
+						phoneErrorMessage.style.display = 'none';
+					}
+				}
+
+				// Функция для проверки ввода номера телефона
+				function validatePhoneNumber(input) {
+					const phoneNumberInput = input.value;
+					const phoneErrorMessage = document.getElementById('phoneErrorMessage');
+
+					if (!phoneNumberInput.match(/^(\+7|8)[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/)) {
+						phoneErrorMessage.style.display = 'inline-block';
+					} else {
+						phoneErrorMessage.style.display = 'none';
+					}
+				}
+			</script>
+
 </body>
+
 </html>

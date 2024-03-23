@@ -6,9 +6,7 @@ const authController = require('../controllers/authController');
 router.post('/register', authController.registerUser);
 
 // Маршрут для отображения страницы регистрации
-router.get('/register', (req, res) => {
-    res.render('register'); // Передаем flash сообщения в шаблон
-});
+router.get('/register', authController.getRegisterPage);
 
 // Маршрут для аутентификации пользователя
 router.post('/login', authController.authenticateUser);

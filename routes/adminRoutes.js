@@ -5,7 +5,7 @@ const adminController = require('../controllers/adminController');
 
 
 // Маршрут для страницы администратора
-router.get('/admin', isAdmin, adminController.adminPage);
+router.get('/', adminController.adminPage);
 
 // Маршрут для удаления пользователя администратором
 router.post('/deleteUser/:id', adminController.deleteUser);

@@ -9,7 +9,6 @@ module.exports = function(passport) {
     }, (req, userlogin, password, done) => {
 			User.find({})
     .then(users => {
-        console.log('Найденные пользователи:', users);
         // Делайте что-то с найденными пользователями здесь
     })
     .catch(err => {
@@ -18,16 +17,17 @@ module.exports = function(passport) {
         User.findOne({ userlogin: userlogin })
             .then(user => {
                 if (!user) {
-                    console.log('Неверный логин');
-                    req.flash('error', 'Ошибка логина');
-                    return done(null, false, { message: 'Incorrect name.' });
+                    console.log('Неверный логин (сообщение из файла passport.js)');
+                    req.flash('message', 'Не верный логин');
+                    return done(null, false);
                 }
                 bcrypt.compare(password, user.password)
                     .then(res => {
                         if (res) { 
                             return done(null, user); 
                         } else {
-                            console.log('Неверный пароль');
+                            console.log('Не верный пароль (сообщение из файла passport.js)');
+                            req.flash('message', 'Не верный пароль');
                             return done(null, false);
                         }
                     })

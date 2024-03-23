@@ -9,17 +9,20 @@
 </head>
 
 <body>
+    <%- include('template.ejs') %>
     <div class="container">
         <%- include('menu.ejs') %>
        
             <h1>Пользователи</h1>
-						<a href="/createUser">Добавить нового пользователя</a>
+						<a href="/admin/createUser">Добавить нового пользователя</a>
             <table>
                 <tr>
                     <th>Логин</th>
-                    <th>Имя</th>
-                    <th>Телефон</th>
-                    <th>Telegram</th>
+                    <!-- <th>Имя</th> -->
+                    <th>Баланс MemoCoin</th>
+                    <!-- <th>Telegram</th> -->
+                    <th>Максимум словарей</th>
+                    <th>Максимум Слов</th>
                     <th>Всего словарей</th>
                     <th>Всего слов</th>
                     <th>Действие</th>
@@ -28,22 +31,18 @@
                     <% let id = user._id %>
                     <% let countDictionaries = 0 %>
                     <% let countWords = 0 %>
-                    <% for (const iterator of dictionaries) { %>
-                        <% if (iterator.user == id) { %>
-                            <% countDictionaries += 1 %>
-                            <% countWords += iterator.words.length %>
-                        <% } %>
-                    <% } %>
                     <tr>
                         <td><%= user.userlogin %></td>
-                        <td><%= user.username %></td>
-                        <td><%= user.contactinfo.phoneNumber %></td>
-                        <td><%= user.contactinfo.telegramm %></td>
-                        <td><%= countDictionaries %></td>
-                        <td><%= countWords %></td>
+                        <!-- <td><%= user.username %></td> -->
+                        <td><%= user.balance.memoCoin %></td>
+                        <td><%= user.dictionaries.dictionariesMax %></td>
+                        <td><%= user.words.wordsMax %></td>
+                        <!-- <td><%= user.contactinfo.telegramm %></td> -->
+                        <td><%= user.dictionaries.dictionariesСreated %></td>
+                        <td><%= user.words.wordsСreated %></td>
                         <td>
-                            <a href="/editUser/<%= user._id %>">Редактировать</a>
-                            <form action="/deleteUser/<%= user._id %>" method="post" onsubmit="return confirm('Вы уверены?')">
+                            <a href="/admin/editUser/<%= user._id %>">Редактировать</a>
+                            <form action="/admin/deleteUser/<%= user._id %>" method="post" onsubmit="return confirm('Вы уверены?')">
                                 <button type="submit">Удалить</button>
                             </form>
                         </td>

@@ -12,10 +12,12 @@ exports.adminPage = async (req, res) => {
         const dictionaries = await Dictionary.find({});
 
         // Рендеринг шаблона с информацией о пользователях и словарях
-        res.render('admin', { users, dictionaries });
+        res.render('admin', { users, dictionaries, messages: req.flash('message') });
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).send('Internal Server Error');
+        // req.flash('message', 'Неверный формат email');
+        req.flash('message', 'Что-то пошло не так');
+        res.redirect('/admin');
     }
 };
 
@@ -23,11 +25,12 @@ exports.adminPage = async (req, res) => {
 exports.renderCreateUserPage = async (req, res) => {
     try {
         // Рендеринг шаблона страницы создания пользователя
-        res.render('createUser');
+        res.render('createUser', { messages: req.flash('message') });
     } catch (error) {
         console.error(error);
         // В случае ошибки выводим сообщение и код ошибки 500
-        res.status(500).send('Произошла ошибка');
+        req.flash('message', 'Что-то пошло не так');
+        res.redirect('/admin');
     }
 };
 
@@ -41,7 +44,7 @@ exports.createUser = async (req, res) => {
         const existingUser = await User.findOne({ userlogin: req.body.userlogin });
         if (existingUser) {
             // Если пользователь уже существует, выводим сообщение об ошибке
-            req.flash('error', 'Пользователь с таким логином уже существует');
+            req.flash('message', 'Пользователь с таким логином уже существует');
             return res.redirect('/admin/createUser');
         }
 
@@ -55,7 +58,18 @@ exports.createUser = async (req, res) => {
             password: hashedPassword,
             username: req.body.username,
             userstatus: req.body.userstatus,
-            balance: req.body.balance || 0,
+            balance: {
+                memoCoin: req.body.memoCoin || 0,
+                balanceAllTime: 0,
+            },
+            dictionaries: {
+                dictionariesMax: req.body.maxDictionaries || 2,
+                dictionariesСreated: 0,
+            },
+            words: {
+                wordsMax: req.body.maxWords || 100,
+                wordsСreated: 0,
+            },
             contactinfo: {
                 email: {
                     email: req.body.email,
@@ -74,6 +88,8 @@ exports.createUser = async (req, res) => {
             },
         });
 
+        // console.log(user);
+
         // Сохранение нового пользователя в базе данных
         await user.save();
 
@@ -81,6 +97,7 @@ exports.createUser = async (req, res) => {
         res.redirect('/admin');
     } catch (error) {
         console.error(error);
+        req.flash('message', 'Что-то пошло не так');
         // В случае ошибки перенаправляем пользователя на страницу создания пользователя снова
         res.redirect('/admin/createUser');
     }
@@ -103,33 +120,37 @@ exports.deleteUser = async (req, res) => {
         // await Dictionary.deleteMany({ user: mongoose.Types.ObjectId(userId) });
 
         if (deletedUser) {
+            req.flash('message', 'Пользователь успешно удален');
             res.redirect('/admin'); // Перенаправляем после успешного удаления на страницу администратора
         } else {
-            res.status(404).send('Пользователь не найден');
+            req.flash('message', 'Пользователь не найден');
+            return res.redirect('/admin');
         }
     } catch (error) {
         console.error(error);
-        res.status(500).send('Ошибка при удалении пользователя');
+        req.flash('message', 'Ошибка при удалении пользователя');
+        return res.redirect('/admin');
     }
 };
 
 // Контроллер для страницы редактирования пользователя администратором
 exports.editUserPage = async (req, res) => {
 	try {
-			// Получаем ID пользователя из параметров запроса
-			const userId = req.params.id;
 			// Находим пользователя по ID
-			const user = await User.findById(userId);
+			const user = await User.findById(req.params.id);
 			if (!user) {
 					// Если пользователь не найден, возвращаем ошибку 404
-					return res.status(404).send('Пользователь не найден');
+                    req.flash('message', 'Пользователь не найден');
+                    return res.redirect('/admin');
 			}
 			// Рендерим шаблон страницы редактирования с найденным пользователем
-			res.render('editUser', { user });
+			res.render('editUser', { user, messages: req.flash('message') });
 	} catch (error) {
 			console.error(error);
 			// В случае ошибки отправляем статус 500 и сообщение об ошибке
-			res.status(500).send('Произошла ошибка');
+			req.flash('message', 'Что-то пошло не так');
+        // В случае ошибки перенаправляем пользователя на страницу создания пользователя снова
+            res.redirect('/admin/editUser');
 	}
 };
 
@@ -142,25 +163,26 @@ exports.updateUser = async (req, res) => {
 			// Обновляем свойства пользователя на основе данных из формы
 			user.username = req.body.username;
 			user.userstatus = req.body.userstatus;
-			user.balance = req.body.balance;
+			user.balance.memoCoin = req.body.memoCoin || 0;
+            user.dictionaries.dictionariesMax = req.body.dictionariesMax || 0,
+            user.words.wordsMax = req.body.wordsMax || 0, 
 			user.contactinfo.email.email = req.body.email;
 			user.contactinfo.phoneNumber = req.body.phoneNumber;
-			user.contactinfo.telegramm = req.body.telegramm;
-			user.alerts.email = req.body.emailNotification === 'on';
+          	user.alerts.email = req.body.emailNotification === 'on';
 			user.alerts.whatsapp = req.body.whatsappNotification === 'on';
 			user.alerts.telegramm = req.body.telegramNotification === 'on';
 			user.alerts.push = req.body.pushNotification === 'on';
 
 			// Сохраняем обновленного пользователя в базе данных
 			await user.save();
-
+            req.flash('message', 'Пользователь успешно сохранен');
 			// Перенаправляем пользователя на страницу администратора после успешного обновления
 			res.redirect('/admin');
 	} catch (error) {
 			console.error(error);
 			// В случае ошибки перенаправляем пользователя на страницу редактирования с сообщением об ошибке
-			req.flash('error', 'Произошла ошибка при редактировании пользователя');
-			res.redirect(`/editUser/${req.params.id}`);
+			req.flash('message', 'Произошла ошибка при редактировании пользователя');
+			res.redirect(`/admin/editUser/${req.params.id}`);
 	}
 };
 

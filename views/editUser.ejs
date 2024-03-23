@@ -52,6 +52,7 @@
     </style>
 </head>
 <body>
+    <%- include('template.ejs') %>
 	<% if (typeof user === 'undefined') { %>
 		<% var user = null; %>
 <% } %>
@@ -59,25 +60,33 @@
 			<%- include('menu.ejs') %>
 			<% if(user) { %>
         <h1>Редактировать пользователя</h1>
-        <form action="/editUser/<%= user._id %>" method="post">
+        <form action="/admin/editUser/<%= user._id %>" method="post">
             <label for="userlogin">Логин:</label>
             <input type="text" id="userlogin" name="userlogin" value ="<%= user.userlogin %>" readonly>
             <input type="hidden" id="password" name="password" value ="<%= user.password %>">
             <label for="username">Имя:</label>
             <input type="text" id="username" name="username" value ="<%= user.username %>">
             <label for="userstatus">Статус:</label>
+            <% if (user.userstatus == 'admin') { %>
+                <select id="userstatus" name="userstatus">
+                    <option value="admin">admin</option>
+                </select><br>
+                <% } else { %>
 						<select id="userstatus" name="userstatus">
 							<option value="user">simpleUser</option>
 							<option value="admin">admin</option>
 						</select><br>
-            <label for="balance">Баланс:</label>
-            <input type="text" id="balance" name="balance" value ="<%= user.balance %>">
+                <% } %>
+            <label for="memoCoin">Баланс MemoCoin:</label>
+            <input type="text" id="memoCoin" name="memoCoin" value ="<%= user.balance.memoCoin %>">
+            <label for="dictionariesMax">Максимум словарей:</label>
+            <input type="text" id="dictionariesMax" name="dictionariesMax" value ="<%= user.dictionaries.dictionariesMax %>">
+            <label for="wordsMax">Максимум Слов:</label>
+            <input type="text" id="wordsMax" name="wordsMax" value ="<%= user.words.wordsMax %>">
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" value ="<%= user.contactinfo.email.email %>">
             <label for="phoneNumber">Телефон:</label>
             <input type="text" id="phoneNumber" name="phoneNumber" value ="<%= user.contactinfo.phoneNumber  %>">
-            <label for="telegramm">Telegramm:</label>
-            <input type="text" id="telegramm" name="telegramm" value ="<%= user.contactinfo.telegramm %>">
 						<label>Оповещение по Email:</label>
 						<input type="checkbox" name="emailNotification" <%=(user.alerts.email ? 'checked' : '') %>>
             <label>Оповещение по WhatsApp:</label>

@@ -1,153 +1,100 @@
 const User = require('../models/User');
+const Dictionary = require('../models/Dictionary');
 const bot = require('../utils/telegramBot'); // Импорт экземпляра бота
+const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
 // Функция для отображения профиля пользователя
 exports.renderProfile = async (req, res) => {
-
 	try {
 		// Находим пользователя по его ID
 		const user = await User.findById(req.user._id);
 		if (!user) {
 			// Если пользователь не найден, выводим сообщение об ошибке и перенаправляем на страницу профиля
-			req.flash('error', 'Пользователь не найден');
-			return res.redirect('/profile');
+			req.flash('message', 'Пользователь не найден');
+			return res.redirect('/auth/login');
 		}
 
 		// Обрабатываем событие приема сообщения от бота Telegram
 		bot.on('message', async (msg) => {
-			console.log(msg);
-			let userloginTelegramm = req.user.contactinfo.telegramm.toLowerCase().trim();
-			let userloginTelegrammMemoria = msg.chat.username.toLowerCase().trim();
-			if (userloginTelegramm == userloginTelegrammMemoria) {
-					user.contactinfo.chatId = msg.chat.id;
-					await user.save();
+			let userId = req.user._id;
+			let userIdTelegrammMemoria = msg.text
+			if (userId == userIdTelegrammMemoria) {
+				user.contactinfo.chatId = msg.chat.id;
+				console.log('Пользователь индетифицирован в чат-боте телеграмм id' + msg.chat.id);
+				await user.save();
+			} else {
+				console.log('Сообщение из чат бота telegramm не авторизованный пользователь' + msg.text);
 			}
-	});
-
+		});
 
 		// Рендерим шаблон профиля и передаем в него данные пользователя
-		res.render('profile', { user });
+		res.render('profile', { user, messages: req.flash('message') });
 	} catch (error) {
 		console.error(error);
+		console.error('Произошла ошибка загрузки профиля');
 		// Если произошла ошибка, выводим сообщение об ошибке и перенаправляем на страницу профиля
-		req.flash('error', 'Произошла ошибка');
-		res.redirect('/profile');
+		req.flash('message', 'Произошла ошибка загрузки профиля');
+		res.redirect('/auth/login');
 	}
 };
 
-// Регулярное выражение для валидации номера телефона в формате российского номера
-const phoneRegex = /^((\+7|7|8)+([0-9]){10})$/;
-
-// Регулярное выражение для валидации email
-const emailRegex = /^[\w-]+(\.[\w-]+)*@([a-z0-9-]+\.)+[a-z]{2,}$/i;
-
-// Регулярное выражение для валидации Telegramm (только латинские буквы или цифры)
-const telegrammRegex = /^[a-zA-Z0-9]+$/;
-
-
-// Контроллер для обновления номера телефона
-exports.updatePhoneNumber = async (req, res) => {
+// Контроллер для обновления профиля пользователя
+exports.updateUserProfil = async (req, res) => {
 	try {
+		// Находим пользователя по его ID
+		const user = await User.findById(req.user._id);
+
+		if (!user) {
+			req.flash('message', 'Пользователь не найден');
+			return res.redirect('/auth/login');
+		}
+
+		// Регулярное выражение для валидации email
+		const emailRegex = res.locals.EMAIL_REGEXP;
+		const userEmail = req.body.useremail;
+		
+
+		// Проверяем, соответствует ли email формату валидного email
+		if (userEmail !== '' & !emailRegex.test(userEmail)) {
+			req.flash('message', 'Неверный формат email');
+			return res.redirect('/user/profile');
+		}
+
+		
+
+		// Регулярное выражение для валидации номера телефона в формате российского номера
+		const phoneRegex = res.locals.TEL_REGEXP;
 		const phoneNumber = req.body.phoneNumber;
+		
 		// Проверяем, соответствует ли номер телефона формату российского номера
-		if (!phoneRegex.test(phoneNumber)) {
-			req.flash('error', 'Неверный формат номера телефона');
-			return res.redirect('/profile');
+		if (phoneNumber !== '' & !phoneRegex.test(phoneNumber)) {
+			req.flash('message', 'Неверный формат номера телефона');
+			return res.redirect('/user/profile');
 		}
 
-		const user = await User.findById(req.user._id);
-		if (!user) {
-			req.flash('error', 'Пользователь не найден');
-			return res.redirect('/profile');
-		}
+		
 
-		user.contactinfo.phoneNumber = req.body.phoneNumber;
-		await user.save();
-		res.redirect('/profile');
-	} catch (error) {
-		console.error(error);
-		req.flash('error', 'Произошла ошибка при обновлении номера телефона');
-		res.redirect('/profile');
-	}
-};
+		// // Регулярное выражение для валидации Telegramm (только латинские буквы или цифры)
+		// const telegrammRegex = /^[a-zA-Z0-9]+$/;
+		// const telegramm = req.body.telegramm;
 
-// Контроллер для обновления Telegram
-exports.updateTelegramm = async (req, res) => {
-	try {
-		const telegramm = req.body.telegramm;
-		// Проверяем, соответствует ли Telegramm формату латинских букв или цифр
-		if (!telegrammRegex.test(telegramm)) {
-			// const errorMessage = 'Неверный формат Telegramm';
-			res.locals.errorMessage = 'Неверный формат Telegramm'; // Добавляем сообщение об ошибке в объект locals
-			return res.redirect('/profile');
-		}
-
-		const user = await User.findById(req.user._id);
-		if (!user) {
-			req.flash('error', 'Пользователь не найден');
-			return res.redirect('/profile');
-		}
-
-		user.contactinfo.telegramm = req.body.telegramm;
-		await user.save();
-		res.redirect('/profile');
-	} catch (error) {
-		console.error(error);
-		req.flash('error', 'Произошла ошибка при обновлении Telegram');
-		res.redirect('/profile');
-	}
-};
-
-// Контроллер для обновления имени пользователя
-exports.updateUsername = async (req, res) => {
-	try {
-		const user = await User.findById(req.user._id);
-		if (!user) {
-			req.flash('error', 'Пользователь не найден');
-			return res.redirect('/profile');
-		}
+		// // Проверяем, соответствует ли Telegramm формату латинских букв или цифр
+		// if (!telegrammRegex.test(telegramm)) {
+		// 	// const errorMessage = 'Неверный формат Telegramm';
+		// 	req.flash('message', 'Неверный формат Telegramm'); // Добавляем сообщение об ошибке
+		// 	return res.redirect('/user/profile');
+		// }
 
 		user.username = req.body.username;
-		await user.save();
-		res.redirect('/profile');
-	} catch (error) {
-		console.error(error);
-		req.flash('error', 'Произошла ошибка при обновлении имени пользователя');
-		res.redirect('/profile');
-	}
-};
-
-// Контроллер для обновления email пользователя
-exports.updateEmail = async (req, res) => {
-	try {
-		const userEmail = req.body.useremail;
-		// Проверяем, соответствует ли email формату валидного email
-		if (!emailRegex.test(userEmail)) {
-			req.flash('error', 'Неверный формат email');
-			return res.redirect('/profile');
-		}
-
-		const user = await User.findById(req.user._id);
-		if (!user) {
-			req.flash('error', 'Пользователь не найден');
-			return res.redirect('/profile');
-		}
-
 		user.contactinfo.email.email = req.body.useremail;
-		await user.save();
-		res.redirect('/profile');
-	} catch (error) {
-		console.error(error);
-		req.flash('error', 'Произошла ошибка при обновлении email');
-		res.redirect('/profile');
-	}
-};
+		user.contactinfo.phoneNumber = req.body.phoneNumber;
+		// user.contactinfo.telegramm = req.body.telegramm;
+		
 
-// Контроллер для обновления настроек оповещений пользователя
-exports.updateAlerts = async (req, res) => {
-	try {
+		await user.save();
+
 		// Обновляем поля оповещений пользователя на основе данных из формы
 		const email = req.body.email === 'on';
 		const whatsapp = req.body.whatsapp === 'on';
@@ -159,15 +106,181 @@ exports.updateAlerts = async (req, res) => {
 		// Обновляем данные пользователя в сессии
 		req.user.alerts = { email, whatsapp, telegramm, push };
 
-		// Перенаправляем пользователя обратно на страницу настроек с сообщением об успешном обновлении
-		req.flash('success', 'Настройки оповещений успешно обновлены');
-		res.redirect('/profile');
+		req.flash('message', 'Профиль сохранён');
+		res.redirect('/user/profile');
+
 	} catch (error) {
 		console.error(error);
-		// Перенаправляем пользователя с сообщением об ошибке
-		req.flash('error', 'Произошла ошибка при обновлении настроек оповещений');
-		res.redirect('/profile');
+		req.flash('message', 'Произошла ошибка при обновлении информации профиля');
+		res.redirect('/user/profile');
+	}
+};
+
+// Контроллер для удаления профиля пользователя и всех его словарей
+exports.deleteProfile = async (req, res) => {
+	try {
+			// Удаляем профиль пользователя по его ID
+			await User.findByIdAndDelete(req.user._id);
+
+
+			// Удаляем все словари пользователя
+			await Dictionary.deleteMany({ user: req.user._id });
+			
+			// Вызываем метод logout(), предоставленный Passport для выхода пользователя из сеанса
+			req.logout((err) => {
+					if (err) {
+							console.error('Ошибка при выходе пользователя:', err);
+							req.flash('message', 'Произошла ошибка при выходе пользователя');
+							// Обработка ошибки, если таковая имеется
+							return res.redirect('/user/profile'); // Перенаправление пользователя в случае ошибки
+					}
+					req.flash('message', 'Ваш профиль удалён');
+					// После успешного выхода пользователя перенаправляем его на главную страницу
+					res.redirect('/');
+			});
+	} catch (error) {
+			console.error('Произошла ошибка при удалении профиля:', error);
+			req.flash('message', 'Произошла ошибка при удалении профиля');
+			res.redirect('/user/profile');
 	}
 };
 
 
+
+
+
+
+
+
+
+// // Контроллер для обновления номера телефона
+// exports.updatePhoneNumber = async (req, res) => {
+// 	try {
+// 		// Регулярное выражение для валидации номера телефона в формате российского номера
+// 		const phoneRegex = res.locals.TEL_REGEXP;
+// 		const phoneNumber = req.body.phoneNumber;
+
+// 		// Проверяем, соответствует ли номер телефона формату российского номера
+// 		if (!phoneRegex.test(phoneNumber)) {
+// 			req.flash('message', 'Неверный формат номера телефона');
+// 			return res.redirect('/user/profile');
+// 		}
+
+// 		const user = await User.findById(req.user._id);
+// 		if (!user) {
+// 			req.flash('error', 'Пользователь не найден');
+// 			return res.redirect('/auth/login');
+// 		}
+
+// 		user.contactinfo.phoneNumber = req.body.phoneNumber;
+// 		await user.save();
+// 		res.redirect('/user/profile');
+// 	} catch (error) {
+// 		console.error(error);
+// 		req.flash('message', 'Произошла ошибка при обновлении номера телефона');
+// 		res.redirect('/user/profile');
+// 	}
+// };
+
+// // Контроллер для обновления Telegram
+// exports.updateTelegramm = async (req, res) => {
+// 	try {
+// 		// Регулярное выражение для валидации Telegramm (только латинские буквы или цифры)
+// 		const telegrammRegex = /^[a-zA-Z0-9]+$/;
+// 		const telegramm = req.body.telegramm;
+
+// 		// Проверяем, соответствует ли Telegramm формату латинских букв или цифр
+// 		if (!telegrammRegex.test(telegramm)) {
+// 			// const errorMessage = 'Неверный формат Telegramm';
+// 			req.flash('message', 'Неверный формат Telegramm'); // Добавляем сообщение об ошибке
+// 			return res.redirect('/user/profile');
+// 		}
+
+// 		const user = await User.findById(req.user._id);
+// 		if (!user) {
+// 			req.flash('message', 'Пользователь не найден');
+// 			return res.redirect('/auth/login');
+// 		}
+
+// 		user.contactinfo.telegramm = req.body.telegramm;
+// 		await user.save();
+// 		res.redirect('/user/profile');
+// 	} catch (error) {
+// 		console.error(error);
+// 		req.flash('message', 'Произошла ошибка при обновлении Telegram');
+// 		res.redirect('/user/profile');
+// 	}
+// };
+
+// // Контроллер для обновления имени пользователя
+// exports.updateUsername = async (req, res) => {
+// 	try {
+// 		const user = await User.findById(req.user._id);
+// 		if (!user) {
+// 			req.flash('error', 'Пользователь не найден');
+// 			return res.redirect('/user/profile');
+// 		}
+
+// 		user.username = req.body.username;
+// 		await user.save();
+// 		res.redirect('/user/profile');
+// 	} catch (error) {
+// 		console.error(error);
+// 		req.flash('error', 'Произошла ошибка при обновлении имени пользователя');
+// 		res.redirect('/user/profile');
+// 	}
+// };
+
+// // Контроллер для обновления email пользователя
+// exports.updateEmail = async (req, res) => {
+// 	try {
+// 		// Регулярное выражение для валидации email
+// 		const emailRegex = res.locals.EMAIL_REGEXP;
+
+// 		const userEmail = req.body.useremail;
+// 		// Проверяем, соответствует ли email формату валидного email
+// 		if (!emailRegex.test(userEmail)) {
+// 			req.flash('error', 'Неверный формат email');
+// 			return res.redirect('/user/profile');
+// 		}
+
+// 		const user = await User.findById(req.user._id);
+// 		if (!user) {
+// 			req.flash('error', 'Пользователь не найден');
+// 			return res.redirect('/user/profile');
+// 		}
+
+// 		user.contactinfo.email.email = req.body.useremail;
+// 		await user.save();
+// 		res.redirect('/user/profile');
+// 	} catch (error) {
+// 		console.error(error);
+// 		req.flash('error', 'Произошла ошибка при обновлении email');
+// 		res.redirect('/user/profile');
+// 	}
+// };
+
+// // Контроллер для обновления настроек оповещений пользователя
+// exports.updateAlerts = async (req, res) => {
+// 	try {
+// 		// Обновляем поля оповещений пользователя на основе данных из формы
+// 		const email = req.body.email === 'on';
+// 		const whatsapp = req.body.whatsapp === 'on';
+// 		const telegramm = req.body.telegramm === 'on';
+// 		const push = req.body.push === 'on';
+
+// 		await User.findByIdAndUpdate(req.user._id, { alerts: { email, whatsapp, telegramm, push } });
+
+// 		// Обновляем данные пользователя в сессии
+// 		req.user.alerts = { email, whatsapp, telegramm, push };
+
+// 		// Перенаправляем пользователя обратно на страницу настроек с сообщением об успешном обновлении
+// 		req.flash('error', 'Настройки оповещений успешно обновлены');
+// 		res.redirect('/user/profile');
+// 	} catch (error) {
+// 		console.error(error);
+// 		// Перенаправляем пользователя с сообщением об ошибке
+// 		req.flash('error', 'Произошла ошибка при обновлении настроек оповещений');
+// 		res.redirect('/user/profile');
+// 	}
+// };

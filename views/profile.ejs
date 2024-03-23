@@ -9,72 +9,127 @@
 </head>
 
 <body>
-    <div class="container">
-			<%- include('menu.ejs') %>
-        <h1><%= user.username %></h1>
-				<p>Баланс: <%= user.balance %> рублей</p>
+    <%- include('template.ejs') %>
+        <%- include('menu.ejs') %>
+            <div class="container">
 
-        <!-- Проверяем, подтвержден ли email пользователя -->
-        <% if (user.contactinfo.email.confirmation) { %>
-        <p>Email подтвержден</p>
-        <% } else { %>
-        <p>Email не подтвержден</p>
-        <% } %>
+                <div class="wrapper">
 
-			  <form action="/updateUsername" method="POST">
-            <label for="username">Имя:</label>
-            <input type="text" id="username" name="username" value="<%= user.username %>" placeholder="Имя">
-            <button class="edit-button" type="submit">Изменить</button>
-        </form>
+                    <div class="header_h1">
+                        <form class="deleteProfil" action="/user/deleteProfile" method="POST"
+                            onsubmit="return confirm('Вы уверены?')">
+                            <!-- <a type="submit">Удалить профиль</a> -->
+                            <button class="delete-button" type="submit"><a>Удалить профиль</a></button>
+                        </form>
 
-        <form action="/updateEmail" method="POST">
-            <label for="useremail">Email:</label>
-            <input type="text" id="useremail" name="useremail" value="<%= user.contactinfo.email.email %>"
-                placeholder="Email">
-            <button class="edit-button" type="submit">Изменить</button>
-        </form>
+                        <h1>
+                            <%= user.username %>
+                        </h1>
 
-        <form action="/updatePhoneNumber" method="POST">
-            <label for="phoneNumber">Телефон:</label>
-            <input type="text" id="phoneNumber" name="phoneNumber" value="<%= user.contactinfo.phoneNumber %>"
-                placeholder="Телефон">
-            <button class="edit-button" type="submit">Изменить</button>
-        </form>
+                    </div>
 
-        <form action="/updateTelegramm" method="POST">
-            <label for="telegramm">Telegramm:</label>
-            <input type="text" id="telegramm" name="telegramm" value="<%= user.contactinfo.telegramm %>"
-                placeholder="Telegramm">
-            <button class="edit-button" type="submit">Изменить</button>
-        </form>
+                    <!-- <form action="/profile/deleteProfile" method="POST" onsubmit="return confirm('Вы уверены?')">
+                <button class="delete-button" type="submit">Удалить профиль</button>
+            </form> -->
+                    <div class="balanceInfo">
+                        <div class="purchase">
+                            
+                            <a href="/purchase">Купить</a>
+                        </div>
+                        
+                        <p>Баланс: <%= user.balance.memoCoin %> MemoCoin</p>
+                        <p>Словарей могу создать: <%= user.dictionaries.dictionariesMax %>
+                        </p>
+                        <p>Терминов могу создать: <%= user.words.wordsMax %>
+                        </p>
+                        
+                    </div>
 
-        <form action="/deleteProfile" method="POST">
-            <button class="delete-button" type="submit">Удалить профиль</button>
-        </form>
+                    
+                    <!-- Проверяем, подтвержден ли email пользователя -->
+                    <% if (user.contactinfo.email.confirmation) { %>
+                        <p style="display: none;">Email подтвержден</p>
+                        <% } else { %>
+                            <p>Email не подтвержден</p>
+                            <% } %>
+                                <form class="profilInfo" action="/user/updateUserProfil" method="post">
+                                    <h2>Информация о пользователе</h2>
+                                    <!-- <form class="userInfo" action="/profile/updateUsername" method="POST"> -->
+                                    <label for="username">Имя:</label>
+                                    <input type="text" id="username" name="username" value="<%= user.username %>"
+                                        placeholder="Имя">
+                                    <!-- <button type="submit">Изменить</button> -->
+                                    <!-- </form> -->
 
-				<h1>Настройки оповещений</h1>
-        <form action="/updateAlerts" method="post">
-            <label>
-                <input type="checkbox" name="email" <% if (user.alerts.email) { %> checked <% } %>>
-                Оповещение по Email
-            </label><br>
-            <label>
-                <input type="checkbox" name="whatsapp" <% if (user.alerts.whatsapp) { %> checked <% } %>>
-                Оповещение по WhatsApp
-            </label><br>
-            <label>
-                <input type="checkbox" name="telegramm" <% if (user.alerts.telegramm) { %> checked <% } %>>
-                Оповещение по Telegramm
-            </label><br>
-            <label>
-                <input type="checkbox" name="push" <% if (user.alerts.push) { %> checked <% } %>>
-                Оповещение по Push-уведомлениям
-            </label><br>
-            <button class="edit-button" type="submit">Сохранить</button>
-        </form>
+                                    <!-- <form class="userInfo last-input"  action="/profile/updateEmail" method="POST"> -->
+                                    <label for="useremail">Email:</label>
+                                    <input type="text" id="useremail" name="useremail"
+                                        value="<%= user.contactinfo.email.email %>" placeholder="Email">
+                                    <!-- <button type="submit">Изменить</button> -->
+                                    <!-- </form> -->
 
-        <a href="/auth/logout">Выйти</a>
-    </div>
+                                    <!-- <form class="userInfo last-input"  action="/profile/updatePhoneNumber" method="POST"> -->
+                                    <label for="phoneNumber">Телефон:</label>
+                                    <input class="last-input" type="text" id="phoneNumber" name="phoneNumber"
+                                        value="<%= user.contactinfo.phoneNumber %>" placeholder="Телефон">
+                                    <!-- <button class="edit-button" type="submit">Изменить</button> -->
+                                    <!-- </form> -->
+
+                                    <!-- <form class="userInfo"  action="/profile/updateTelegramm" method="POST">
+                            <label for="telegramm">Telegramm:</label>
+                            <input type="text" id="telegramm" name="telegramm" value="<%= user.contactinfo.telegramm %>"
+                                placeholder="Telegramm">
+                            <button class="edit-button" type="submit">Изменить</button>
+                        </form> -->
+
+                                    <!-- Всплывающая подсказка для Telegramm -->
+
+
+                                    <!-- <form action="/profile/deleteProfile" method="POST" onsubmit="return confirm('Вы уверены?')">
+                            <button class="delete-button" type="submit">Удалить профиль</button>
+                        </form> -->
+
+                                    <h2>Настройки оповещений</h2>
+                                    
+
+                                    <p class="updateAlerts">
+                                        <input class="updateAlerts_checkbox" type="checkbox" name="email" <% if
+                                            (user.alerts.email) { %> checked <% } %>>
+                                            Оповещение по Email
+                                    </p><br>
+                                    <!-- <label class="updateAlerts">
+                                <input class="updateAlerts_checkbox" type="checkbox" name="whatsapp" <% if (user.alerts.whatsapp) { %> checked <% } %>
+                                    >
+                                    Оповещение по WhatsApp
+                            </label><br> -->
+                                    <p class="updateAlerts">
+                                        <input class="updateAlerts_checkbox telegram-checkbox" type="checkbox"
+                                            name="telegramm" <% if (user.alerts.telegramm) { %> checked <% } %>>
+                                            <!-- <input type="checkbox" name="telegramm" > -->
+                                            Оповещение по Telegramm
+                                    </p>
+                                    <div class="telegrammTooltip" id="telegrammTooltip">
+                                        <p>
+                                            <%= user.username %>, чтобы подписаться на уведомления в Telegramm, отправьте
+                                                сообщение "<%= user.id %>" (без кавычек) в чат-бот Telegramm <a
+                                                        href="https://t.me/MemoriaBot_bot"
+                                                        target="_blank">MemoriaBot_bot</a>
+                                        </p>
+                                        <button class="closeTooltip" id="closeTooltip">Закрыть</button>
+                                    </div>
+                                    <!-- <label class="updateAlerts">
+                                <input class="updateAlerts_checkbox" type="checkbox" name="push" <% if (user.alerts.push) { %> checked <% } %>>
+                                    Оповещение по Push-уведомлениям
+                            </label><br> -->
+                                    <button class="edit-button" type="submit">Сохранить профиль</button>
+                                </form>
+                                
+
+                                
+                </div>
+            </div>
+
+            <script src="/js/script.js"></script>
 </body>
 
 </html>
