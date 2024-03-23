@@ -333,11 +333,6 @@ td {
 	border-bottom: 1px solid #ddd;
 }
 
-.question-mark {
-	position: absolute;
-	left: -25px;
-}
-
 table {
 	width: 100%;
 	border-collapse: collapse;
@@ -407,8 +402,8 @@ table {
 
 @media screen and (max-width: 339px) {
 	body {
+		width: 100%;
 		font-size: 4.71vw;
-		width: 301.18vw;
 	}
 
 	.menu {
@@ -615,10 +610,6 @@ table {
 		padding: 2.35vw;
 	}
 
-	.question-mark {
-		left: -7.35vw;
-	}
-
 	/* Стили для всплывающей подсказки */
 	.telegrammTooltip {
 		padding: 2.94vw;
@@ -645,8 +636,8 @@ table {
 @media screen and (min-width: 340px) and (max-width: 767px) {
 
 	body {
+		width: 100%;
 		font-size: 2.08vw;
-		width: 133.33vw;
 	}
 
 	.menu {
@@ -849,10 +840,6 @@ table {
 		padding: 1.04vw;
 	}
 
-	.question-mark {
-		left: -3.26vw;
-	}
-
 	/* Стили для всплывающей подсказки */
 	.telegrammTooltip {
 		padding: 1.30vw;
@@ -878,8 +865,8 @@ table {
 @media screen and (min-width: 768px) and (max-width: 1023px) {
 
 	body {
+		width: 100%;
 		font-size: 1.56vw;
-		width: 100.10vw;
 	}
 
 	.menu {
@@ -1085,10 +1072,6 @@ table {
 		padding: 0.78vw;
 		text-align: left;
 		border-bottom: 0.10vw solid #ddd;
-	}
-
-	.question-mark {
-		left: -2.44vw;
 	}
 
 	/* Стили для всплывающей подсказки */
