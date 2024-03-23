@@ -405,7 +405,7 @@ table {
 
 
 
-@media only screen and (max-width: 340px) {
+@media screen and (max-width: 340px) {
 	body {
 		font-size: 4.71vw;
 		width: 301.18vw;
@@ -642,7 +642,7 @@ table {
 
 }
 
-@media only screen and (min-width: 341px) and (max-width: 767px) {
+@media screen and (min-width: 341px) and (max-width: 767px) {
 
 	body {
 		font-size: 2.78vw;
@@ -875,7 +875,7 @@ table {
 	}
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1023px){
+@media screen and (min-width: 768px) and (max-width: 1023px){
 
 	body {
 		font-size: 2.08vw;
