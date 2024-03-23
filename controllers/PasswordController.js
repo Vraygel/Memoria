@@ -99,7 +99,7 @@ exports.handleForgotPasswordRequest = async (req, res) => {
       from: 'neverhoteb@yandex.ru',
       to: email,
       subject: 'Сброс пароля Memoria',
-      text: `Для сброса пароля перейдите по ссылке: http://localhost:3000/password/resetPassword/${token}`
+      text: `Для сброса пароля перейдите по ссылке: http://frlpt.site/password/resetPassword/${token}`
     };
 
     // Отправка письма

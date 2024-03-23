@@ -32,25 +32,22 @@ a:hover {
 	background-color: #222222;
 	padding: 20px 24px;
 	border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+	border-top-right-radius: 8px;
 }
 
 .container {
-	/* width: 1024px; */
 	margin: 0 auto;
 	padding: 40px;
-	/* padding-top: 40px; */
 	border: 2px solid #222222;
 	border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+	border-bottom-right-radius: 8px;
 	display: flex;
 	flex-direction: column;
 	align-content: center;
 	flex-wrap: wrap;
-	/* background-color: #86e4cd; */
 }
 
-h1{
+h1 {
 	margin-top: 20px;
 }
 
@@ -74,9 +71,6 @@ button {
 
 button:hover {
 	background-color: #3b444b;
-	/* зеленый при наведении */
-	/* color: #9b8fe6; */
-	/* border: 1px solid ; */
 }
 
 .login-button,
@@ -90,15 +84,14 @@ button:hover {
 	margin-bottom: 40px;
 }
 
-
-
 .deleteProfil {
 	font-size: 16px;
 	margin-left: auto;
 }
 
 .login,
-.form-register, .password {
+.form-register,
+.password {
 	width: 480px;
 	display: flex;
 	flex-wrap: wrap;
@@ -110,23 +103,21 @@ button:hover {
 }
 
 .login input,
-.form-register input, .password input {
+.form-register input,
+.password input {
 	width: 100%;
 	margin-bottom: 20px;
 	appearance: none;
 	font-size: 16px;
-
 }
 
 .login label,
-.form-register label, .password label {
+.form-register label,
+.password label {
 	margin-bottom: 10px;
 }
 
-
-
-
-.newDictonaries{
+.newDictonaries {
 	margin-bottom: 60px;
 }
 
@@ -136,31 +127,26 @@ button:hover {
 }
 
 .newDictonaries label {
-margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .newDictonaries input {
-	/* margin-bottom: 20px; */
 	font-size: 16px;
-	}
-
+}
 
 input,
 textarea {
 	padding: 12px;
-	/* margin-bottom: 20px; */
 	border: 1px solid #222222;
 	border-radius: 8px;
 	font-size: 16px;
-
-	
 }
 
 .container .last-input {
 	margin-bottom: 60px;
 }
 
-.wrapper{
+.wrapper {
 	background-color: #2f4f4f;
 	width: 100%;
 	border-radius: 8px;
@@ -182,17 +168,17 @@ textarea {
 	margin-bottom: 20px;
 }
 
-.profilInfo{
+.profilInfo {
 	display: flex;
 	flex-direction: column;
 }
 
 .profilInfo input {
-margin-bottom: 20px;
-font-size: 16px;
+	margin-bottom: 20px;
+	font-size: 16px;
 }
 
-.profilInfo label{
+.profilInfo label {
 	margin-bottom: 10px;
 }
 
@@ -208,12 +194,10 @@ font-size: 16px;
 	all: unset;
 }
 
-
 .header_h1 {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* width: 480px; */
 }
 
 .balanceInfo p {
@@ -228,14 +212,11 @@ font-size: 16px;
 }
 
 .userInfo label {
-	/* margin-right: 10px; */
 	min-width: 80px;
-	/* width: 100px; */
 }
 
 .updateAlerts {
 	display: flex;
-	/* margin-bottom: 20px; */
 }
 
 .updateAlerts_checkbox {
@@ -262,14 +243,13 @@ font-size: 16px;
 	flex-direction: column;
 }
 
-.dictionaries_h2{
+.dictionaries_h2 {
 	text-align: left;
 }
 
 .dictionary_form {
 	margin-bottom: 20px;
 }
-
 
 .updateDictionary textarea {
 	margin-bottom: 20px;
@@ -279,7 +259,7 @@ font-size: 16px;
 	margin-bottom: 20px;
 }
 
-.updateWord label{
+.updateWord label {
 	display: inline-block;
 	margin-bottom: 10px;
 }
@@ -289,76 +269,26 @@ font-size: 16px;
 	margin-bottom: 10px;
 }
 
-
-
-
-
-
-
-
-
-
 textarea {
 	width: 100%;
 	height: 100px;
 }
 
-
-.studyWord{
+.studyWord {
 	display: flex;
 	flex-direction: column;
 	margin-top: 20px;
 }
 
-.studyWord label{
- display: inline-block;
- margin-bottom: 10px;
+.studyWord label {
+	display: inline-block;
+	margin-bottom: 10px;
 }
 
-.studyWord input{
+.studyWord input {
 	display: inline-block;
 	margin-bottom: 20px;
- }
- 
-
-
-
-
-
-
-
-
-/* input[type="text"],
-input[type="password"],
-input[type="email"] {
-	padding: 10px;
-	/* margin-bottom: 10px; */
-/* border: 1px solid #ccc;
-	border-radius: 5px;
-} */
-/* .flash-messages {
-	position: fixed;
-	top: 20px;
-	left: 50%;
-	transform: translateX(-50%);
-	z-index: 9999;
-	width: 300px;
-	padding: 20px;
-	border-radius: 5px;
-	background-color: #ffffff;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-	display: none;
 }
-
-.flash-messages .message {
-	margin-bottom: 10px;
-} */
-
-
-
-
-
-
 
 .flash-messages .alert {
 	position: relative;
@@ -371,32 +301,24 @@ input[type="email"] {
 	cursor: pointer;
 }
 
-.dictinaries_menu{
+.dictinaries_menu {
 	display: flex;
 	justify-content: space-around;
 	margin-bottom: 20px;
-
 }
 
-.dictionaryList_td{
+.dictionaryList_td {
 	width: 369px;
 }
 
-
-
-
 .td_editWord {
 	height: auto;
-	/* display: flex; */
-	/* flex-direction: column;
-	align-items: center; */
 	width: 170px;
 }
 
-.td_editWord button{
-
-margin-top: 10px;
-margin-bottom: 10px;
+.td_editWord button {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 table {
@@ -411,36 +333,15 @@ td {
 	border-bottom: 1px solid #ddd;
 }
 
-
-
 .question-mark {
 	position: absolute;
 	left: -25px;
 }
 
-
-/* 
-label {
-display: flex;
-  align-items: center; 
-  margin-bottom: 10px; Отступ снизу для разделения элементов 
-	position: relative;
-}
-
-label span {
-  margin-right: 10px;  Отступ между текстом вопроса и полем ввода
-}
- */
-
-
 table {
 	width: 100%;
 	border-collapse: collapse;
 }
-
-
-
-
 
 /* Стили для всплывающей подсказки */
 .telegrammTooltip {
@@ -461,16 +362,6 @@ table {
 	margin-top: 20px;
 }
 
-/* Стили для стрелочки всплывающей подсказки
-.telegrammTooltip::after {
-	content: '';
-	position: absolute;
-	top: -10px;
-	left: 50%;
-} */
-
-/* styles.css */
-
 .overlay {
 	position: fixed;
 	top: 0;
@@ -478,16 +369,12 @@ table {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
-	/* Полупрозрачный темный фон */
 	z-index: 1000;
-	/* Чтобы модальное окно было выше других элементов */
 }
 
 .modal {
 	position: fixed;
 	background-color: #303030;
-
-	
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -497,28 +384,726 @@ table {
 	border-radius: 8px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	z-index: 1001;
-	/* Чтобы модальное окно было выше оверлея */
 }
 
-.modal p{
+.modal p {
 	margin-bottom: 20px;
 	border-radius: 8px;
 }
 
-/* .popup {
-	width: 33%;
-	background-color: #fff;
-	padding: 20px;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-} */
-
-
 .myDiv {
 	display: none;
 	height: auto;
-	/* background-color: ; */
+}
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 340px) {
+	body {
+		font-size: 4.71vw;
+		width: 301.18vw;
+	}
+
+	.menu {
+		padding: 5.88vw 7.06vw;
+		border-top-left-radius: 2.35vw;
+		border-top-right-radius: 2.35vw;
+	}
+
+	.container {
+		padding: 11.76vw;
+		border-bottom-left-radius: 2.35vw;
+		border-bottom-right-radius: 2.35vw;
+	}
+
+	h1 {
+		margin-top: 5.88vw;
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin-bottom: 11.76vw;
+	}
+
+	button {
+		padding: 2.94vw 5.88vw;
+		font-size: 4.71vw;
+		border-radius: 2.35vw;
+	}
+
+	.forgot-password {
+		font-size: 4.71vw;
+		margin-bottom: 11.76vw;
+	}
+
+	.deleteProfil {
+		font-size: 4.71vw;
+	}
+
+	.login,
+	.form-register,
+	.password {
+		width: 98%;
+		padding: 9.41vw;
+		border-radius: 2.35vw;
+	}
+
+	.login input,
+	.form-register input,
+	.password input {
+		margin-bottom: 5.88vw;
+		font-size: 4.71vw;
+	}
+
+	.login label,
+	.form-register label,
+	.password label {
+		margin-bottom: 2.94vw;
+	}
+
+	.newDictonaries {
+		margin-bottom: 17.65vw;
+	}
+
+	.newDictonaries label {
+		margin-bottom: 2.94vw;
+	}
+
+	.newDictonaries input {
+		font-size: 4.71vw;
+	}
+
+	input,
+	textarea {
+		padding: 3.53vw;
+		border-radius: 2.35vw;
+		font-size: 4.71vw;
+	}
+
+	.container .last-input {
+		margin-bottom: 17.65vw;
+	}
+
+	.wrapper {
+		border-radius: 2.35vw;
+		padding: 4.71vw;
+		padding-bottom: 17.65vw;
+	}
+
+	.balanceInfo {
+		margin-bottom: 17.65vw;
+		border-radius: 2.35vw;
+		padding: 2.94vw;
+	}
+
+	.purchase {
+		width: 17.65vw;
+		margin-bottom: 5.88vw;
+	}
+
+	.profilInfo input {
+		margin-bottom: 5.88vw;
+		font-size: 4.71vw;
+	}
+
+	.profilInfo label {
+		margin-bottom: 2.94vw;
+	}
+
+	.balanceInfo p {
+		margin-bottom: 2.94vw;
+	}
+
+	.userInfo {
+		margin-bottom: 5.88vw;
+	}
+
+	.userInfo label {
+		min-width: 23.53vw;
+	}
+
+	.updateAlerts_checkbox {
+		margin-right: 5.88vw;
+	}
+
+	.edit-button,
+	.create-button {
+		margin-top: 5.88vw;
+		width: 100%;
+	}
+
+	.logout {
+		margin-top: 23.53vw;
+	}
+
+	.dictionary {
+		margin-bottom: 5.88vw;
+		padding: 2.94vw;
+		border: 0.29vw solid #ccc;
+		border-radius: 1.47vw;
+	}
+
+	.dictionary_form {
+		margin-bottom: 5.88vw;
+	}
+
+	.updateDictionary textarea {
+		margin-bottom: 5.88vw;
+	}
+
+	.updateWord textarea {
+		margin-bottom: 5.88vw;
+	}
+
+	.updateWord label {
+		margin-bottom: 2.94vw;
+	}
+
+	.updateDictionary_label {
+		min-width: 29.41vw;
+		margin-bottom: 2.94vw;
+	}
+
+	textarea {
+		height: 29.41vw;
+	}
+
+	.studyWord {
+		margin-top: 5.88vw;
+	}
+
+	.studyWord label {
+		margin-bottom: 2.94vw;
+	}
+
+	.studyWord input {
+		margin-bottom: 5.88vw;
+	}
+
+	.flash-messages .close-btn {
+		top: 1.47vw;
+		right: 2.94vw;
+	}
+
+	.dictinaries_menu {
+		margin-bottom: 5.88vw;
+	}
+
+	.dictionaryList_td {
+		width: 108.53vw;
+	}
+
+	.td_editWord {
+		width: 50.00vw;
+	}
+
+	.td_editWord button {
+		margin-top: 2.94vw;
+		margin-bottom: 2.94vw;
+	}
+
+	th,
+	td {
+		padding: 2.35vw;
+	}
+
+	.question-mark {
+		left: -7.35vw;
+	}
+
+	/* Стили для всплывающей подсказки */
+	.telegrammTooltip {
+		padding: 2.94vw;
+		border-radius: 2.35vw;
+	}
+
+	.telegrammTooltip .closeTooltip {
+		margin-top: 5.88vw;
+	}
+
+	.modal {
+		/* Ширина модального окна */
+		padding: 5.88vw;
+		border-radius: 2.35vw;
+	}
+
+	.modal p {
+		margin-bottom: 5.88vw;
+		border-radius: 2.35vw;
+	}
+
+}
+
+@media only screen and (max-width: 767px) {
+
+	body {
+		font-size: 2.78vw;
+		width: 177.78vw;
+	}
+
+	.menu {
+		padding: 3.47vw 4.17vw;
+		border-top-left-radius: 1.39vw;
+		border-top-right-radius: 1.39vw;
+	}
+
+	.container {
+		padding: 6.94vw;
+		border-bottom-left-radius: 1.39vw;
+		border-bottom-right-radius: 1.39vw;
+	}
+
+	h1 {
+		margin-top: 3.47vw;
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin-bottom: 6.94vw;
+	}
+
+	button {
+		padding: 1.74vw 3.47vw;
+		font-size: 2.78vw;
+	}
+
+	.forgot-password {
+		font-size: 2.78vw;
+		margin-bottom: 6.94vw;
+	}
+
+	.deleteProfil {
+		font-size: 2.78vw;
+	}
+
+	.login,
+	.form-register,
+	.password {
+		padding: 5.56vw;
+		border-radius: 1.39vw;
+	}
+
+	.login input,
+	.form-register input,
+	.password input {
+		margin-bottom: 3.47vw;
+		font-size: 2.78vw;
+	}
+
+	.login label,
+	.form-register label,
+	.password label {
+		margin-bottom: 1.74vw;
+	}
+
+	.newDictonaries {
+		margin-bottom: 10.42vw;
+	}
+
+	.newDictonaries label {
+		margin-bottom: 1.74vw;
+	}
+
+	.newDictonaries input {
+		font-size: 2.78vw;
+	}
+
+	input,
+	textarea {
+		padding: 2.08vw;
+		border-radius: 1.39vw;
+		font-size: 2.78vw;
+	}
+
+	.container .last-input {
+		margin-bottom: 10.42vw;
+	}
+
+	.wrapper {
+		border-radius: 1.39vw;
+		padding: 2.78vw;
+		padding-bottom: 10.42vw;
+	}
+
+	.balanceInfo {
+		margin-bottom: 10.42vw;
+		border-radius: 1.39vw;
+		padding: 1.74vw;
+	}
+
+	.purchase {
+		width: 10.42vw;
+		margin-bottom: 3.47vw;
+	}
+
+	.profilInfo input {
+		margin-bottom: 3.47vw;
+		font-size: 2.78vw;
+	}
+
+	.profilInfo label {
+		margin-bottom: 1.74vw;
+	}
+
+	.balanceInfo p {
+		margin-bottom: 1.74vw;
+	}
+
+	.userInfo {
+		margin-bottom: 3.47vw;
+	}
+
+	.userInfo label {
+		min-width: 13.89vw;
+	}
+
+	.updateAlerts_checkbox {
+		margin-right: 3.47vw;
+	}
+
+	.edit-button,
+	.create-button {
+		margin-top: 3.47vw;
+	}
+
+	.logout {
+		margin-top: 13.89vw;
+	}
+
+	.dictionary {
+		margin-bottom: 3.47vw;
+		padding: 1.74vw;
+		border-radius: 0.87vw;
+	}
+
+	.dictionary_form {
+		margin-bottom: 3.47vw;
+	}
+
+	.updateDictionary textarea {
+		margin-bottom: 3.47vw;
+	}
+
+	.updateWord textarea {
+		margin-bottom: 3.47vw;
+	}
+
+	.updateWord label {
+		margin-bottom: 1.74vw;
+	}
+
+	.updateDictionary_label {
+		min-width: 17.36vw;
+		margin-bottom: 1.74vw;
+	}
+
+	textarea {
+		height: 17.36vw;
+	}
+
+	.studyWord {
+		margin-top: 3.47vw;
+	}
+
+	.studyWord label {
+		margin-bottom: 1.74vw;
+	}
+
+	.studyWord input {
+		margin-bottom: 3.47vw;
+	}
+
+	.flash-messages .close-btn {
+		top: 0.87vw;
+		right: 1.74vw;
+	}
+
+	.dictinaries_menu {
+		margin-bottom: 3.47vw;
+	}
+
+	.dictionaryList_td {
+		width: 64.06vw;
+	}
+
+	.td_editWord {
+		width: 29.51vw;
+	}
+
+	.td_editWord button {
+		margin-top: 1.74vw;
+		margin-bottom: 1.74vw;
+	}
+
+	th,
+	td {
+		padding: 1.39vw;
+	}
+
+	.question-mark {
+		left: -4.34vw;
+	}
+
+	/* Стили для всплывающей подсказки */
+	.telegrammTooltip {
+		padding: 1.74vw;
+		border-radius: 1.39vw;
+	}
+
+	.telegrammTooltip .closeTooltip {
+		margin-top: 3.47vw;
+	}
+
+	.modal {
+		/* Ширина модального окна */
+		padding: 3.47vw;
+		border-radius: 1.39vw;
+	}
+
+	.modal p {
+		margin-bottom: 3.47vw;
+		border-radius: 1.39vw;
+	}
+}
+
+@media only screen and (max-width: 1023px) {
+
+	body {
+		font-size: 2.08vw;
+		width: 133.33vw;
+	}
+
+	.menu {
+
+		padding: 2.60vw 3.13vw;
+		border-top-left-radius: 1.04vw;
+		border-top-right-radius: 1.04vw;
+	}
+
+	.container {
+		border-bottom-left-radius: 1.04vw;
+		border-bottom-right-radius: 1.04vw;
+	}
+
+	h1 {
+		margin-top: 2.60vw;
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin-bottom: 5.21vw;
+	}
+
+	button {
+		padding: 1.30vw 2.60vw;
+		font-size: 2.08vw;
+		border-radius: 1.04vw;
+	}
+
+	.forgot-password {
+		font-size: 2.08vw;
+		margin-bottom: 5.21vw;
+	}
+
+	.deleteProfil {
+		font-size: 2.08vw;
+	}
+
+	.login,
+	.form-register,
+	.password {
+		padding: 4.17vw;
+		border-radius: 1.04vw;
+	}
+
+	.login input,
+	.form-register input,
+	.password input {
+		margin-bottom: 2.60vw;
+		font-size: 2.08vw;
+	}
+
+	.login label,
+	.form-register label,
+	.password label {
+		margin-bottom: 1.30vw;
+	}
+
+	.newDictonaries {
+		margin-bottom: 7.81vw;
+	}
+
+	.newDictonaries label {
+		margin-bottom: 1.30vw;
+	}
+
+	.newDictonaries input {
+		font-size: 2.08vw;
+	}
+
+	input,
+	textarea {
+		padding: 1.56vw;
+		border-radius: 1.04vw;
+		font-size: 2.08vw;
+	}
+
+	.container .last-input {
+		margin-bottom: 7.81vw;
+	}
+
+	.wrapper {
+		border-radius: 1.04vw;
+		padding: 2.08vw;
+		padding-bottom: 7.81vw;
+	}
+
+	.balanceInfo {
+		margin-bottom: 7.81vw;
+		border-radius: 1.04vw;
+		padding: 1.30vw;
+	}
+
+	.purchase {
+		width: 7.81vw;
+		margin-bottom: 2.60vw;
+	}
+
+	.profilInfo input {
+		margin-bottom: 2.60vw;
+		font-size: 2.08vw;
+	}
+
+	.profilInfo label {
+		margin-bottom: 1.30vw;
+	}
+
+	.balanceInfo p {
+		margin-bottom: 1.30vw;
+	}
+
+	.userInfo {
+		margin-bottom: 2.60vw;
+	}
+
+	.userInfo label {
+		min-width: 10.42vw;
+	}
+
+	.updateAlerts_checkbox {
+		margin-right: 2.60vw;
+	}
+
+	.edit-button,
+	.create-button {
+		margin-top: 2.60vw;
+	}
+
+	.logout {
+		margin-top: 10.42vw;
+	}
+
+	.dictionary {
+		margin-bottom: 2.60vw;
+		padding: 1.30vw;
+		border-radius: 0.65vw;
+	}
+
+	.dictionary_form {
+		margin-bottom: 2.60vw;
+	}
+
+	.updateDictionary textarea {
+		margin-bottom: 2.60vw;
+	}
+
+	.updateWord textarea {
+		margin-bottom: 2.60vw;
+	}
+
+	.updateWord label {
+		margin-bottom: 1.30vw;
+	}
+
+	.updateDictionary_label {
+		min-width: 13.02vw;
+		margin-bottom: 1.30vw;
+	}
+
+	textarea {
+		height: 13.02vw;
+	}
+
+	.studyWord {
+		margin-top: 2.60vw;
+	}
+
+	.studyWord label {
+		margin-bottom: 1.30vw;
+	}
+
+	.studyWord input {
+		margin-bottom: 2.60vw;
+	}
+
+	.flash-messages .close-btn {
+		top: 0.65vw;
+		right: 1.30vw;
+	}
+
+	.dictinaries_menu {
+		margin-bottom: 2.60vw;
+	}
+
+	.dictionaryList_td {
+		width: 48.05vw;
+	}
+
+	.td_editWord {
+		width: 22.14vw;
+	}
+
+	.td_editWord button {
+		margin-top: 1.30vw;
+		margin-bottom: 1.30vw;
+	}
+
+	th,
+	td {
+		padding: 1.04vw;
+	}
+
+	.question-mark {
+		left: -3.26vw;
+	}
+
+	/* Стили для всплывающей подсказки */
+	.telegrammTooltip {
+		padding: 1.30vw;
+		border-radius: 1.04vw;
+	}
+
+	.telegrammTooltip .closeTooltip {
+		margin-top: 2.60vw;
+	}
+
+	.modal {
+		padding: 2.60vw;
+		border-radius: 1.04vw;
+	}
+
+	.modal p {
+		margin-bottom: 2.60vw;
+		border-radius: 1.04vw;
+	}
 }

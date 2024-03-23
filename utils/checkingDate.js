@@ -45,7 +45,7 @@ async function checkingDate(req, res, next) {
 						if (user.alerts.email) {
 							const message = `<b>Пора повторить термины!</b>
 						\n
-						<a href="http://localhost:3000/study/repetition/">Повторять термины!</a>
+						<a href="http://frlpt.site/study/repetition/">Повторять термины!</a>
 						`
 							const token = ''
 							const email = user.contactinfo.email.email
@@ -59,7 +59,7 @@ async function checkingDate(req, res, next) {
 							sendConfirmationEmail(email, token, mailOptions);
 						}
 						if (user.alerts.telegramm) {
-							const message = `Пора повторить термины!	http://localhost:3000/study/repetition
+							const message = `Пора повторить термины!	http://frlpt.site/study/repetition
 						`
 							if (userChatId != '') {
 								function sendMessageToUser(chatId) {

@@ -4,7 +4,6 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
 
-
 const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const adminRoutes = require('./routes/adminRoutes');
@@ -15,23 +14,17 @@ const wordRoutes = require('./routes/wordRoutes');
 const studyRoutes = require('./routes/studyRoutes');
 const purchaseRoutes = require('./routes/purchaseRoutes'); // Импорт роутера для покупок
 
-
-
-
 const isAuthenticated = require('./middleware/authenticated');
 const isAdmin = require('./middleware/isAdmin');
 const user = require('./middleware/user');
 const telEmailRegExp = require('./middleware/telEmailRegExp');
 
-
 const checkingDate = require('./utils/checkingDate');
-
 
 // Подключение к MongoDB
 mongoose.connect('mongodb://localhost:27017/passport-example')
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Error connecting to MongoDB:', err));
-
 
 const app = express();
 
@@ -49,9 +42,6 @@ app.use(session({
     saveUninitialized: true
 }));
 
-
-
-
 // Middleware для Flash сообщений
 app.use(flash());
 
@@ -63,17 +53,11 @@ app.use(passport.session());
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
-// Добавляем middleware для проверки аутентификации
-// app.use(isAuthenticated);
-
 // Добавляем middleware user
 app.use(user);
 
 // Добавляем middleware user telEmailRegExp
 app.use(telEmailRegExp);
-
-
-
 
 app.get('/', (req, res) => {
   res.redirect('/auth/register');
@@ -81,9 +65,6 @@ app.get('/', (req, res) => {
 
 // Подключение маршрутов аутентификации
 app.use('/auth', authRoutes);
-
-
-
 
 // Подключаем маршруты для профиля
 app.use('/user', isAuthenticated, profileRoutes);
@@ -106,57 +87,11 @@ app.use('/words', isAuthenticated, wordRoutes);
 // Подключение роутов для изучения словаря
 app.use('/study', isAuthenticated, studyRoutes);
 
-
 // Подключаем маршруты для покупки слов и словарей
 app.use('/purchase', isAuthenticated, purchaseRoutes);
 
-
-
-
-
-
-
-
-
-
-// // Функция для сравнения текущей даты с датой из словаря
-// async function compareDates() {
-//   try {
-//       // Извлекаем все записи из словаря
-//       const dictionaries = await Dictionary.find();
-
-//       dictionaries.forEach(dictionary => {
-//         dictionary.words.forEach(word => {
-//           const wordDate = new Date(word.waitingTime);
-//           const wordEnum = word.enum
-//           const currentDate = new Date();
-          
-//           console.log(wordEnum);
-
-//           if (wordDate <= currentDate && wordEnum !== 'new') {
-//             console.log(`It's time to review word "${word.word}" from dictionary "${dictionary.name}"`);
-//             // Implement your logic here, for example, send a notification or update the word's status
-//           }
-//         });
-//       });
-
-
-//   } catch (error) {
-//       console.error('Error comparing dates:', error);
-//   }
-// }
-
 // Устанавливаем интервал для выполнения функции каждые 10 секунд (в миллисекундах)
 setInterval(checkingDate, 10000); // 10000 миллисекунд = 10 секунд
-
-
-
-
-
-
-
-
-
 
 const PORT = process.env.PORT || 3000;
 

@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const Dictionary = require('../models/Dictionary');
-const bot = require('../utils/telegramBot'); // Импорт экземпляра бота
+// const bot = require('../utils/telegramBot'); // Импорт экземпляра бота
 const bcrypt = require('bcrypt');
 
 require('dotenv').config();
@@ -16,18 +16,18 @@ exports.renderProfile = async (req, res) => {
 			return res.redirect('/auth/login');
 		}
 
-		// Обрабатываем событие приема сообщения от бота Telegram
-		bot.on('message', async (msg) => {
-			let userId = req.user._id;
-			let userIdTelegrammMemoria = msg.text
-			if (userId == userIdTelegrammMemoria) {
-				user.contactinfo.chatId = msg.chat.id;
-				console.log('Пользователь индетифицирован в чат-боте телеграмм id' + msg.chat.id);
-				await user.save();
-			} else {
-				console.log('Сообщение из чат бота telegramm не авторизованный пользователь' + msg.text);
-			}
-		});
+		// // Обрабатываем событие приема сообщения от бота Telegram
+		// bot.on('message', async (msg) => {
+		// 	let userId = req.user._id;
+		// 	let userIdTelegrammMemoria = msg.text
+		// 	if (userId == userIdTelegrammMemoria) {
+		// 		user.contactinfo.chatId = msg.chat.id;
+		// 		console.log('Пользователь индетифицирован в чат-боте телеграмм id' + msg.chat.id);
+		// 		await user.save();
+		// 	} else {
+		// 		console.log('Сообщение из чат бота telegramm не авторизованный пользователь' + msg.text);
+		// 	}
+		// });
 
 		// Рендерим шаблон профиля и передаем в него данные пользователя
 		res.render('profile', { user, messages: req.flash('message') });
