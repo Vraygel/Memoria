@@ -1,10 +1,12 @@
 // Подключение middleware для проверки аутентификации
 const isAuthenticated = require('./authenticated');
+require('dotenv').config();
+
 
 // Middleware для проверки административных прав пользователя
 const isAdmin = function(req, res, next) {
 	// Устанавливаем переменную userIsAdmin в res.locals
-	res.locals.userIsAdmin = req.isAuthenticated() && req.user && req.user.userstatus === 'admin';
+	res.locals.userIsAdmin = req.isAuthenticated() && req.user && (req.user.userlogin == `${process.env.admin}` || req.user.userstatus === 'admin') ;
 
 	// Выводим сообщение в консоль для отладки
 	console.log('Проверяем, является ли пользователь администратором:', res.locals.userIsAdmin);
