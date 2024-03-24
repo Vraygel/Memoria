@@ -3,6 +3,8 @@ const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
+const favicon = require('serve-favicon');
+const path = require('path');
 
 const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/profileRoutes');
@@ -27,6 +29,9 @@ mongoose.connect('mongodb://localhost:27017/passport-example')
   .catch(err => console.error('Error connecting to MongoDB:', err));
 
 const app = express();
+
+// Подключаем иконку сайта (favicon)
+app.use(favicon(path.join(__dirname, 'public', 'image', 'favicon.png')));
 
 // Настройка Passport
 require('./config/passport')(passport);
