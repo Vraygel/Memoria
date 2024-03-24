@@ -69,7 +69,7 @@ async function checkingDate(req, res, next) {
 								function sendMessageToUser(chatId) {
 									console.log('Отправлено сообщение в telegramm пользователю:' + user.userlogin);
 									// bot.sendMessage(chatId, message, { parse_mode: 'html', disable_web_page_preview: true });
-									bot.sendMessage(chatId, message);
+									bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
 								}
 								// Отправляем сообщение пользователю
 								sendMessageToUser(userChatId);

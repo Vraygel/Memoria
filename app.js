@@ -31,7 +31,7 @@ mongoose.connect('mongodb://localhost:27017/passport-example')
 const app = express();
 
 // Подключаем иконку сайта (favicon)
-app.use(favicon(path.join(__dirname, 'public', 'image', 'favicon.png')));
+app.use(favicon(path.join(__dirname, 'public', 'image', 'favicon.ico')));
 
 // Настройка Passport
 require('./config/passport')(passport);
