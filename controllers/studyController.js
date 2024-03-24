@@ -135,8 +135,22 @@ exports.repeatWord = async (req, res) => {
 // Контроллер для отображения страницы повторения слова
 exports.repetitionWordPage = async (req, res) => {
 	try {
-		
-		const dictionary = await Dictionary.findOne({ 'words.expectation': 'waited' });
+
+		// Находим пользователя по его ID
+		const user = await User.findById(req.user._id);
+		if (!user) {
+				// Если пользователь не найден, выводим сообщение об ошибке и перенаправляем на страницу профиля
+				req.flash('message', 'Пользователь не найден');
+				return res.redirect('/user/profile');
+		}
+
+		const userId = user._id
+		console.log(userId);
+
+
+		// , user: user:_id 
+		const dictionary = await Dictionary.findOne({ 'words.expectation': 'waited', user: userId});
+		console.log(dictionary);
 		if (!dictionary) {
 			req.flash('message', 'Нет терминов для повторения');
 			return res.redirect('/dictionaries')
