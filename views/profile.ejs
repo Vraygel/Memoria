@@ -47,13 +47,9 @@
 
                     
                     <!-- Проверяем, подтвержден ли email пользователя -->
-                    <% if (user.contactinfo.email.confirmation) { %>
-                        <p style="display: none;">Email подтвержден</p>
-                        <% } else { %>
-                            <p>Email не подтвержден</p>
-                            <% } %>
+                    
                                 <form class="profilInfo" action="/user/updateUserProfil" method="post">
-                                    <h2>Информация о пользователе</h2>
+                                    <h2>Контакты</h2>
                                     <!-- <form class="userInfo" action="/profile/updateUsername" method="POST"> -->
                                     <label for="username">Имя:</label>
                                     <input type="text" id="username" name="username" value="<%= user.username %>"
@@ -63,6 +59,11 @@
 
                                     <!-- <form class="userInfo last-input"  action="/profile/updateEmail" method="POST"> -->
                                     <label for="useremail">Email:</label>
+                                    <% if (user.contactinfo.email.confirmation) { %>
+                                        <p style="display: none;">Email подтвержден</p>
+                                        <% } else { %>
+                                            <p>Email не подтвержден</p>
+                                            <% } %>
                                     <input type="text" id="useremail" name="useremail"
                                         value="<%= user.contactinfo.email.email %>" placeholder="Email">
                                     <!-- <button type="submit">Изменить</button> -->

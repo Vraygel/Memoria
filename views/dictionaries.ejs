@@ -14,9 +14,9 @@
             <div class="container">
                 <div class="wrapper">
 
-                <h1>Мои разделы</h1>
+                <h1>Разделы</h1>
                 <div class="newDictonaries">
-                    <h2>Создать новый раздел</h2>
+                    <!-- <h2>Создать</h2> -->
                     <form action="/dictionaries" method="POST">
                         <label for="dictionaryName">Название раздела:</label>
                         <input type="text" id="dictionaryName" name="dictionaryName" required>
@@ -25,7 +25,7 @@
                 </div>
                 
                 <% if (dictionaries.length> 0) { %>
-                    <h2>Список моих разделов</h2>
+                    <!-- <h2>Мои разделы:</h2> -->
                     <% dictionaries.forEach(dictionary=> { %>
                         <!-- <div class="dictionary"> -->
                             <a href="/dictionaries/dictionariesList/<%= dictionary._id %>">

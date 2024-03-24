@@ -16,7 +16,7 @@ const sendConfirmationEmail = async function(email, token) {
 		subject: 'Подтверждение email',
 		html: `
             <p>Пожалуйста, подтвердите ваш email, перейдя по следующей ссылке:</p>
-            <a href="http://frlpt.site/confirm-email/${token}">Подтвердить email</a>
+            <a href="https://frlpt.site/confirm-email/${token}">Подтвердить email</a>
         `
 	};
 

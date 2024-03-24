@@ -370,7 +370,7 @@ table {
 .modal {
 	position: fixed;
 	background-color: #303030;
-	top: 50%;
+	top: 25%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 33%;
@@ -403,7 +403,7 @@ table {
 @media screen and (max-width: 339px) {
 	body {
 		width: 100%;
-		font-size: 4.71vw;
+		font-size: 14px;
 	}
 
 	.menu {
@@ -430,17 +430,17 @@ table {
 
 	button {
 		padding: 2.94vw 5.88vw;
-		font-size: 4.71vw;
+		font-size: 14px;
 		border-radius: 2.35vw;
 	}
 
 	.forgot-password {
-		font-size: 4.71vw;
+		font-size: 14px;
 		margin-bottom: 11.76vw;
 	}
 
 	.deleteProfil {
-		font-size: 4.71vw;
+		font-size: 14px;
 	}
 
 	.login,
@@ -455,7 +455,7 @@ table {
 	.form-register input,
 	.password input {
 		margin-bottom: 5.88vw;
-		font-size: 4.71vw;
+		font-size: 14px;
 	}
 
 	.login label,
@@ -473,14 +473,14 @@ table {
 	}
 
 	.newDictonaries input {
-		font-size: 4.71vw;
+		font-size: 14px;
 	}
 
 	input,
 	textarea {
 		padding: 3.53vw;
 		border-radius: 2.35vw;
-		font-size: 4.71vw;
+		font-size: 14px;
 	}
 
 	.container .last-input {
@@ -500,13 +500,13 @@ table {
 	}
 
 	.purchase {
-		width: 17.65vw;
+		/* width: 17.65vw; */
 		margin-bottom: 5.88vw;
 	}
 
 	.profilInfo input {
 		margin-bottom: 5.88vw;
-		font-size: 4.71vw;
+		font-size: 14px;
 	}
 
 	.profilInfo label {
@@ -637,7 +637,7 @@ table {
 
 	body {
 		width: 100%;
-		font-size: 2.08vw;
+		font-size: 14px;
 	}
 
 	.menu {
@@ -663,22 +663,23 @@ table {
 
 	button {
 		padding: 1.30vw 2.60vw;
-		font-size: 2.08vw;
+		font-size: 14px;
 		border-radius: 1.04vw;
 	}
 
 	.forgot-password {
-		font-size: 2.08vw;
+		font-size: 14px;
 		margin-bottom: 5.21vw;
 	}
 
 	.deleteProfil {
-		font-size: 2.08vw;
+		font-size: 14px;
 	}
 
 	.login,
 	.form-register,
 	.password {
+		width: 98%;
 		padding: 4.17vw;
 		border-radius: 1.04vw;
 	}
@@ -687,7 +688,7 @@ table {
 	.form-register input,
 	.password input {
 		margin-bottom: 2.60vw;
-		font-size: 2.08vw;
+		font-size: 14px;
 	}
 
 	.login label,
@@ -705,14 +706,14 @@ table {
 	}
 
 	.newDictonaries input {
-		font-size: 2.08vw;
+		font-size: 14px;
 	}
 
 	input,
 	textarea {
 		padding: 1.56vw;
 		border-radius: 1.04vw;
-		font-size: 2.08vw;
+		font-size: 14px;
 	}
 
 	.container .last-input {
@@ -732,13 +733,13 @@ table {
 	}
 
 	.purchase {
-		width: 7.81vw;
+		/* width: 7.81vw; */
 		margin-bottom: 2.60vw;
 	}
 
 	.profilInfo input {
 		margin-bottom: 2.60vw;
-		font-size: 2.08vw;
+		font-size: 14px;
 	}
 
 	.profilInfo label {
@@ -866,7 +867,7 @@ table {
 
 	body {
 		width: 100%;
-		font-size: 1.56vw;
+		font-size: 14px;
 	}
 
 	.menu {
@@ -893,23 +894,23 @@ table {
 
 	button {
 		padding: 0.98vw 1.96vw;
-		font-size: 1.56vw;
+		font-size: 14px;
 		border-radius: 0.78vw;
 	}
 
 	.forgot-password {
-		font-size: 1.56vw;
+		font-size: 14px;
 		margin-bottom: 3.91vw;
 	}
 
 	.deleteProfil {
-		font-size: 1.56vw;
+		font-size: 14px;
 	}
 
 	.login,
 	.form-register,
 	.password {
-		width: 46.92vw;
+		width: 98%;
 		padding: 3.13vw;
 		border-radius: 0.78vw;
 	}
@@ -918,7 +919,7 @@ table {
 	.form-register input,
 	.password input {
 		margin-bottom: 1.96vw;
-		font-size: 1.56vw;
+		font-size: 14px;
 	}
 
 	.login label,
@@ -936,14 +937,14 @@ table {
 	}
 
 	.newDictonaries input {
-		font-size: 1.56vw;
+		font-size: 14px;
 	}
 
 	input,
 	textarea {
 		padding: 1.17vw;
 		border-radius: 0.78vw;
-		font-size: 1.56vw;
+		font-size: 14px;
 	}
 
 	.container .last-input {
@@ -963,13 +964,13 @@ table {
 	}
 
 	.purchase {
-		width: 5.87vw;
+		/* width: 5.87vw; */
 		margin-bottom: 1.96vw;
 	}
 
 	.profilInfo input {
 		margin-bottom: 1.96vw;
-		font-size: 1.56vw;
+		font-size: 14px;
 	}
 
 	.profilInfo label {

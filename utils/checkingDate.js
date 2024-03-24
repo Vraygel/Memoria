@@ -43,10 +43,11 @@ async function checkingDate(req, res, next) {
 						const userChatId = user.contactinfo.chatId
 
 						if (user.alerts.email) {
-							const message = `<b>Пора повторить термины!</b>
-						\n
-						<a href="http://frlpt.site/study/repetition/">Повторять термины!</a>
-						`
+							const message = `
+							<a href="https://frlpt.site/study/repetition/"><b>Пора повторить термины!</b></a>
+							\n
+							Настроить оповещения можно в профиле: <a href="https://frlpt.site/user/profile/"><b>Профиль</b></a>
+							`
 							const token = ''
 							const email = user.contactinfo.email.email
 							const mailOptions = {
@@ -59,8 +60,11 @@ async function checkingDate(req, res, next) {
 							sendConfirmationEmail(email, token, mailOptions);
 						}
 						if (user.alerts.telegramm) {
-							const message = `Пора повторить термины!	http://frlpt.site/study/repetition
-						`
+							const message = `
+							<a href="https://frlpt.site/study/repetition/"><b>Пора повторить термины!</b></a>
+							\n
+							Настроить оповещения можно в профиле: <a href="https://frlpt.site/user/profile/"><b>Профиль</b></a>
+							`
 							if (userChatId != '') {
 								function sendMessageToUser(chatId) {
 									console.log('Отправлено сообщение в telegramm пользователю:' + user.userlogin);

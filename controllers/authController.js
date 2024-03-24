@@ -72,7 +72,7 @@ exports.registerUser = async (req, res) => {
                 chatId: ''
             },
             alerts: {
-                email: false,
+                email: true,
                 whatsapp: false,
                 telegramm: false,
                 push: false,
@@ -87,8 +87,8 @@ exports.registerUser = async (req, res) => {
 			to: req.body.email,
 			subject: 'Подтверждение email',
 			html: `
-					<p>Пожалуйста, подтвердите ваш email, перейдя по следующей ссылке:</p>
-					<a href="http://frlpt.site/confirmEmail/${token}">Подтвердить email</a>
+					<p>Пожалуйста, подтвердите ваш email:</p>
+					<a href="https://frlpt.site/confirmEmail/${token}">Подтвердить email</a>
 			`
 	    };
 
@@ -111,7 +111,6 @@ exports.authenticateUser = (req, res, next) => {
             return next(err);
         }
         if (!user) { // Если пользователь не найден или аутентификация не удалась
-            // req.flash('message', 'Пользователь не найден. Не верный логин или пароль');
             return res.redirect('/auth/login'); // Перенаправляем на страницу входа с сообщением об ошибке
         }
         // Если аутентификация прошла успешно
@@ -120,7 +119,7 @@ exports.authenticateUser = (req, res, next) => {
                 return next(err);
             }
 
-            return res.redirect('/user/profile'); // Перенаправляем на страницу профиля после успешной аутентификации
+            return res.redirect('/study/repetition'); // Перенаправляем на страницу профиля после успешной аутентификации
         });
     })(req, res, next);
 };
@@ -129,7 +128,7 @@ exports.authenticateUser = (req, res, next) => {
 // Обработка GET-запроса на страницу входа
 exports.getLoginPage = (req, res) => {
     if (req.isAuthenticated()) {
-        return res.redirect('/user/profile');
+        return res.redirect('/study/repetition');
     } else {
         res.render('login', { messages: req.flash('message') } );
     }
