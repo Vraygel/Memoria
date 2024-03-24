@@ -31,16 +31,12 @@ a:hover {
 	align-items: center;
 	background-color: #222222;
 	padding: 20px 24px;
-	border-top-left-radius: 8px;
-	border-top-right-radius: 8px;
 }
 
 .container {
 	margin: 0 auto;
 	padding: 40px;
 	border: 2px solid #222222;
-	border-bottom-left-radius: 8px;
-	border-bottom-right-radius: 8px;
 	display: flex;
 	flex-direction: column;
 	align-content: center;
@@ -140,6 +136,22 @@ textarea {
 	border: 1px solid #222222;
 	border-radius: 8px;
 	font-size: 16px;
+}
+
+textarea {
+	width: 100%;
+	min-height: 100px;
+	resize: vertical;
+	overflow: hidden;
+	
+}
+
+input[type="text"], input[type="password"], input[type="checkbox"] {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 
 .container .last-input {
@@ -269,10 +281,7 @@ textarea {
 	margin-bottom: 10px;
 }
 
-textarea {
-	width: 100%;
-	height: 100px;
-}
+
 
 .studyWord {
 	display: flex;
@@ -391,7 +400,27 @@ table {
 	height: auto;
 }
 
+.footer-content{
+	display: flex;
+	background-color: #222222;
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
+	padding: 20px 60px;
+	align-items: center;
+  justify-content: flex-end;
+}
 
+.author{
+	display: flex;
+	align-items: flex-end;;
+  justify-content: space-between;
+	margin-left: 60px;
+}
+
+.author_img{
+	width: 30px;
+	margin-left: 20px;
+}
 
 
 

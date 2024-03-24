@@ -11,26 +11,25 @@
 	<meta name="author" content="Райгель Владимир Александрович VRaygel">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="stylesheet" href="/css/style.css">
+	<title>Memoria обратная связь</title>
 </head>
 
 <body>
-	<% if (messages.length> 0) { %>
-		<div id="popup" class="overlay popup">
-			<div class="modal">
+	<%- include('template.ejs') %>
+		<%- include('menu.ejs') %>
+			<div class="container">
+				<div class="wrapper">
+					<h1>Обратная связь</h1>
+					<form class="updateDictionary" action="/user/feedback" method="POST">
+						<p class="updateDictionary_label" for="feedback">Текст сообщения:</p>
+						<textarea type="text" id="feedback" name="feedback" required></textarea>
 
-				<p class="message">
-					<%= messages[0] %>
-				</p>
-				<button id="closeButton">Закрыть</button>
+						<button class="create-button" type="submit">Отправить</button>
+					</form>
+
+				</div>
 			</div>
-		</div>
-		<% } %>
-			<script>
-				// Скрытие шаблона через 5 секунд
-				setTimeout(hidePopup, 5000);
-			</script>
-
-			<script src="/js/script.js"></script>
+			<%- include('footer.ejs') %>
 </body>
 
 </html>

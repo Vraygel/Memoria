@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		content="Сайт для интервального повторения информации. Поможет вам эффективно запоминать любую информацию и иностранные слова.">
+	<meta name="keywords"
+		content="интервальное повторение, запоминание информации, запоминание слов, запоминание иностранных слов, обучение, эффективное обучение, обучение с помощью интервалов, обучение с повторениями">
+	<meta name="author" content="Райгель Владимир Александрович VRaygel">
+	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="stylesheet" href="/css/style.css">
 	<title>Memoria Запоминание термина</title>
 </head>
@@ -13,39 +19,21 @@
 		<%- include('menu.ejs') %>
 			<div class="container">
 				<div class="wrapper">
-
 					<h1>Запоминание термина</h1>
 					<div class="studyWord">
 						<label for="word">Темин:</label>
 						<input type="text" id="word" name="word" value="<%= word.word %>"></input>
-	
 						<label for="translation">Определение:</label>
 						<input type="text" id="translation" name="translation" value="<%= word.translation %>"></input>
 					</div>
-					
 					<form action="/study/words/<%= word._id %>" method="POST">
 						<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
 						<input type="hidden" name="complexity" value="normal">
-
 						<button class="create-button" type="submit">Запомнил</button>
 					</form>
-					<!-- <form action="/study/<%= word._id %>/repeated" method="POST">
-						<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
-						<input type="hidden" name="complexity" value="hard">
-						
-						<button class="learn-button" type="submit">Трудно</button>
-					</form> -->
-
-
-					<!-- <form action="/repetition/<%= word._id %>" method="POST">
-						<input type="hidden" name="wordId" value="<%= word._id %>">
-						<button type="submit" name="difficulty" value="easy">Легко</button>
-						<button type="submit" name="difficulty" value="normal">Нормально</button>
-						<button type="submit" name="difficulty" value="hard">Тяжело</button>
-						<button type="submit" name="difficulty" value="forgot">Не помню</button>
-					</form> -->
 				</div>
 			</div>
+			<%- include('footer.ejs') %>
 </body>
 
 </html>

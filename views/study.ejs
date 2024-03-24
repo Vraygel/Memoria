@@ -1,78 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		content="Сайт для интервального повторения информации. Поможет вам эффективно запоминать любую информацию и иностранные слова.">
+	<meta name="keywords"
+		content="интервальное повторение, запоминание информации, запоминание слов, запоминание иностранных слов, обучение, эффективное обучение, обучение с помощью интервалов, обучение с повторениями">
+	<meta name="author" content="Райгель Владимир Александрович VRaygel">
+	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="stylesheet" href="/css/style.css">
-	<title>Memoria Учить</title>
+	<title>Memoria Запоминать термины</title>
 </head>
 
 <body>
 	<%- include('template.ejs') %>
-	<%- include('menu.ejs') %>
-	<div class="container">
-		<div class="wrapper">
-
-		
-			<!-- <a href="/dictionaries/editDictionary/<%= dictionary._id %>">Добавить новое слово</a> -->
-			<!-- <h1><%= dictionary.name %></h1> -->
-			<!-- <a href="/dictionaries/dictionariesList/<%= dictionary._id %>"><h1>Изучение <%= dictionary.name %></h1></a> -->
-			<h1>	Запоминание слов <%= dictionary.name %></h1>
-			<% if (dictionary.words.length> 0) { %>
-
-				<table>
-					<tbody>
-						<% dictionary.words.forEach(word=> { %>
-							<% if(word.enum == 'new' ) { %>
-								<tr>
-									<td class="dictionaryList_td">
-										<%= word.word %>
-									</td>
-									<td class="dictionaryList_td">
-										<%= word.translation %>
-									</td>
-									<td class="dictionaryList_td dictionaryList_td td_editWord td_learnWord">
-													<form action="/study/studyWord/<%= word._id %>" method="GET">
-														<button class="edit-button" type="submit">Запоминать</button>
-													</form>
-													<form action="/study/words/<%= word._id %>" method="POST">
-														<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
-														<input type="hidden" name="complexity" value="easy">
-														<!-- Скрытое поле для передачи значения complexity -->
-														<button class="edit-button" type="submit">Запомнил</button>
-													</form>
-									</td>
-									<!-- <td class="td_learnWord"> -->
-										
-									<!-- </td> -->
-									<!-- <td class="td_learnWord"> -->
-										<!-- <form action="/study/<%= word._id %>/repeated" method="POST">
-											<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
-											<input type="hidden" name="complexity" value="normal">
-											
-											<button class="learn-button" type="submit">Нормально</button>
-										</form> -->
-									<!-- </td> -->
-									<!-- <td class="td_learnWord"> -->
-										<!-- <form action="/study/<%= word._id %>/repeated" method="POST">
-											<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
-											<input type="hidden" name="complexity" value="hard">
-											
-											<button class="learn-button" type="submit">Трудно</button>
-										</form> -->
-									<!-- </td> -->
-								</tr>
-
-								<% }; %>
-									<% }); %>
-					</tbody>
-				</table>
-				<% } else { %>
-					<p>В этом словаре нет слов.</p>
-					<% } %>
-	</div>
-</div>
+		<%- include('menu.ejs') %>
+			<div class="container">
+				<div class="wrapper">
+					<h1> Запоминание слов <%= dictionary.name %>
+					</h1>
+					<% if (dictionary.words.length> 0) { %>
+						<table>
+							<tbody>
+								<% dictionary.words.forEach(word=> { %>
+									<% if(word.enum=='new' ) { %>
+										<tr>
+											<td class="dictionaryList_td">
+												<%= word.word %>
+											</td>
+											<td class="dictionaryList_td">
+												<%= word.translation %>
+											</td>
+											<td class="dictionaryList_td dictionaryList_td td_editWord td_learnWord">
+												<form action="/study/studyWord/<%= word._id %>" method="GET">
+													<button class="edit-button" type="submit">Запоминать</button>
+												</form>
+												<form action="/study/words/<%= word._id %>" method="POST">
+													<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
+													<input type="hidden" name="complexity" value="easy">
+													<!-- Скрытое поле для передачи значения complexity -->
+													<button class="edit-button" type="submit">Запомнил</button>
+												</form>
+											</td>
+										</tr>
+										<% }; %>
+											<% }); %>
+							</tbody>
+						</table>
+						<% } else { %>
+							<p>В этом словаре нет слов.</p>
+							<% } %>
+				</div>
+			</div>
+			<%- include('footer.ejs') %>
 </body>
 
 </html>

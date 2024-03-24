@@ -1,34 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="/css/style.css">
+    <meta name="description"
+        content="Сайт для интервального повторения информации. Поможет вам эффективно запоминать любую информацию и иностранные слова.">
+    <meta name="keywords"
+        content="интервальное повторение, запоминание информации, запоминание слов, запоминание иностранных слов, обучение, эффективное обучение, обучение с помощью интервалов, обучение с повторениями">
+    <meta name="author" content="Райгель Владимир Александрович VRaygel">
+    <link rel="icon" href="./favicon.png" type="image/png">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Memoria Купить Разделы и Термины</title>
 </head>
+
 <body>
     <%- include('menu.ejs') %>
-	<div class="container">
-
-		
-    <h1>Купить Разделы и Термины</h1>
-    
-    
-
-    <!-- Форма для покупки словарей -->
-    <form class="password" action="/purchase/dictionaries" method="POST">
-        <label for="dictionaryCount">Введите количество разделов для покупки:</label>
-        <input type="number" id="dictionaryCount" name="dictionaryCount">
-        <button type="submit">Купить раздел</button>
-    </form>
-
-    <!-- Форма для покупки слов -->
-    <form class="password" action="/purchase/words" method="POST">
-        <label for="wordCount">Введите количество терминов для покупки:</label>
-        <input type="number" id="wordCount" name="wordCount">
-        <button type="submit">Купить термины</button>
-    </form>
-    
-	</div>
+        <div class="container">
+                <h1>Купить Разделы и Термины</h1>
+                <!-- Форма для покупки словарей -->
+                <form class="password" action="/purchase/dictionaries" method="POST">
+                    <label for="dictionaryCount">Введите количество разделов для покупки:</label>
+                    <input type="number" id="dictionaryCount" name="dictionaryCount">
+                    <button type="submit">Купить раздел</button>
+                </form>
+                <!-- Форма для покупки слов -->
+                <form class="password" action="/purchase/words" method="POST">
+                    <label for="wordCount">Введите количество терминов для покупки:</label>
+                    <input type="number" id="wordCount" name="wordCount">
+                    <button type="submit">Купить термины</button>
+                </form>
+        </div>
+        <%- include('footer.ejs') %>
 </body>
+
 </html>

@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		content="Сайт для интервального повторения информации. Поможет вам эффективно запоминать любую информацию и иностранные слова.">
+	<meta name="keywords"
+		content="интервальное повторение, запоминание информации, запоминание слов, запоминание иностранных слов, обучение, эффективное обучение, обучение с помощью интервалов, обучение с повторениями">
+	<meta name="author" content="Райгель Владимир Александрович VRaygel">
+	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="stylesheet" href="/css/style.css">
-	<title>Повторение Термина</title>
+	<title>Memoria Повторение Термина</title>
 </head>
 
 <body>
@@ -18,23 +24,13 @@
 					<label for="word">Вы помните это?:</label>
 					<input type="text" id="word" name="word" value="<%= wordParameter %>"></input>
 				</div>
-				
-
-
-				<!-- <p>
-					<%= wordParameter %>
-				</p> -->
-
 				<button class="create-button" id="myButtonShow">Показать ответ</button>
-
-				<!-- Div, который появляется/скрывается -->
 				<div class="myDiv">
 					<% if(wordParameter==word.translation){ %>
-
 						<div class="studyWord">
-					<label for="word">Ответ:</label>
-					<input type="text" id="word" name="word" value="<%= word.word %>"></input>
-				</div>
+							<label for="word">Ответ:</label>
+							<input type="text" id="word" name="word" value="<%= word.word %>"></input>
+						</div>
 						<% } else { %>
 							<div class="studyWord">
 								<label for="word">Ответ:</label>
@@ -42,66 +38,45 @@
 							</div>
 							<% } %>
 				</div>
-
-			<form action="/study/studyWord/<%= word._id %>" method="POST">
-				<input type="hidden" name="wordId" value="<%= word._id %>">
-				<input type="hidden" name="complexity" value="forgot">
-				<!-- Скрытое поле для передачи значения complexity -->
-				<button class="create-button" type="submit">Не помню</button>
-			</form>
-			<!-- <form action="/study/repetition/<%= word._id %>" method="POST">
+				<form action="/study/studyWord/<%= word._id %>" method="POST">
 					<input type="hidden" name="wordId" value="<%= word._id %>">
-					<input type="hidden" name="complexity" value="easy">
-					Скрытое поле для передачи значения complexity
-					<button class="learn-button" type="submit">Легко</button>
-				</form> -->
-			<form action="/study/repetition/<%= word._id %>" method="POST">
-				<input type="hidden" name="wordId" value="<%= word._id %>">
-				<input type="hidden" name="complexity" value="normal">
-				<!-- Скрытое поле для передачи значения complexity -->
-				<button class="create-button" type="submit">Помню</button>
-			</form>
-			<!-- <form action="/study/repetition/<%= word._id %>" method="POST">
+					<input type="hidden" name="complexity" value="forgot">
+					<!-- Скрытое поле для передачи значения complexity -->
+					<button class="create-button" type="submit">Не помню</button>
+				</form>
+				<form action="/study/repetition/<%= word._id %>" method="POST">
 					<input type="hidden" name="wordId" value="<%= word._id %>">
-					<input type="hidden" name="complexity" value="hard">
-					Скрытое поле для передачи значения complexity
-					<button class="learn-button" type="submit">Трудно</button>
-				</form> -->
-
-
-			<!-- <form action="/repetition/<%= word._id %>" method="POST">
-						<input type="hidden" name="wordId" value="<%= word._id %>">
-						<button type="submit" name="difficulty" value="easy">Легко</button>
-						<button type="submit" name="difficulty" value="normal">Нормально</button>
-						<button type="submit" name="difficulty" value="hard">Тяжело</button>
-						<button type="submit" name="difficulty" value="forgot">Не помню</button>
-					</form> -->
+					<input type="hidden" name="complexity" value="normal">
+					<!-- Скрытое поле для передачи значения complexity -->
+					<button class="create-button" type="submit">Помню</button>
+				</form>
+			</div>
 		</div>
-	</div>
-		<script>
+		<%- include('footer.ejs') %>
+			<script>
 
-			let button = document.getElementById("myButtonShow");
-			let div = document.querySelector(".myDiv");
-			const styles = window.getComputedStyle(div);
+				let button = document.getElementById("myButtonShow");
+				let div = document.querySelector(".myDiv");
+				const styles = window.getComputedStyle(div);
 
-			// Добавляем обработчик события click для кнопки
-			button.addEventListener("click", function () {
-				const display = styles.display;
+				// Добавляем обработчик события click для кнопки
+				button.addEventListener("click", function () {
+					const display = styles.display;
 
-				// Если div скрыт, показываем его, иначе скрываем
-				if (display === "none") {
-					console.log('первый иф')
-					div.style.display = "block";
-					button.textContent = "Скрыть ответ";
-				} else {
-					console.log('второй иф');
-					div.style.display = "none";
-					button.textContent = "Показать ответ";
-				}
-			});
+					// Если div скрыт, показываем его, иначе скрываем
+					if (display === "none") {
+						console.log('первый иф')
+						div.style.display = "block";
+						button.textContent = "Скрыть ответ";
+					} else {
+						console.log('второй иф');
+						div.style.display = "none";
+						button.textContent = "Показать ответ";
+					}
+				});
 
-		</script>
-		<script src="/js/script.js"></script>
+			</script>
+			<script src="/js/script.js"></script>
 </body>
 
 </html>

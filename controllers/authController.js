@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const Dictionary = require('../models/Dictionary');
 const passport = require('passport');
 const uuid = require('uuid');
 
@@ -15,7 +16,6 @@ exports.getRegisterPage = (req, res) => {
         res.render('register', { messages: req.flash('message') } );
     }
 };
-
 
 // Обработка регистрации нового пользователя
 exports.registerUser = async (req, res) => {
@@ -105,7 +105,7 @@ exports.registerUser = async (req, res) => {
 };
 
 // Аутентификация пользователя
-exports.authenticateUser = (req, res, next) => {
+exports.authenticateUser = async (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
         if (err) { // Если произошла ошибка аутентификации
             return next(err);
@@ -114,10 +114,26 @@ exports.authenticateUser = (req, res, next) => {
             return res.redirect('/auth/login'); // Перенаправляем на страницу входа с сообщением об ошибке
         }
         // Если аутентификация прошла успешно
-        req.logIn(user, (err) => {
+        req.logIn(user, async (err) => {
             if (err) {
                 return next(err);
             }
+
+
+            // Находим пользователя по его ID
+            const user = await User.findById(req.user._id);
+            if (!user) {
+                // Если пользователь не найден, выводим сообщение об ошибке и перенаправляем на страницу профиля
+                req.flash('message', 'Пользователь не найден');
+                return res.redirect('/user/profile');
+            }
+
+            // Находим все словари, принадлежащие текущему пользователю
+            const dictionaries = await Dictionary.find({ user: req.user._id });
+
+            if(dictionaries == 0){
+                return res.redirect('/user/profile');
+            } 
 
             return res.redirect('/study/repetition'); // Перенаправляем на страницу профиля после успешной аутентификации
         });

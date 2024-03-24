@@ -20,7 +20,7 @@ exports.confirmEmail = async (req, res) => {
         user.contactinfo.email.token = '';
         await user.save();
 
-        // Перенаправляем пользователя на страницу, где можно сообщить об успешном подтверждении email
+        // Перенаправляем пользователя на страницу, где можно сообщить об успешном подтверждении 
         req.flash('message', 'Ваш Email успешно подтвержден');
         res.redirect('/user/profile');
     } catch (error) {

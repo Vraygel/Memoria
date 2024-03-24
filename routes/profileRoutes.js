@@ -5,13 +5,18 @@ const profileController = require('../controllers/profileController');
 // Маршрут для отображения профиля пользователя
 router.get('/profile', profileController.renderProfile);
 
-
 // Маршрут для обновления номера телефона
 router.post('/updateUserProfil', profileController.updateUserProfil);
 
-
 // Маршрут для удаления профиля пользователя
 router.post('/deleteProfile', profileController.deleteProfile);
+
+// Маршрут для  отображения страницы обратно связи
+router.get('/feedback', profileController.renderFeedback);
+
+// Маршрут для отправки обратной связи
+router.post('/feedback', profileController.feedback);
+
 
 module.exports = router;
 
