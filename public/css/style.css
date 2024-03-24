@@ -644,6 +644,11 @@ table {
 		border-radius: 2.35vw;
 	}
 
+	.telegrammTooltip a{
+		font-size: 20px;
+		color: #2f4f4f;
+	}
+
 	.telegrammTooltip .closeTooltip {
 		margin-top: 5.88vw;
 	}
