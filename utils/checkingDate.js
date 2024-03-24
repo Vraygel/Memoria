@@ -53,7 +53,7 @@ async function checkingDate(req, res, next) {
 							const mailOptions = {
 								from: 'neverhoteb@yandex.ru',
 								to: email,
-								subject: 'Пора повторять слова',
+								subject: 'Memoria Пора повторять термины',
 								html: message
 							};
 							// Отправка письма для подтверждения email
@@ -62,7 +62,7 @@ async function checkingDate(req, res, next) {
 						if (user.alerts.telegramm) {
 							const message = `
 							<a href="https://frlpt.site/study/repetition/"><b>Пора повторить термины!</b></a>
-							\n
+							<br><br>
 							Настроить оповещения можно в профиле: <a href="https://frlpt.site/user/profile/"><b>Профиль</b></a>
 							`
 							if (userChatId != '') {

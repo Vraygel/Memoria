@@ -98,8 +98,12 @@ exports.handleForgotPasswordRequest = async (req, res) => {
     const mailOptions = {
       from: 'neverhoteb@yandex.ru',
       to: email,
-      subject: 'Сброс пароля Memoria',
-      text: `Для сброса пароля перейдите по ссылке: https://frlpt.site/password/resetPassword/${token}`
+      subject: 'Запрос на сброс пароля Memoria',
+      html: `
+      Если вы не оформляли данную заявку, то проигнорируйте письмо.<br><br>
+      <a href="https://frlpt.site/password/resetPassword/${token}"><b>Сбросить пароль!</b></a><br><br>
+      Если данное письмо вы получили по ошибке, проигнорируйте его.
+      `
     };
 
     // Отправка письма
@@ -111,7 +115,7 @@ exports.handleForgotPasswordRequest = async (req, res) => {
       } else {
         console.log('Email sent: ' + info.response);
         // Перед перенаправлением сохраняем сообщение в сеансе
-        req.flash('message', 'Письмо с инструкциями по сбросу пароля отправлено на ваш email');
+        req.flash('message', 'Письмо с инструкциями по сбросу пароля отправлено на ваш email. Если вы не получили письмо, проверьте папку "СПАМ"');
         res.redirect('/auth/login');
       }
     });
