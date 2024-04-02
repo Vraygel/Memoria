@@ -37,9 +37,46 @@
                         <%= dictionary.name %>
                     </h1>
                     <% if (dictionary.words.length> 0) { %>
-                        <table>
+
+
+                        <% dictionary.words.forEach(word=> { %>
+
+                        <div class="dictionaryList_wrap">
+
+                            <div class="dictionaryList_item">
+                                <%= word.word %>
+                            </div>
+                            <div class="dictionaryList_item">
+                                <%= word.translation %>
+                            </div>
+
+                            
+                                <div class="dictionaryList_item_button">
+                                    <form
+                                    action="/words/editWord/<%= word._id %>?dictionaryId=<%= dictionary._id %>"
+                                    method="GET">
+                                    <input type="hidden" name="dictionaryId"
+                                        value="<%= dictionary._id %>">
+                                    <button class="edit-button"
+                                        type="submit">Редактировать</button>
+                                </form>
+                                <form action="/words/deleteWord/<%= word._id %>" method="POST"
+                                    onsubmit="return confirm('Вы уверены?')">
+                                    <button class="edit-button" type="submit">Удалить</button>
+                                </form> 
+                                </div>
+                              
+                               
+
+                        </div>
+
+<% }); %>
+                        <!-- <table>
                             <tbody>
                                 <% dictionary.words.forEach(word=> { %>
+                                    
+
+
                                     <tr>
                                         <td class="dictionaryList_td">
                                             <%= word.word %>
@@ -49,6 +86,7 @@
                                         </td>
                                         <td class="td_editWord dictionaryList_td">
                                             <% if(word.enum !='new' ) { %>
+
                                                 <% } else {%>
                                                     <% } %>
                                                         <form
@@ -67,7 +105,7 @@
                                     </tr>
                                     <% }); %>
                             </tbody>
-                        </table>
+                        </table> -->
                         <% } else { %>
                             <p>В этом разделе нет терминов.</p>
                             <% } %>

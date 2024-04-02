@@ -160,7 +160,7 @@ width: 100%;
 	width: 100%;
 	border-radius: 8px;
 	padding: 16px;
-	padding-bottom: 60px;
+	/* padding-bottom: 40px; */
 }
 
 .balanceInfo {
@@ -235,7 +235,7 @@ width: 100%;
 .edit-button,
 .create-button {
 	margin-top: 20px;
-	width: 100%;
+	min-width: 100%;
 }
 
 .logout {
@@ -422,6 +422,103 @@ table {
 }
 
 
+.dictionaryList_wrap{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	border: solid 1px #ccc;
+	margin-bottom: 2px;
+}
+
+.dictionaryList_item{
+	padding-top: 10px;
+	/* padding-bottom: 10px; */
+	width: 50%;
+	padding-left: 10px;
+	padding-right: 10px;
+	max-height: 100px;
+	margin-bottom: 10px;
+	overflow: auto;
+}
+
+.dictionaryList_wrap > :nth-child(2) {
+	margin-right: 0px;
+}
+
+
+
+
+
+
+.dictionaryList_item_button{
+	width: 100%;
+	padding-left: 10px;
+	padding-right: 10px;
+	display: flex;
+	justify-content: space-evenly;
+	/* padding-bottom: 10px; */
+}
+
+.dictionaryList_item_button button{
+	margin-top: 0;
+	margin-bottom: 10px;
+	min-width: 100%;
+
+}
+
+/* Для Webkit (Chrome, Safari, Opera) */
+/* Ширина и цвет полосы прокрутки */
+::-webkit-scrollbar {
+	width: 12px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: #555;
+}
+
+/* Для Firefox */
+/* Ширина и цвет полосы прокрутки */
+::-moz-scrollbar {
+	width: 12px;
+}
+
+::-moz-scrollbar-track {
+	background-color: #f1f1f1;
+}
+
+::-moz-scrollbar-thumb {
+	background-color: #888;
+}
+
+::-moz-scrollbar-thumb:hover {
+	background-color: #555;
+}
+
+/* Для Internet Explorer и Edge */
+/* Ширина и цвет полосы прокрутки */
+::-ms-scrollbar {
+	width: 12px;
+}
+
+::-ms-scrollbar-track {
+	background-color: #f1f1f1;
+}
+
+::-ms-scrollbar-thumb {
+	background-color: #888;
+}
+
+::-ms-scrollbar-thumb:hover {
+	background-color: #555;
+}
 
 
 
@@ -441,7 +538,7 @@ table {
 	}
 
 	.container {
-		padding: 11.76vw;
+		padding: 1vw;
 		border-bottom-left-radius: 2.35vw;
 		border-bottom-right-radius: 2.35vw;
 	}
@@ -518,7 +615,6 @@ table {
 	.wrapper {
 		border-radius: 2.35vw;
 		padding: 4.71vw;
-		padding-bottom: 17.65vw;
 	}
 
 	.balanceInfo {
@@ -560,7 +656,7 @@ table {
 	.edit-button,
 	.create-button {
 		margin-top: 5.88vw;
-		width: 100%;
+		min-width: 100%;
 	}
 
 	.logout {
@@ -680,6 +776,7 @@ table {
 	}
 
 	.container {
+		padding: 1vw;
 		border-bottom-left-radius: 1.04vw;
 		border-bottom-right-radius: 1.04vw;
 	}
@@ -756,7 +853,6 @@ table {
 	.wrapper {
 		border-radius: 1.04vw;
 		padding: 2.08vw;
-		padding-bottom: 7.81vw;
 	}
 
 	.balanceInfo {
@@ -987,7 +1083,6 @@ table {
 	.wrapper {
 		border-radius: 0.78vw;
 		padding: 1.56vw;
-		padding-bottom: 5.87vw;
 	}
 
 	.balanceInfo {
@@ -1029,7 +1124,7 @@ table {
 	.edit-button,
 	.create-button {
 		margin-top: 1.96vw;
-		width: 100%;
+		min-width: 100%;
 	}
 
 	.logout {
