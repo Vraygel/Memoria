@@ -531,6 +531,8 @@ table {
 		font-size: 14px;
 	}
 
+
+
 	.menu {
 		padding: 5.88vw 7.06vw;
 		border-top-left-radius: 2.35vw;
@@ -751,6 +753,7 @@ table {
 
 	.modal {
 		/* Ширина модального окна */
+		width: 95%;
 		padding: 5.88vw;
 		border-radius: 2.35vw;
 	}
@@ -981,6 +984,7 @@ table {
 	}
 
 	.modal {
+		width: 95%;
 		padding: 2.60vw;
 		border-radius: 1.04vw;
 	}
@@ -1214,6 +1218,7 @@ table {
 	}
 
 	.modal {
+		width: 70%;
 		padding: 1.96vw;
 		border-radius: 0.78vw;
 	}

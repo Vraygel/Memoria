@@ -81,27 +81,27 @@ exports.repeatWord = async (req, res) => {
 			case 'third':
 				// Действие, которое нужно выполнить
 				dictionary.words[wordIndex].enum = 'fourth';
-				setTime = 21600000
+				setTime = 25200000
 				break; // Обязательный оператор break, чтобы завершить блок switch			
 			case 'fourth':
 				// Действие, которое нужно выполнить
 				dictionary.words[wordIndex].enum = 'fifth';
-				setTime = 1512000000
+				setTime = 86400000
 				break; // Обязательный оператор break, чтобы завершить блок switch
 			case 'fifth':
 				// Действие, которое нужно выполнить
 				dictionary.words[wordIndex].enum = 'sixth';
-				setTime = 6574365000
+				setTime = 1512000000
 				break; // Обязательный оператор break, чтобы завершить блок switch
 			case 'sixth':
 				// Действие, которое нужно выполнить
 				dictionary.words[wordIndex].enum = 'seventh';
-				setTime = 15768000000
+				setTime = 6574365000
 				break; // Обязательный оператор break, чтобы завершить блок switch
 			case 'seventh':
 				// Действие, которое нужно выполнить
 				dictionary.words[wordIndex].enum = 'eighth';
-				setTime = 31536000000
+				setTime = 15768000000
 				break; // Обязательный оператор break, чтобы завершить блок switch
 			case 'eighth':
 				// Действие, которое нужно выполнить
@@ -230,27 +230,27 @@ exports.repetitionWord = async (req, res) => {
 			case 'third':
 				// Действие, которое нужно выполнить
 				dictionary.words[wordIndex].enum = 'fourth';
-				setTime = 21600000
+				setTime = 25200000
 				break; // Обязательный оператор break, чтобы завершить блок switch			
 			case 'fourth':
 				// Действие, которое нужно выполнить
 				dictionary.words[wordIndex].enum = 'fifth';
-				setTime = 1512000000
+				setTime = 86400000
 				break; // Обязательный оператор break, чтобы завершить блок switch
 			case 'fifth':
 				// Действие, которое нужно выполнить
 				dictionary.words[wordIndex].enum = 'sixth';
-				setTime = 6574365000
+				setTime = 1512000000
 				break; // Обязательный оператор break, чтобы завершить блок switch
 			case 'sixth':
 				// Действие, которое нужно выполнить
 				dictionary.words[wordIndex].enum = 'seventh';
-				setTime = 15768000000
+				setTime = 6574365000
 				break; // Обязательный оператор break, чтобы завершить блок switch
 			case 'seventh':
 				// Действие, которое нужно выполнить
 				dictionary.words[wordIndex].enum = 'eighth';
-				setTime = 31536000000
+				setTime = 15768000000
 				break; // Обязательный оператор break, чтобы завершить блок switch
 			case 'eighth':
 				// Действие, которое нужно выполнить

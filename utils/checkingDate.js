@@ -45,7 +45,7 @@ async function checkingDate(req, res, next) {
 						if (user.alerts.email) {
 							const message = `
 							<a href="https://frlpt.site/study/repetition/"><b>Пора повторить термины!</b></a>
-							\n
+							
 							Настроить оповещения можно в профиле: <a href="https://frlpt.site/user/profile/"><b>Профиль</b></a>
 							`
 							const token = ''
