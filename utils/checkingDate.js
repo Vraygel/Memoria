@@ -44,9 +44,9 @@ async function checkingDate(req, res, next) {
 
 						if (user.alerts.email) {
 							const message = `
-							<a href="https://frlpt.site/study/repetition/"><b>Пора повторить термины!</b></a>
+							<a href="https://memboost.ru/study/repetition/"><b>Пора повторить термины!</b></a>
 							
-							Настроить оповещения можно в профиле: <a href="https://frlpt.site/user/profile/"><b>Профиль</b></a>
+							Настроить оповещения можно в профиле: <a href="https://memboost.ru/user/profile/"><b>Профиль</b></a>
 							`
 							const token = ''
 							const email = user.contactinfo.email.email
@@ -61,9 +61,9 @@ async function checkingDate(req, res, next) {
 						}
 						if (user.alerts.telegramm) {
 							const message = `
-							<a href="https://frlpt.site/study/repetition/"><b>Пора повторить термины!</b></a>
+							<a href="https://memboost.ru/study/repetition/"><b>Пора повторить термины!</b></a>
 							
-							Настроить оповещения можно в профиле: <a href="https://frlpt.site/user/profile/"><b>Профиль</b></a>
+							Настроить оповещения можно в профиле: <a href="https://memboost.ru/user/profile/"><b>Профиль</b></a>
 							`
 							if (userChatId != '') {
 								function sendMessageToUser(chatId) {

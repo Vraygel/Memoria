@@ -101,7 +101,7 @@ exports.handleForgotPasswordRequest = async (req, res) => {
       subject: 'Запрос на сброс пароля Memoria',
       html: `
       Если вы не оформляли данную заявку, то проигнорируйте письмо.<br><br>
-      <a href="https://frlpt.site/password/resetPassword/${token}"><b>Сбросить пароль!</b></a><br><br>
+      <a href="https://memboost.ru/password/resetPassword/${token}"><b>Сбросить пароль!</b></a><br><br>
       Если данное письмо вы получили по ошибке, проигнорируйте его.
       `
     };

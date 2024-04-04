@@ -88,7 +88,7 @@ exports.registerUser = async (req, res) => {
 			subject: 'Подтверждение email',
 			html: `
 					<p>Пожалуйста, подтвердите ваш email:</p>
-					<a href="https://frlpt.site/confirmEmail/${token}">Подтвердить email</a>
+					<a href="https://memboost.ru/confirmEmail/${token}">Подтвердить email</a>
 			`
 	    };
 
