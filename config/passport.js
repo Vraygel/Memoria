@@ -29,12 +29,12 @@ module.exports = function (passport) {
                             // Обрабатываем событие приема сообщения от бота Telegram
                             bot.on('message', async (msg) => {
                                 let userId = req.user._id;
-                                let userIdTelegrammMemoria = msg.text
+                                let userIdTelegrammMemboost = msg.text
                                 console.log(msg);
                                 if (user.contactinfo.chatId == msg.from.id) {
                                     console.log('Сообщение из чат бота telegramm авторизованный пользователь ' + user.userlogin + " " + msg.text);
                                 } else {
-                                    if (userId == userIdTelegrammMemoria) {
+                                    if (userId == userIdTelegrammMemboost) {
                                         user.contactinfo.chatId = msg.chat.id;
                                         console.log('Пользователь индетифицирован в чат-боте телеграмм id' + msg.chat.id);
                                         await user.save();

@@ -53,7 +53,7 @@ async function checkingDate(req, res, next) {
 							const mailOptions = {
 								from: 'neverhoteb@yandex.ru',
 								to: email,
-								subject: 'Memoria Пора повторять термины',
+								subject: 'Memboost Пора повторять термины',
 								html: message
 							};
 							// Отправка письма для подтверждения email

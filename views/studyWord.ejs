@@ -11,7 +11,7 @@
 	<meta name="author" content="Райгель Владимир Александрович VRaygel">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="stylesheet" href="/css/style.css">
-	<title>Memoria Запоминание термина</title>
+	<title>Memboost Запоминание термина</title>
 </head>
 
 <body>
@@ -22,9 +22,15 @@
 					<h1>Запоминание термина</h1>
 					<div class="studyWord">
 						<label for="word">Темин:</label>
-						<input type="text" id="word" name="word" value="<%= word.word %>"></input>
+						<div style="white-space: pre-wrap;">
+							<p><%= word.word %></p>
+						</div>
+						<!-- <input type="text" id="word" name="word" value="<%= word.word %>"></input> -->
 						<label for="translation">Определение:</label>
-						<input type="text" id="translation" name="translation" value="<%= word.translation %>"></input>
+						<div style="white-space: pre-wrap;">
+							<p><%= word.translation %></p>
+						</div>
+						<!-- <input type="text" id="translation" name="translation" value="<%= word.translation %>"></input> -->
 					</div>
 					<form action="/study/words/<%= word._id %>" method="POST">
 						<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">

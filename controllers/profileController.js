@@ -20,19 +20,6 @@ exports.renderProfile = async (req, res) => {
 			return res.redirect('/auth/login');
 		}
 
-		// // Обрабатываем событие приема сообщения от бота Telegram
-		// bot.on('message', async (msg) => {
-		// 	let userId = req.user._id;
-		// 	let userIdTelegrammMemoria = msg.text
-		// 	if (userId == userIdTelegrammMemoria) {
-		// 		user.contactinfo.chatId = msg.chat.id;
-		// 		console.log('Пользователь индетифицирован в чат-боте телеграмм id' + msg.chat.id);
-		// 		await user.save();
-		// 	} else {
-		// 		console.log('Сообщение из чат бота telegramm не авторизованный пользователь' + msg.text);
-		// 	}
-		// });
-
 		// Рендерим шаблон профиля и передаем в него данные пользователя
 		res.render('profile', { user, messages: req.flash('message') });
 	} catch (error) {
@@ -178,9 +165,13 @@ exports.feedback = async (req, res) => {
 
 		
 			const message = `
-			Сообещение обратной связи с сайта Memoria
+			Сообещение обратной связи с сайта Memboost
 			\n
-				${req.body.feedback}
+			От: ${user.userlogin}
+			\n
+			${req.body.feedback}
+			\n
+			Ответ отправить: ${req.body.feedbackInput}
 			`
 				function sendMessageToUser(chatId) {
 					console.log('Отправлено сообщение по обратной связи:' + user.userlogin);
@@ -202,7 +193,7 @@ exports.feedback = async (req, res) => {
 		const mailOptions = {
 			from: 'neverhoteb@yandex.ru',
 			to: 'vraygel@mail.ru',
-			subject: 'Сообщение обратной связи с сайта Memoria',
+			subject: 'Сообщение обратной связи с сайта Memboost',
 			text: `
 			${req.body.feedback}
 			`
@@ -222,16 +213,6 @@ exports.feedback = async (req, res) => {
 			}
 		});
 
-
-
-
-
-
-
-
-
-
-		
 	} catch (error) {
 		console.error(error);
 		console.error('Произошла ошибка загрузки обратной связи');

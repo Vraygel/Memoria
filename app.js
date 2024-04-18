@@ -15,6 +15,7 @@ const dictionaryRoutes = require('./routes/dictionaryRoutes');
 const wordRoutes = require('./routes/wordRoutes');
 const studyRoutes = require('./routes/studyRoutes');
 const purchaseRoutes = require('./routes/purchaseRoutes'); // Импорт роутера для покупок
+const indexRoutes = require('./routes/indexRoutes'); // 
 
 const isAuthenticated = require('./middleware/authenticated');
 const isAdmin = require('./middleware/isAdmin');
@@ -65,8 +66,11 @@ app.use(user);
 app.use(telEmailRegExp);
 
 app.get('/', (req, res) => {
-  res.redirect('/auth/register');
+  res.redirect('/index');
 });
+
+// Подключение маршрутов 
+app.use('/index', indexRoutes);
 
 // Подключение маршрутов аутентификации
 app.use('/auth', authRoutes);

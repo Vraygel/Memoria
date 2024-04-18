@@ -11,7 +11,7 @@
 	<meta name="author" content="Райгель Владимир Александрович VRaygel">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="stylesheet" href="/css/style.css">
-	<title>Memoria Повторение Термина</title>
+	<title>Memboost Повторение Термина</title>
 </head>
 
 <body>
@@ -22,19 +22,28 @@
 				<h1>Повторение слова</h1>
 				<div class="studyWord">
 					<label for="word">Вы помните это?:</label>
-					<input type="text" id="word" name="word" value="<%= wordParameter %>"></input>
+					<div style="white-space: pre-wrap;">
+						<p><%= wordParameter %></p>
+					</div>
+					<!-- <input type="text" id="word" name="word" value="<%= wordParameter %>"></input> -->
 				</div>
 				<button class="create-button" id="myButtonShow">Показать ответ</button>
 				<div class="myDiv">
 					<% if(wordParameter==word.translation){ %>
 						<div class="studyWord">
 							<label for="word">Ответ:</label>
-							<input type="text" id="word" name="word" value="<%= word.word %>"></input>
+							<div style="white-space: pre-wrap;">
+								<p><%= word.word %></p>
+							</div>
+							<!-- <input type="text" id="word" name="word" value="<%= word.word %>"></input> -->
 						</div>
 						<% } else { %>
 							<div class="studyWord">
 								<label for="word">Ответ:</label>
-								<input type="text" id="word" name="word" value="<%= word.translation %>"></input>
+								<div style="white-space: pre-wrap;">
+									<p><%= word.translation %></p>
+								</div>
+								<!-- <input type="text" id="word" name="word" value="<%= word.translation %>"></input> -->
 							</div>
 							<% } %>
 				</div>

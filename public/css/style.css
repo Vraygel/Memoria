@@ -439,6 +439,7 @@ table {
 	max-height: 100px;
 	margin-bottom: 10px;
 	overflow: auto;
+display: flex;
 }
 
 .dictionaryList_wrap > :nth-child(2) {

@@ -11,7 +11,7 @@
 	<meta name="author" content="Райгель Владимир Александрович VRaygel">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="stylesheet" href="/css/style.css">
-	<title>Memoria обратная связь</title>
+	<title>Memboost обратная связь</title>
 </head>
 
 <body>
@@ -23,6 +23,8 @@
 					<form class="updateDictionary" action="/user/feedback" method="POST">
 						<p class="updateDictionary_label" for="feedback">Текст сообщения:</p>
 						<textarea type="text" id="feedback" name="feedback" required></textarea>
+						<p class="updateDictionary_label" for="feedbackInput">Куда отправить ответ?</p>
+						<input type="text" id="feedbackInput" name="feedbackInput" placeholder="Email/Telegramm" required></input>
 
 						<button class="create-button" type="submit">Отправить</button>
 					</form>
