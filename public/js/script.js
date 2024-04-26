@@ -103,10 +103,21 @@ function addNewTermBlock(event) {
 // Назначаем обработчик события на кнопку "Добавить новый термин"
 addButton.addEventListener('click', addNewTermBlock);
 
+})
 
+
+document.addEventListener('DOMContentLoaded', function () {
+	let newDictonaries  = document.querySelector('.newDictonaries ')
+	let newDictonaries_button = document.querySelector('.newDictonaries_button')
+
+	newDictonaries_button.addEventListener('click', (event) =>{
+		event.preventDefault()
+		newDictonaries .classList.toggle('newDictonaries_none')
+		})
 
 
 })
+
 
 
 function deleteTermBlockFunc() {

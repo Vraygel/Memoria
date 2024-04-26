@@ -174,12 +174,15 @@ width: 100%;
 }
 
 .purchase {
-
 	margin-left: auto;
 	margin-bottom: 20px;
 	text-align: right;
 	display: flex;
 	justify-content: flex-end;
+}
+
+.newDictonaries_none{
+	display: none;
 }
 
 .profilInfo {

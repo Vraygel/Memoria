@@ -19,8 +19,22 @@
         <%- include('menu.ejs') %>
             <div class="container">
                 <div class="wrapper">
+                    
+
+                    <div class="purchase">
+                        <form class="deleteProfil">
+                            <!-- <a type="submit">Удалить профиль</a> -->
+                            <button class="delete-button newDictonaries_button" type="submit"><a>Новый раздел</a></button>
+                        </form>
+                        <form class="deleteProfil" action="/study/repetition" method="GET">
+                            <!-- <a type="submit">Удалить профиль</a> -->
+                            <button class="delete-button" type="submit"><a>Повторять термины</a></button>
+                        </form>
+                        
+                    </div>
+                    
                     <h1>Разделы</h1>
-                    <div class="newDictonaries">
+                    <div class="newDictonaries newDictonaries_none">
                         <!-- <h2>Создать</h2> -->
                         <% if (edit) { %>
                             <form action="/dictionaries/editDictionary/<%= dictionary._id %>" method="POST">
@@ -51,6 +65,7 @@
                                     <% } %>
                 </div>
             </div>
+            <script src="/js/script.js"></script>
             <%- include('footer.ejs') %>
                 <!-- JavaScript для подтверждения удаления словаря -->
                 <script>

@@ -24,7 +24,7 @@
                     <div class="dictinaries_menu">
                         <a href="/words/addWordPage/<%= dictionary._id %>"><button>Создать</button></a>
                         <a href="/study/words/<%= dictionary._id %>"><button>Учить</button></a>
-                        <a href="/study/repetition"><button>Повторить</button></a>
+                        <a href="/study/repetition"><button>Повторять</button></a>
                     </div>
                     <div class="purchase">
                         <form class="deleteProfil" action="/dictionaries/editDictionary/<%= dictionary._id %>"
@@ -35,7 +35,7 @@
                         <form class="deleteProfil" action="/dictionaries/deleteDictionary/<%= dictionary._id %>"
                             method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить этот раздел?')">
                             <!-- <a type="submit">Удалить профиль</a> -->
-                            <button class="delete-button" type="submit"><a>Удалить</a></button>
+                            <button class="delete-button" type="submit"><a>Удалить раздел</a></button>
                         </form>
                     </div>
                     <h1>
