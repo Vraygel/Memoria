@@ -100,7 +100,7 @@ app.use('/study', isAuthenticated, studyRoutes);
 app.use('/purchase', isAuthenticated, purchaseRoutes);
 
 // Устанавливаем интервал для выполнения функции каждые 10 секунд (в миллисекундах)
-// setInterval(checkingDate, 10000); // 10000 миллисекунд = 10 секунд
+setInterval(checkingDate, 10000); // 10000 миллисекунд = 10 секунд
 
 const PORT = process.env.PORT || 443;
 
