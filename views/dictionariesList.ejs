@@ -20,12 +20,33 @@
         <%- include('menu.ejs') %>
             <div class="container">
                 <div class="wrapper">
+                    
+                    <div class="purchase">
+                        <form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
+                            <!-- <a type="submit">Удалить профиль</a> -->
+                            <button class="delete-button" type="submit"><a>Учить термины</a></button>
+                        </form>
+
+                        <form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
+                            <!-- <a type="submit">Удалить профиль</a> -->
+                            <button class="delete-button" type="submit"><a>Новый термин</a></button>
+                        </form>
+
+                        <form class="deleteProfil" action="/study/repetition" method="GET">
+                            <!-- <a type="submit">Удалить профиль</a> -->
+                            <button class="delete-button" type="submit"><a>Повторять термины</a></button>
+                        </form>
+                        
+                    </div>
+
                     <h1>Термины</h1>
-                    <div class="dictinaries_menu">
+
+                    <!-- <div class="dictinaries_menu">
                         <a href="/words/addWordPage/<%= dictionary._id %>"><button>Создать</button></a>
                         <a href="/study/words/<%= dictionary._id %>"><button>Учить</button></a>
                         <a href="/study/repetition"><button>Повторять</button></a>
-                    </div>
+                    </div> -->
+
                     <div class="purchase">
                         <form class="deleteProfil" action="/dictionaries/editDictionary/<%= dictionary._id %>"
                             method="GET">
