@@ -141,7 +141,8 @@ exports.updateWord = async (req, res) => {
 
         req.flash('message', 'Термин изменён');
         // После успешного обновления перенаправляем пользователя обратно на страницу редактирования словаря
-        res.redirect(`/dictionariesList`);
+        res.redirect(`/dictionaries/dictionariesList/${id}`);
+        // res.redirect(`/dictionariesList`);
     } catch (error) {
         console.error(error);
         req.flash('message', 'Что-то пошло не так. Попробуйте ещё раз');

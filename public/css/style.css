@@ -16,7 +16,8 @@ body {
 }
 
 a {
-	color: #eaeaea;
+	/* color: #eaeaea; */
+	color: #C1AA96;
 	text-decoration: none;
 }
 
@@ -44,7 +45,7 @@ a:hover {
 }
 
 h1 {
-	margin-top: 20px;
+	/* margin-top: 20px; */
 }
 
 h1,
@@ -174,8 +175,9 @@ width: 100%;
 }
 
 .purchase {
+	width: 100%;
 	margin-left: auto;
-	margin-bottom: 20px;
+	/* margin-bottom: 20px; */
 	text-align: right;
 	display: flex;
 	justify-content: flex-end;
@@ -262,6 +264,8 @@ width: 100%;
 
 .dictionaries_h2 {
 	text-align: left;
+	margin-bottom: 0;
+	color: #eaeaea;
 }
 
 .dictionary_form {
@@ -295,6 +299,7 @@ width: 100%;
 .studyWord label {
 	display: inline-block;
 	margin-bottom: 10px;
+	color: #febb38
 }
 
 .studyWord input {
@@ -435,17 +440,19 @@ table {
 	justify-content: space-between;
 	flex-wrap: wrap;
 	border: solid 1px #ccc;
+	border-radius: 8px;
 	margin-bottom: 2px;
+	padding: 16px;
 }
 
 .dictionaryList_item{
-	padding-top: 10px;
+	/* padding-top: 10px; */
 	/* padding-bottom: 10px; */
 	width: 50%;
-	padding-left: 10px;
-	padding-right: 10px;
-	max-height: 100px;
-	margin-bottom: 10px;
+	/* padding-left: 10px; */
+	/* padding-right: 10px; */
+	/* max-height: 100px; */
+	/* margin-bottom: 10px; */
 	overflow: auto;
 display: flex;
 }
@@ -453,10 +460,6 @@ display: flex;
 .dictionaryList_wrap > :nth-child(2) {
 	margin-right: 0px;
 }
-
-
-
-
 
 
 .dictionaryList_item_button{

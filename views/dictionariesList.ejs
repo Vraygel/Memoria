@@ -20,17 +20,20 @@
         <%- include('menu.ejs') %>
             <div class="container">
                 <div class="wrapper">
-                    
-                    <div class="purchase">
-                        <form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
-                            <!-- <a type="submit">Удалить профиль</a> -->
-                            <button class="delete-button" type="submit"><a>Учить термины</a></button>
-                        </form>
 
-                        <form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
-                            <!-- <a type="submit">Удалить профиль</a> -->
-                            <button class="delete-button" type="submit"><a>Новый термин</a></button>
-                        </form>
+                        
+
+                        <div class="purchase">
+
+                            <form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
+                                <!-- <a type="submit">Удалить профиль</a> -->
+                                <button class="delete-button" type="submit"><a>Новый термин</a></button>
+                            </form>
+
+                            <form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
+                                <!-- <a type="submit">Удалить профиль</a> -->
+                                <button class="delete-button" type="submit"><a>Учить термины</a></button>
+                            </form>
 
                         <form class="deleteProfil" action="/study/repetition" method="GET">
                             <!-- <a type="submit">Удалить профиль</a> -->
@@ -39,7 +42,7 @@
                         
                     </div>
 
-                    <h1>Термины</h1>
+                    <h1>Термины: <%= dictionary.name %></h1>
 
                     <!-- <div class="dictinaries_menu">
                         <a href="/words/addWordPage/<%= dictionary._id %>"><button>Создать</button></a>
@@ -47,51 +50,52 @@
                         <a href="/study/repetition"><button>Повторять</button></a>
                     </div> -->
 
-                    <div class="purchase">
+                    <!-- <div class="purchase">
                         <form class="deleteProfil" action="/dictionaries/editDictionary/<%= dictionary._id %>"
                             method="GET">
-                            <!-- <a type="submit">Удалить профиль</a> -->
+                            <a type="submit">Удалить профиль</a>
                             <button class="delete-button" type="submit"><a>Редактировать</a></button>
                         </form>
                         <form class="deleteProfil" action="/dictionaries/deleteDictionary/<%= dictionary._id %>"
                             method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить этот раздел?')">
-                            <!-- <a type="submit">Удалить профиль</a> -->
+                            <a type="submit">Удалить профиль</a>
                             <button class="delete-button" type="submit"><a>Удалить раздел</a></button>
                         </form>
                     </div>
                     <h1>
                         <%= dictionary.name %>
-                    </h1>
+                    </h1> -->
 
                     <% if (dictionary.words.length> 0) { %>
                         <% dictionary.words.forEach(word=> { %>
 
                             <div class="dictionaryList_wrap">
+                                <div class="purchase">
+                                    <form class="deleteProfil" action="/words/editWord/<%= word._id %>?dictionaryId=<%= dictionary._id %>"
+                                        method="GET">
+                                        <input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
+                                        <button class="delete-button newDictonaries_button" type="submit"><a>Редактировать</a></button>
+                                    </form>
+                                    <form class="deleteProfil" action="/words/deleteWord/<%= word._id %>" method="POST"
+                                        onsubmit="return confirm('Вы уверены?')">
+                                        <button class="delete-button" type="submit"><a>Удалить термин</a></button>
+                                    </form>
+                                </div>
 
-                                <div class="dictionaryList_item" style="white-space: pre-wrap;">
+                                <div class="dictionaryList_item" style="white-space: pre-line;">
                                     <p>
                                         <%= word.word %>
                                     </p>
                                 </div>
 
-                                <div class="dictionaryList_item" style="white-space: pre-wrap;">
+                                <div class="dictionaryList_item" style="white-space: pre-line;">
                                     <p>
                                         <%= word.translation %>
                                     </p>
                                 </div>
 
 
-                                <div class="dictionaryList_item_button">
-                                    <form action="/words/editWord/<%= word._id %>?dictionaryId=<%= dictionary._id %>"
-                                        method="GET">
-                                        <input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
-                                        <button class="edit-button" type="submit">Редактировать</button>
-                                    </form>
-                                    <form action="/words/deleteWord/<%= word._id %>" method="POST"
-                                        onsubmit="return confirm('Вы уверены?')">
-                                        <button class="edit-button" type="submit">Удалить</button>
-                                    </form>
-                                </div>
+                                
 
                             </div>
 

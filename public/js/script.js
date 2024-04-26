@@ -107,8 +107,14 @@ addButton.addEventListener('click', addNewTermBlock);
 
 
 document.addEventListener('DOMContentLoaded', function () {
-	let newDictonaries  = document.querySelector('.newDictonaries ')
+	let newDictonaries = document.querySelector('.newDictonaries ')
 	let newDictonaries_button = document.querySelector('.newDictonaries_button')
+
+	if (newDictonaries.classList.contains('newDictonaries_none')) {
+		
+	} else {
+		
+	}
 
 	newDictonaries_button.addEventListener('click', (event) =>{
 		event.preventDefault()

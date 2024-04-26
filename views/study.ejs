@@ -19,50 +19,36 @@
 		<%- include('menu.ejs') %>
 			<div class="container">
 				<div class="wrapper">
-					<h1> Запоминание слов <%= dictionary.name %>
+					<h1> Запоминание слов: <%= dictionary.name %>
 					</h1>
 					<% if (dictionary.words.length> 0) { %>
 						<% dictionary.words.forEach(word=> { %>
 							
 							<% if(word.enum=='new' ) { %>
-							
-							
 
-						<table>
-							<tbody>
-								
-									
-										
-										<tr>
-											<td class="dictionaryList_td">
-												<div style="white-space: pre-wrap;">
-													<p><%= word.word %></p>
-												</div>
-												
-											</td>
-											<td class="dictionaryList_td">
-												<div style="white-space: pre-wrap;">
-													<p><%= word.translation %></p>
-												</div>
-												
-											</td>
-											<td class="dictionaryList_td dictionaryList_td td_editWord td_learnWord">
-												<form action="/study/studyWord/<%= word._id %>" method="GET">
-													<button class="edit-button" type="submit">Запоминать</button>
-												</form>
-												<form action="/study/words/<%= word._id %>" method="POST">
-													<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
-													<!-- <input type="hidden" name="dictionaryId" value="<%= dictionary._id %>"> -->
-													<input type="hidden" name="complexity" value="easy">
-													<!-- Скрытое поле для передачи значения complexity -->
-													<button class="edit-button" type="submit">Запомнил</button>
-												</form>
-											</td>
-										</tr>
+								<div class="dictionaryList_wrap">
+									<div class="purchase">
+											<form class="deleteProfil" action="/study/studyWord/<%= word._id %>" method="GET">
+													<button class="delete-button" type="submit"><a>Запоминать</a></button>
+											</form>
+											<form class="deleteProfil" action="/study/words/<%= word._id %>" method="POST">
+													<button class="delete-button" type="submit"><a>Запомнил</a></button>
+											</form>
+									</div>
+
+									<div class="dictionaryList_item" style="white-space: pre-line;">
+										<p><%= word.word %></p>
+									</div>
+
+									<div class="dictionaryList_item" style="white-space: pre-line;">
+										<p><%= word.translation %></p>
+									</div>
+							</div>
+							
+							
 										<% }; %>
 											<% }); %>
-							</tbody>
-						</table>
+
 						<% } else { %>
 							<p>В этом словаре нет слов.</p>
 							<% } %>
