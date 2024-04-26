@@ -53,8 +53,6 @@ exports.updateUserProfil = async (req, res) => {
 			return res.redirect('/user/profile');
 		}
 
-
-
 		// Регулярное выражение для валидации номера телефона в формате российского номера
 		const phoneRegex = res.locals.TEL_REGEXP;
 		const phoneNumber = req.body.phoneNumber;
@@ -82,7 +80,6 @@ exports.updateUserProfil = async (req, res) => {
 		user.contactinfo.email.email = req.body.useremail;
 		user.contactinfo.phoneNumber = req.body.phoneNumber;
 		// user.contactinfo.telegramm = req.body.telegramm;
-
 
 		await user.save();
 
@@ -181,9 +178,11 @@ exports.feedback = async (req, res) => {
 				// Отправляем сообщение пользователю
 				sendMessageToUser(chatIdTelegramm);
 
-		// Отправляем email с ссылкой для сброса пароля
+		// Отправляем email сообщение обратной связи
 		const transporter = nodemailer.createTransport({
-			service: 'Yandex',
+			host: 'smtp.yandex.com',
+    port: 465,
+    secure: true, // это значение говорит о том, что используется SSL
 			auth: {
 				user: 'neverhoteb@yandex.ru',
 				pass: `${emailPass}`

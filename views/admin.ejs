@@ -24,9 +24,8 @@
                     <table>
                         <tr>
                             <th>Логин</th>
+                            <th>Дата регистрации</th>
                             <th>Баланс MemoCoin</th>
-                            <th>Максимум словарей</th>
-                            <th>Максимум Слов</th>
                             <th>Всего словарей</th>
                             <th>Всего слов</th>
                             <th>Действие</th>
@@ -40,14 +39,12 @@
                                                 <%= user.userlogin %>
                                             </td>
                                             <td>
+                                                <%= user.dateRegistration %>
+                                            </td>
+                                            <td>
                                                 <%= user.balance.memoCoin %>
                                             </td>
-                                            <td>
-                                                <%= user.dictionaries.dictionariesMax %>
-                                            </td>
-                                            <td>
-                                                <%= user.words.wordsMax %>
-                                            </td>
+
                                             <td>
                                                 <%= user.dictionaries.dictionariesСreated %>
                                             </td>

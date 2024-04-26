@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const PasswordController = require('../controllers/PasswordController');
 
+
+// Маршрут для отображения страницы изменения пароля профиля
+router.get('/updateUserPassword', PasswordController.updateUserPasswordPage);
+
+// Маршрут для обновления пароля профиля
+router.post('/resetPassword', PasswordController.updateUserPassword);
+
 // Маршрут для страницы сброса пароля
 router.get('/resetPassword/:token', PasswordController.renderResetPasswordPage);
 

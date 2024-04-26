@@ -6,14 +6,88 @@ exports.dictionariesPage = async (req, res) => {
     try {
         // Находим все словари, принадлежащие текущему пользователю
         const dictionaries = await Dictionary.find({ user: req.user._id });
+        const edit = false
+        const dictionary = ''
         // Рендерим шаблон страницы со словарями и передаем найденные словари
-        res.render('dictionaries', { messages: req.flash('message'), dictionaries });
+
+        res.render('dictionaries', { messages: req.flash('message'), dictionaries, dictionary, edit });
     } catch (error) {
         console.error(error);
         req.flash('message', 'Что-то пошло не так. Попробуйте еще раз');
         return res.redirect('/profile');
     }
 };
+
+// Контроллер для отображения страницы редактирования названия раздела
+exports.editDictionaryPage = async (req, res) => {
+    try {
+
+        // Получаем идентификатор словаря из запроса
+        const dictionaryId = req.params.id;
+
+        // Находим словарь по ID
+        const dictionary = await Dictionary.findById(dictionaryId);
+        if (!dictionary) {
+            // Если словарь не найден, возвращаем страницу с сообщением об ошибке
+            req.flash('message', 'Раздел не найден');
+            return res.redirect('/dictionaries');
+        }
+
+
+        // Находим все словари, принадлежащие текущему пользователю
+        const dictionaries = await Dictionary.find({ user: req.user._id });
+        const edit = true
+        // Рендерим шаблон страницы со словарями и передаем найденные словари
+        res.render('dictionaries', { messages: req.flash('message'), dictionaries, dictionary, edit });
+    } catch (error) {
+        console.error(error);
+        req.flash('message', 'Что-то пошло не так. Попробуйте еще раз');
+        return res.redirect('/profile');
+    }
+};
+
+// Контроллер для сохранения нового названия раздела
+exports.editDictionary = async (req, res) => {
+    try {
+        // Находим пользователя по его ID
+        const user = await User.findById(req.user._id);
+        if (!user) {
+            // Если пользователь не найден, выводим сообщение об ошибке и перенаправляем на страницу профиля
+            req.flash('message', 'Пользователь не найден');
+            return res.redirect('/user/profile');
+        }
+
+         // Получаем идентификатор словаря из запроса
+         const dictionaryId = req.params.id;
+
+         // Находим словарь по ID
+         const dictionary = await Dictionary.findById(dictionaryId);
+
+         if (!dictionary) {
+             // Если словарь не найден, возвращаем страницу с сообщением об ошибке
+             req.flash('message', 'Раздел не найден');
+             return res.redirect('/dictionaries');
+         }
+
+         const {dictionaryName} = req.body;
+         dictionary.name = dictionaryName
+ 
+        // Сохраняем обновленный словарь в базе данных
+        user.dictionaries.dictionariesСreated += 1
+        await user.save();
+        await dictionary.save();
+
+        req.flash('message', 'Раздел успешно сохранён');
+        // Перенаправляем пользователя на страницу со словарями
+        res.redirect('/dictionaries');
+    } catch (error) {
+        console.error(error);
+        req.flash('message', 'Что-то пошло не так. Попробуйте ещё раз.');
+        res.redirect('/dictionaries');
+    }
+};
+
+
 
 // Контроллер для создания нового словаря
 exports.createDictionary = async (req, res) => {
@@ -29,13 +103,13 @@ exports.createDictionary = async (req, res) => {
         // Находим все словари, принадлежащие текущему пользователю
         const dictionaries = await Dictionary.find({ user: req.user._id });
 
-        if (req.user.dictionaries.dictionariesMax == 0) {
-            req.flash('message', 'Вы не можете создать новый раздел. Приобретите больше разделов');
-            console.log('Вы не можете создать новый раздел. Приобретите больше словарей')
-            return res.redirect('/dictionaries');
-        }
+        // if (req.user.dictionaries.dictionariesMax == 0) {
+        //     req.flash('message', 'Вы не можете создать новый раздел. Приобретите больше разделов');
+        //     console.log('Вы не можете создать новый раздел. Приобретите больше словарей')
+        //     return res.redirect('/dictionaries');
+        // }
 
-        user.dictionaries.dictionariesMax -= 1
+        // user.dictionaries.dictionariesMax -= 1
         user.dictionaries.dictionariesСreated += 1
 
         // Создаем новый словарь и присваиваем ему идентификатор пользователя

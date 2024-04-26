@@ -5,7 +5,7 @@ const profileController = require('../controllers/profileController');
 // Маршрут для отображения профиля пользователя
 router.get('/profile', profileController.renderProfile);
 
-// Маршрут для обновления номера телефона
+// Маршрут для обновления данных профиля
 router.post('/updateUserProfil', profileController.updateUserProfil);
 
 // Маршрут для удаления профиля пользователя

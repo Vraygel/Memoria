@@ -6,16 +6,15 @@ const userSchema = new mongoose.Schema({
 	password: String,
 	username: String,
 	userstatus: String,
+	dateRegistration: Object,
 	balance: {
 		balanceAllTime: Number,
 		memoCoin: Number,
 	},
 	dictionaries: {
-		dictionariesMax: Number,
 		dictionariesСreated: Number,
 	},
 	words: {
-		wordsMax: Number,
 		wordsСreated: Number,
 	},
 	contactinfo: {

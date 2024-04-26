@@ -30,25 +30,27 @@
                         </h1>
                     </div>
                     <div class="balanceInfo">
-                        <div class="purchase">
+                        <!-- <div class="purchase">
                             <a href="/purchase">Купить</a>
-                        </div>
+                        </div> -->
                         <p>Баланс: <%= user.balance.memoCoin %> MemoCoin</p>
-                        <p>Разделов могу создать: <%= user.dictionaries.dictionariesMax %>
-                        </p>
-                        <p>Терминов могу создать: <%= user.words.wordsMax %>
-                        </p>
+                        <!-- <p>Разделов могу создать: <%= user.dictionaries.dictionariesMax %></p> -->
+                        <!-- <p>Терминов могу создать: <%= user.words.wordsMax %></p> -->
                     </div>
+                    <form class="deleteProfil" action="/password/updateUserPassword" method="GET">
+                            <!-- <a type="submit">Удалить профиль</a> -->
+                            <button class="delete-button" type="submit"><a>Изменить пароль</a></button>
+                        </form>
                     <form class="profilInfo" action="/user/updateUserProfil" method="post">
                         <h2>Контакты</h2>
                         <label for="username">Имя:</label>
                         <input type="text" id="username" name="username" value="<%= user.username %>" placeholder="Имя">
-                        <label for="useremail">Email:</label>
-                        <% if (user.contactinfo.email.confirmation) { %>
-                            <p style="display: none;">Email подтвержден</p>
+                        <label for="useremail">Email: <% if (user.contactinfo.email.confirmation) { %>
+                            <p style="display: none;">Email подтверждён</p>
                             <% } else { %>
-                                <p>Email не подтвержден</p>
-                                <% } %>
+                                не подтверждён
+                                <% } %></label>
+                       
                                     <input type="text" id="useremail" name="useremail"
                                         value="<%= user.contactinfo.email.email %>" placeholder="Email">
                                     <label for="phoneNumber">Телефон:</label>
@@ -70,11 +72,11 @@
                                         <p>
                                             <%= user.username %>, чтобы подписаться на уведомления в Telegramm,
                                                 отправьте
-                                                сообщение "<%= user.id %>" (без кавычек) в чат-бот Telegramm <a
+                                                сообщение "<%= user.id %>" (без кавычек) в чат-бот Telegramm <a style="color:#febb38"
                                                         href="https://t.me/MemoriaBot_bot"
                                                         target="_blank">MemoriaBot_bot</a>
                                         </p>
-                                        <button class="closeTooltip" id="closeTooltip">Закрыть</button>
+                                        <!-- <button class="closeTooltip" id="closeTooltip">Закрыть</button> -->
                                     </div>
                                     <button class="edit-button" type="submit">Сохранить профиль</button>
 

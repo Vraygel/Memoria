@@ -24,8 +24,8 @@ async function purchaseWords (req, res) {
 			req.flash('message', `Не достаточно MemoCoin. ${balansMemoCoin} Пополните баланс`);
 			return res.redirect('/user/profile');
 		}
-		user.balance.memoCoin -= wordCount
-		user.words.wordsMax += +wordCount
+		// user.balance.memoCoin -= wordCount
+		// user.words.wordsMax += +wordCount
 
 		await user.save();
 
@@ -48,8 +48,8 @@ async function purchaseDictionaries(req, res) {
 			req.flash('message', `Не достаточно MemoCoin. ${balansMemoCoin} Пополните баланс`);
 			return res.redirect('/user/profile');
 		}
-		user.balance.memoCoin -= dictionaryCount * 50
-		user.dictionaries.dictionariesMax += +dictionaryCount
+		// user.balance.memoCoin -= dictionaryCount * 50
+		// user.dictionaries.dictionariesMax += +dictionaryCount
 
 		await user.save();
 

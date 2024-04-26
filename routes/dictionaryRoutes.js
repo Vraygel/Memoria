@@ -12,6 +12,11 @@ router.post('/', dictionaryController.createDictionary);
 router.post('/deleteDictionary/:id', dictionaryController.deleteDictionary);
 
 
+// Роут для отображения страницы редактирования словаря
+router.get('/editDictionary/:id', dictionaryController.editDictionaryPage);
+
+// Роут для редактирования словаря
+router.post('/editDictionary/:id', dictionaryController.editDictionary);
 
 
 

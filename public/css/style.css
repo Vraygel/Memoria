@@ -82,7 +82,9 @@ button:hover {
 
 .deleteProfil {
 	font-size: 16px;
-	margin-left: auto;
+	margin-left: 20px;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .login,
@@ -172,9 +174,12 @@ width: 100%;
 }
 
 .purchase {
-	width: 60px;
+
 	margin-left: auto;
 	margin-bottom: 20px;
+	text-align: right;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .profilInfo {
@@ -203,15 +208,15 @@ width: 100%;
 	all: unset;
 }
 
-.header_h1 {
+/* .header_h1 {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
+} */
 
-.balanceInfo p {
+/* .balanceInfo p {
 	margin-bottom: 10px;
-}
+} */
 
 .userInfo {
 	display: flex;
@@ -627,7 +632,6 @@ display: flex;
 	}
 
 	.purchase {
-		/* width: 17.65vw; */
 		margin-bottom: 5.88vw;
 	}
 
@@ -866,7 +870,6 @@ display: flex;
 	}
 
 	.purchase {
-		/* width: 7.81vw; */
 		margin-bottom: 2.60vw;
 	}
 
@@ -1097,7 +1100,6 @@ display: flex;
 	}
 
 	.purchase {
-		/* width: 5.87vw; */
 		margin-bottom: 1.96vw;
 	}
 

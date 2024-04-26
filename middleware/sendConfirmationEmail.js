@@ -1,12 +1,17 @@
 const nodemailer = require('nodemailer'); // Для отправки писем подтверждения
 
+require('dotenv').config();
+const emailPass = process.env.emailPass
+
 // Функция для отправки письма подтверждения
 const sendConfirmationEmail = async function(email, token) {
 	const transporter = nodemailer.createTransport({
-		service: 'Yandex',
+		host: 'smtp.yandex.com',
+    port: 465,
+    secure: true, // это значение говорит о том, что используется SSL
 		auth: {
 			user: 'neverhoteb@yandex.ru',
-			pass: 'Ghjcnjqgfhjkm1981_yan'
+			pass: `${emailPass}`
 		}
 	});
 

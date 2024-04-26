@@ -22,11 +22,21 @@
                     <h1>Разделы</h1>
                     <div class="newDictonaries">
                         <!-- <h2>Создать</h2> -->
-                        <form action="/dictionaries" method="POST">
-                            <label for="dictionaryName">Название раздела:</label>
-                            <input type="text" id="dictionaryName" name="dictionaryName" required>
-                            <button class="create-button" type="submit">Создать</button>
-                        </form>
+                        <% if (edit) { %>
+                            <form action="/dictionaries/editDictionary/<%= dictionary._id %>" method="POST">
+
+                                    <label for="dictionaryName">Название раздела:</label>
+                                    <input type="text" id="dictionaryName" name="dictionaryName" required
+                                        value="<%= dictionary.name %>">
+                                    <button class="create-button" type="submit">Сохранить</button>
+                            </form>
+                            <% } else { %>
+                                <form action="/dictionaries" method="POST">
+                                    <label for="dictionaryName">Название раздела:</label>
+                                    <input type="text" id="dictionaryName" name="dictionaryName" required>
+                                    <button class="create-button" type="submit">Создать</button>
+                                </form>
+                                <% } %>
                     </div>
                     <% if (dictionaries.length> 0) { %>
                         <% dictionaries.forEach(dictionary=> { %>

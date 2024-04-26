@@ -11,7 +11,7 @@
     <meta name="author" content="Райгель Владимир Александрович VRaygel">
     <link rel="icon" href="./favicon.png" type="image/png">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Memboost Создание нового пользователя</title>
+    <title>Memboost Редактирование пользователя</title>
 </head>
 
 <body>
@@ -40,11 +40,11 @@
                                     <label for="memoCoin">Баланс MemoCoin:</label>
                                     <input class="admin_input" type="text" id="memoCoin" name="memoCoin"
                                         value="<%= user.balance.memoCoin %>">
-                                    <label for="dictionariesMax">Максимум словарей:</label>
-                                    <input class="admin_input" type="text" id="dictionariesMax" name="dictionariesMax"
-                                        value="<%= user.dictionaries.dictionariesMax %>">
-                                    <label for="wordsMax">Максимум Слов:</label>
-                                    <input class="admin_input" type="text" id="wordsMax" name="wordsMax" value="<%= user.words.wordsMax %>">
+                                    <label for="dateRegistration">Дата регистрации:</label>
+                                    <input class="admin_input" type="text" id="dateRegistration" name="dateRegistration"
+                                        value="<%= user.dateRegistration %>">
+                                    <!-- <label for="wordsMax">Максимум Слов:</label>
+                                    <input class="admin_input" type="text" id="wordsMax" name="wordsMax" value="<%= user.words.wordsMax %>"> -->
                                     <label for="email">Email:</label>
                                     <input class="admin_input" type="text" id="email" name="email"
                                         value="<%= user.contactinfo.email.email %>">

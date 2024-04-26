@@ -12,14 +12,14 @@ const sendConfirmationEmail = async function(email, token, mailOptions) {
 	}
 
 	const transporter = nodemailer.createTransport({
-			service: 'Yandex',
+		host: 'smtp.yandex.com',
+    port: 465,
+    secure: true, // это значение говорит о том, что используется SSL
 			auth: {
 					user: 'neverhoteb@yandex.ru',
 					pass: `${emailPass}`
 			}
 	});
-
-	
 
 	transporter.sendMail(mailOptions, (error, info) => {
 			if (error) {

@@ -58,16 +58,17 @@ exports.createUser = async (req, res) => {
             password: hashedPassword,
             username: req.body.username,
             userstatus: req.body.userstatus,
+            dateRegistration: new Date(),
             balance: {
                 memoCoin: req.body.memoCoin || 0,
                 balanceAllTime: 0,
             },
             dictionaries: {
-                dictionariesMax: req.body.maxDictionaries || 2,
+                // dictionariesMax: req.body.maxDictionaries || 2,
                 dictionariesСreated: 0,
             },
             words: {
-                wordsMax: req.body.maxWords || 100,
+                // wordsMax: req.body.maxWords || 100,
                 wordsСreated: 0,
             },
             contactinfo: {
@@ -164,8 +165,9 @@ exports.updateUser = async (req, res) => {
 			user.username = req.body.username;
 			user.userstatus = req.body.userstatus;
 			user.balance.memoCoin = req.body.memoCoin || 0;
-            user.dictionaries.dictionariesMax = req.body.dictionariesMax || 0,
-            user.words.wordsMax = req.body.wordsMax || 0, 
+            user.dateRegistration = req.body.dateRegistration || new Date(),
+            // user.dictionaries.dictionariesMax = req.body.dictionariesMax || 0,
+            // user.words.wordsMax = req.body.wordsMax || 0, 
 			user.contactinfo.email.email = req.body.email;
 			user.contactinfo.phoneNumber = req.body.phoneNumber;
           	user.alerts.email = req.body.emailNotification === 'on';

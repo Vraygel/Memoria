@@ -8,6 +8,8 @@ const uuid = require('uuid');
 const { sendConfirmationEmail } = require('../utils/email');
 
 
+
+
 // Обработка GET-запроса на страницу регистрации
 exports.getRegisterPage = (req, res) => {
     if (req.isAuthenticated()) {
@@ -49,16 +51,17 @@ exports.registerUser = async (req, res) => {
             password: hashedPassword,
             username: req.body.username,
             userstatus: 'user',
+            dateRegistration: new Date(),
             balance: {
                 memoCoin: 0,
                 balanceAllTime: 0,
             },
             dictionaries: {
-                dictionariesMax: 2,
+                // dictionariesMax: 2,
                 dictionariesСreated: 0,
             },
             words: {
-                wordsMax: 100,
+                // wordsMax: 100,
                 wordsСreated: 0,
             },
             contactinfo: {

@@ -11,7 +11,6 @@
 	<meta name="author" content="Райгель Владимир Александрович VRaygel">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="stylesheet" href="/css/style.css">
-	<%- include('footer.ejs') %>
 	<title>Memboost Добавить новый термин</title>
 </head>
 
@@ -22,17 +21,26 @@
 				<div class="wrapper">
 					<h1>Новый термин</h1>
 					<form class="updateDictionary" action="/words/addWord/<%= dictionary._id %>" method="POST">
-						<p class="updateDictionary_label" for="word">Термин:</p>
-						<!-- <textarea type="text" id="word" name="word" value="<%= dictionary.word %>" required></textarea> -->
-						<textarea id="word" name="word" required><%= dictionary.word %></textarea>
-						<!-- <textarea name="" id="" cols="30" rows="10"> -->
-						<p class="updateDictionary_label" for="translation">Определение:</p>
-						<!-- <textarea type="text" id="translation" name="translation" value="<%= dictionary.translation %>" required></textarea> -->
-						<textarea id="translation" name="translation" required><%= dictionary.translation %></textarea>
+						<div class="newTerm balanceInfo" >
+							<p class="updateDictionary_label" for="word">Термин:</p>
+							<!-- <textarea type="text" id="word" name="word" value="<%= dictionary.word %>" required></textarea> -->
+							<textarea id="word" name="word" required></textarea>
+							<!-- <textarea name="" id="" cols="30" rows="10"> -->
+							<p class="updateDictionary_label" for="translation">Определение:</p>
+							<!-- <textarea type="text" id="translation" name="translation" value="<%= dictionary.translation %>" required></textarea> -->
+							<textarea id="translation" name="translation" required></textarea>
+							
+						</div>
+						<button class="addNewTerm create-button">+</button>
+					
+
+						
 						<button class="create-button" type="submit">Сохранить</button>
 					</form>
 				</div>
 			</div>
+
+			<script src="/js/script.js"></script>
 			<%- include('footer.ejs') %>
 </body>
 
