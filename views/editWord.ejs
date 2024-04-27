@@ -22,7 +22,7 @@
                 <div class="wrapper">
                     <h1>Редактирование термина</h1>
                     <form class="updateWord" action="/words/editWord/<%= word._id %>" method="POST">
-                        <label for="word">Темин:</label>
+                        <label for="word">Термин:</label>
                         <textarea type="text" id="word" name="word" required><%= word.word %></textarea>
                         <label for="translation">Определение:</label>
                         <textarea type="text" id="translation" name="translation"
