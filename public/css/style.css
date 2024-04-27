@@ -177,7 +177,7 @@ textarea {
 .purchase {
 	width: 100%;
 	margin-left: auto;
-	/* margin-bottom: 20px; */
+	margin-bottom: 20px;
 	text-align: right;
 	display: flex;
 	justify-content: flex-end;
@@ -540,11 +540,11 @@ table {
 
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-	@media only screen and (max-width: 1023px) {
+
 		body {
 			width: 100%;
 			font-family: Arial, sans-serif;
-			font-size: 1.56vw;
+			font-size: 2vw;
 			color: #eaeaea;
 			margin: 0 auto;
 			/* font-family: 'Roboto', sans-serif; */
@@ -572,7 +572,7 @@ table {
 
 		.container {
 			margin: 0 auto;
-			padding: 3.91vw;
+			padding: 0;
 			border: 0.20vw solid #222222;
 			display: flex;
 			flex-direction: column;
@@ -594,7 +594,7 @@ table {
 		button {
 			padding: 0.98vw 1.96vw;
 			background-color: #535353;
-			font-size: 1.56vw;
+			font-size: 2vw;
 			color: #fff;
 			border: none;
 			border-radius: 0.78vw;
@@ -612,13 +612,13 @@ table {
 		}
 
 		.forgot-password {
-			font-size: 1.56vw;
+			font-size: 2vw;
 			margin-left: auto;
 			margin-bottom: 3.91vw;
 		}
 
 		.deleteProfil {
-			font-size: 1.56vw;
+			font-size: 2vw;
 			margin-left: 1.96vw;
 			display: flex;
 			justify-content: flex-end;
@@ -643,7 +643,7 @@ table {
 			width: 100%;
 			margin-bottom: 1.96vw;
 			appearance: none;
-			font-size: 1.56vw;
+			font-size: 2vw;
 		}
 
 		.login label,
@@ -666,7 +666,7 @@ table {
 		}
 
 		.newDictonaries input {
-			font-size: 1.56vw;
+			font-size: 2vw;
 		}
 
 		input,
@@ -675,7 +675,7 @@ table {
 			margin-bottom: 1.96vw;
 			border: 0.10vw solid #222222;
 			border-radius: 0.78vw;
-			font-size: 1.56vw;
+			font-size: 2vw;
 		}
 
 		textarea {
@@ -712,7 +712,7 @@ table {
 		.purchase {
 			width: 100%;
 			margin-left: auto;
-			/* margin-bottom: 1.96vw; */
+			margin-bottom: 1.96vw;
 			text-align: right;
 			display: flex;
 			justify-content: flex-end;
@@ -729,7 +729,7 @@ table {
 
 		.profilInfo input {
 			margin-bottom: 1.96vw;
-			font-size: 1.56vw;
+			font-size: 2vw;
 		}
 
 		.profilInfo label {
@@ -1002,18 +1002,17 @@ table {
 			margin-bottom: 0.98vw;
 			min-width: 100%;
 		}
-	}
+
 
 }
 
 
 @media screen and (min-width: 340px) and (max-width: 767px) {
 
-	@media only screen and (max-width: 767px) {
 		body {
 			width: 100%;
 			font-family: Arial, sans-serif;
-			font-size: 2.09vw;
+			font-size: 3vw;
 			color: #eaeaea;
 			margin: 0 auto;
 			/* font-family: 'Roboto', sans-serif; */
@@ -1041,7 +1040,7 @@ table {
 
 		.container {
 			margin: 0 auto;
-			padding: 5.22vw;
+			padding: 0;
 			border: 0.26vw solid #222222;
 			display: flex;
 			flex-direction: column;
@@ -1063,7 +1062,7 @@ table {
 		button {
 			padding: 1.30vw 2.61vw;
 			background-color: #535353;
-			font-size: 2.09vw;
+			font-size: 3vw;
 			color: #fff;
 			border: none;
 			border-radius: 1.04vw;
@@ -1081,13 +1080,13 @@ table {
 		}
 
 		.forgot-password {
-			font-size: 2.09vw;
+			font-size: 3vw;
 			margin-left: auto;
 			margin-bottom: 5.22vw;
 		}
 
 		.deleteProfil {
-			font-size: 2.09vw;
+			font-size: 3vw;
 			margin-left: 2.61vw;
 			display: flex;
 			justify-content: flex-end;
@@ -1112,7 +1111,7 @@ table {
 			width: 100%;
 			margin-bottom: 2.61vw;
 			appearance: none;
-			font-size: 2.09vw;
+			font-size: 3vw;
 		}
 
 		.login label,
@@ -1135,7 +1134,7 @@ table {
 		}
 
 		.newDictonaries input {
-			font-size: 2.09vw;
+			font-size: 3vw;
 		}
 
 		input,
@@ -1144,7 +1143,7 @@ table {
 			margin-bottom: 2.61vw;
 			border: 0.13vw solid #222222;
 			border-radius: 1.04vw;
-			font-size: 2.09vw;
+			font-size: 3vw;
 		}
 
 		textarea {
@@ -1181,7 +1180,7 @@ table {
 		.purchase {
 			width: 100%;
 			margin-left: auto;
-			/* margin-bottom: 2.61vw; */
+			margin-bottom: 2.61vw;
 			text-align: right;
 			display: flex;
 			justify-content: flex-end;
@@ -1198,7 +1197,7 @@ table {
 
 		.profilInfo input {
 			margin-bottom: 2.61vw;
-			font-size: 2.09vw;
+			font-size: 3vw;
 		}
 
 		.profilInfo label {
@@ -1471,13 +1470,11 @@ table {
 			margin-bottom: 1.30vw;
 			min-width: 100%;
 		}
-	}
-
 }
 
-@media screen and (max-width: 339px) {
 
-	@media only screen and (max-width: 340px) {
+
+@media screen and (max-width: 339px) {
 		body {
 			width: 100%;
 			font-family: Arial, sans-serif;
@@ -1509,7 +1506,7 @@ table {
 
 		.container {
 			margin: 0 auto;
-			padding: 11.76vw;
+			padding: 0;
 			border: 0.59vw solid #222222;
 			display: flex;
 			flex-direction: column;
@@ -1529,9 +1526,9 @@ table {
 		}
 
 		button {
-			padding: 2.94vw 5.88vw;
+			padding: 0.94vw 2.88vw;
 			background-color: #535353;
-			font-size: 4.71vw;
+			font-size: 3.71vw;
 			color: #fff;
 			border: none;
 			border-radius: 2.35vw;
@@ -1649,7 +1646,7 @@ table {
 		.purchase {
 			width: 100%;
 			margin-left: auto;
-			/* margin-bottom: 5.88vw; */
+			margin-bottom: 5.88vw;
 			text-align: right;
 			display: flex;
 			justify-content: flex-end;
@@ -1939,6 +1936,4 @@ table {
 			margin-bottom: 2.94vw;
 			min-width: 100%;
 		}
-	}
-
 }
