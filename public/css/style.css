@@ -917,7 +917,7 @@ table {
 			top: 25%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-			width: 33%;
+			width: 90%;
 			/* Ширина модального окна */
 			padding: 1.96vw;
 			border-radius: 0.78vw;
@@ -1385,7 +1385,7 @@ table {
 			top: 25%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-			width: 33%;
+			width: 90%;
 			/* Ширина модального окна */
 			padding: 2.61vw;
 			border-radius: 1.04vw;
@@ -1851,7 +1851,7 @@ table {
 			top: 25%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-			width: 33%;
+			width: 90%;
 			/* Ширина модального окна */
 			padding: 5.88vw;
 			border-radius: 2.35vw;
