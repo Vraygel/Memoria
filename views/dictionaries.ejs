@@ -59,6 +59,10 @@
 
                             <div class="dictionaryList_wrap">
                                 <div class="purchase">
+                                    <form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
+                                        <!-- <a type="submit">Удалить профиль</a> -->
+                                        <button class="delete-button" type="submit"><a>Учить термины</a></button>
+                                    </form>
                                     <form class="deleteProfil" action="/dictionaries/editDictionary/<%= dictionary._id %>"
                                         method="GET">
                                         <!-- <a type="submit">Удалить профиль</a> -->
