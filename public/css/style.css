@@ -425,7 +425,6 @@ table {
 .author {
 	display: flex;
 	align-items: flex-end;
-	;
 	justify-content: space-between;
 	margin-left: 60px;
 }
@@ -973,13 +972,6 @@ table {
 		}
 
 		.dictionaryList_item {
-			/* padding-top: 0.98vw; */
-			/* padding-bottom: 0.98vw; */
-			width: 50%;
-			/* padding-left: 0.98vw; */
-			/* padding-right: 0.98vw; */
-			/* max-height: 9.78vw; */
-			/* margin-bottom: 0.98vw; */
 			overflow: auto;
 			display: flex;
 		}
@@ -1441,13 +1433,6 @@ table {
 		}
 
 		.dictionaryList_item {
-			/* padding-top: 1.30vw; */
-			/* padding-bottom: 1.30vw; */
-			width: 50%;
-			/* padding-left: 1.30vw; */
-			/* padding-right: 1.30vw; */
-			/* max-height: 13.04vw; */
-			/* margin-bottom: 1.30vw; */
 			overflow: auto;
 			display: flex;
 		}
@@ -1907,13 +1892,6 @@ table {
 		}
 
 		.dictionaryList_item {
-			/* padding-top: 2.94vw; */
-			/* padding-bottom: 2.94vw; */
-			width: 50%;
-			/* padding-left: 2.94vw; */
-			/* padding-right: 2.94vw; */
-			/* max-height: 29.41vw; */
-			/* margin-bottom: 2.94vw; */
 			overflow: auto;
 			display: flex;
 		}
