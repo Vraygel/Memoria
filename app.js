@@ -1,5 +1,8 @@
 const express = require('express');
 const passport = require('passport');
+
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' }); // Папка для сохранения загруженных файлов
 const session = require('express-session');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');

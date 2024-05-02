@@ -1,5 +1,10 @@
 const Dictionary = require('../models/Dictionary');
 const User = require('../models/User');
+const ExcelJS = require('exceljs');
+const fs = require('fs');
+
+
+
 
 
 // Контроллер для отображения страницы добавления нового слова в словарь
@@ -62,9 +67,9 @@ exports.addWord = async (req, res) => {
         if (Array.isArray(req.body.word)) {
             req.body.word.forEach((word, index) => {
                 dictionary.words.push({ enum: 'new', reminder: false, expectation: 'wait', waitingTime: 0, word: word, translation: req.body.translation[index] });
-                
+
             });
-        } else{
+        } else {
             dictionary.words.push({ enum: 'new', reminder: false, expectation: 'wait', waitingTime: 0, word: req.body.word, translation: req.body.translation });
         }
 
@@ -84,6 +89,72 @@ exports.addWord = async (req, res) => {
         res.redirect('/dictionaries');
     }
 };
+
+// Контроллер для добавления новых слов в словарь из эксель
+exports.addWordEx = async (req, res) => {
+    try {
+        // Находим словарь по ID
+        const dictionary = await Dictionary.findById(req.params.id);
+        const id = req.params.id;
+        if (!dictionary) {
+            // Если словарь не найден, возвращаем страницу с сообщением об ошибке
+            req.flash('message', 'Раздел не найден');
+            return res.redirect('/dictionaries');
+        }
+
+        // Находим пользователя по его ID
+        const user = await User.findById(req.user._id);
+        if (!user) {
+            // Если пользователь не найден, выводим сообщение об ошибке и перенаправляем на страницу профиля
+            req.flash('message', 'Пользователь не найден');
+            return res.redirect('/user/profile');
+        }
+
+        // Проверяем, был ли файл загружен на сервер
+        if (!req.file) {
+            return res.status(400).send('Файл Excel не был загружен');
+        }
+
+        // Получаем путь к загруженному файлу из запроса
+        const filePath = req.file.path;
+
+        // Открываем файл Excel
+        const workbook = new ExcelJS.Workbook();
+        await workbook.xlsx.readFile(filePath);
+
+        // Получаем первый лист
+        const worksheet = workbook.getWorksheet(1);
+
+        // Проходимся по каждой строке (начиная со второй, так как первая обычно содержит заголовки)
+        worksheet.eachRow(async (row, rowNumber) => {
+            if (rowNumber > 1) {
+                dictionary.words.push({ enum: 'new', reminder: false, expectation: 'wait', waitingTime: 0, word: row.getCell(1).value, translation: row.getCell(2).value });
+
+                user.words.wordsСreated += 1
+                dictionary.quantityWords += 1
+            }
+        });
+
+        console.log('Импорт завершен успешно');
+        // Удаляем загруженный файл после использования
+        // Это необязательно, но полезно для очистки места
+        fs.unlinkSync(req.file.path);
+
+        await user.save();
+        // Сохраняем обновленный словарь
+        await dictionary.save();
+
+        req.flash('message', 'Термин добавлен');
+        res.redirect(`/dictionaries/dictionariesList/${id}`);
+
+    } catch (error) {
+        console.error(error);
+        req.flash('message', 'Что-то пошло не так. Попробуйте ещё раз');
+        res.redirect('/dictionaries');
+    }
+};
+
+
 
 // Контроллер для отображения страницы редактирования слова
 exports.editWordPage = async (req, res) => {
@@ -160,7 +231,7 @@ exports.deleteWord = async (req, res) => {
             { $pull: { words: { _id: wordId } } },
             { new: true }
         );
-        
+
         // Проверка, было ли удаление успешным
         if (!dictionary) {
             // Если словарь не найден, возвращаем страницу с сообщением об ошибке

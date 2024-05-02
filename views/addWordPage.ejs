@@ -19,15 +19,29 @@
 		<%- include('menu.ejs') %>
 			<div class="container">
 				<div class="wrapper">
+					<div class="purchase">
+
+						
+
+				
+		</div>
 					<h1>Новый термин</h1>
+					<p class="updateDictionary_label" for="translation">Импортировать из файла Эксель:</p>
+					<form class="" action="/words/addWordEx/<%= dictionary._id %>" method="POST" enctype="multipart/form-data">
+						<!-- <a type="submit">Удалить профиль</a> -->
+						<input type="file" name="excelFile">
+						<button class="delete-button" type="submit"><a>Сохранить</a></button>
+						
+					</form>
+
 					<form class="updateDictionary" action="/words/addWord/<%= dictionary._id %>" method="POST">
 						<div class="newTerm balanceInfo" >
 							<p class="updateDictionary_label" for="word">Термин:</p>
-							<!-- <textarea type="text" id="word" name="word" value="<%= dictionary.word %>" required></textarea> -->
+						
 							<textarea id="word" name="word" required></textarea>
-							<!-- <textarea name="" id="" cols="30" rows="10"> -->
+							
 							<p class="updateDictionary_label" for="translation">Определение:</p>
-							<!-- <textarea type="text" id="translation" name="translation" value="<%= dictionary.translation %>" required></textarea> -->
+							
 							<textarea id="translation" name="translation" required></textarea>
 							
 						</div>
