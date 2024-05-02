@@ -411,11 +411,6 @@ exports.studyWordPost = async (req, res) => {
 
 				break; // Обязательный оператор break, чтобы завершить блок switch
 
-
-
-
-
-
 				case 'eighth':
 				// Действие, которое нужно выполнить
 				dictionary.words[wordIndex].enum = 'seventh';
@@ -452,6 +447,8 @@ exports.studyWordPost = async (req, res) => {
 				break; // Необязательный оператор break, но его желательно использовать
 		}
 
+
+		console.log(dictionary.words[wordIndex].enum);
 		await dictionary.save();
 
 		res.render('studyWord', { word, dictionary, messages: req.flash('message') }); // Отправляем данные о словаре в шаблон ejs для отображения

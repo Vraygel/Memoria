@@ -71,6 +71,7 @@
 
                             <div class="dictionaryList_wrap">
                                 <%= word.enum %>
+                                <%= word.waitingTime %>
                                 <div class="purchase">
                                     <form class="deleteProfil" action="/words/editWord/<%= word._id %>?dictionaryId=<%= dictionary._id %>"
                                         method="GET">
