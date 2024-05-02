@@ -70,6 +70,7 @@
                         <% dictionary.words.forEach(word=> { %>
 
                             <div class="dictionaryList_wrap">
+                                <%= word.enum %>
                                 <div class="purchase">
                                     <form class="deleteProfil" action="/words/editWord/<%= word._id %>?dictionaryId=<%= dictionary._id %>"
                                         method="GET">
