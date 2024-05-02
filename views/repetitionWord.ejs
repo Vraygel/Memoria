@@ -19,10 +19,13 @@
 	<%- include('menu.ejs') %>
 		<div class="container">
 			<div class="wrapper">
-				<h1>Повторение слова</h1>
+				<h1><%= word.enum %> Повторение слова <%= dictionary.name %></h1>
+				
 				<div class="studyWord">
 					<label for="word">Вы помните это?:</label>
 					<div style="white-space: pre-wrap;">
+						<!-- <%= dictionary %> -->
+						
 						<p><%= wordParameter %></p>
 					</div>
 					<!-- <input type="text" id="word" name="word" value="<%= wordParameter %>"></input> -->

@@ -194,7 +194,7 @@ exports.repetitionWordPage = async (req, res) => {
 			wordParameter = word.translation
 		}
 
-		res.render('repetitionWord', { word, wordParameter, messages: req.flash('message'), }); // Отправляем данные о словаре в шаблон ejs для отображения
+		res.render('repetitionWord', { word, wordParameter, dictionary, messages: req.flash('message'), }); // Отправляем данные о словаре в шаблон ejs для отображения
 
 	} catch (error) {
 		console.error(error);
