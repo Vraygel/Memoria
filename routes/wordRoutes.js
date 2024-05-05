@@ -15,6 +15,9 @@ router.post('/addWord/:id', wordController.addWord);
 // Роут для обновления словаря из эксель
 router.post('/addWordEx/:id', upload.single('excelFile'), wordController.addWordEx);
 
+// Роут для загрузки файла в термин словаря
+// router.post('/addWordFile/:id', upload.single('file'), wordController.addWordFile);
+
 // Роут для отображения страницы редактирования слова
 router.get('/editWord/:id', wordController.editWordPage);
 

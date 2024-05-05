@@ -66,11 +66,22 @@ exports.addWord = async (req, res) => {
 
         if (Array.isArray(req.body.word)) {
             req.body.word.forEach((word, index) => {
-                dictionary.words.push({ enum: 'new', reminder: false, expectation: 'wait', waitingTime: 0, word: word, translation: req.body.translation[index] });
+                if (req.file) {
+                    const filePath = req.file.path;
+                } else {
+                    filePath = ''
+                }
+                
+                dictionary.words.push({ enum: 'new', reminder: false, expectation: 'wait', waitingTime: 0, wordFileUrl: filePath, word: word, translation: req.body.translation[index] });
 
             });
         } else {
-            dictionary.words.push({ enum: 'new', reminder: false, expectation: 'wait', waitingTime: 0, word: req.body.word, translation: req.body.translation });
+            if (req.file) {
+                const filePath = req.file.path;
+            } else {
+                filePath = ''
+            }
+            dictionary.words.push({ enum: 'new', reminder: false, expectation: 'wait', waitingTime: 0,  wordFileUrl: filePath, word: req.body.word, translation: req.body.translation });
         }
 
         user.words.wordsСreated += 1

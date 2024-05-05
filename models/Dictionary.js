@@ -28,6 +28,8 @@ const dictionarySchema = new mongoose.Schema({
             // Свойство "waitingTime" указывает время ожидания перед повторным изучением слова
             waitingTime: String,
 
+            wordFileUrl: String,
+
             // Свойство "word" содержит само слово
             word: String,
 
