@@ -26,6 +26,15 @@ a:hover {
 	text-decoration: none;
 }
 
+.sndon{
+	background: transparent url(/public/image/privacy2.png) no-repeat scroll -17px -18px;
+display: inline-block;
+height: 10px;
+width: 12px;
+margin-right: 6px;
+cursor: pointer;
+}
+
 .menu {
 	display: flex;
 	justify-content: space-evenly;

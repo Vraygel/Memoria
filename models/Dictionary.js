@@ -29,6 +29,7 @@ const dictionarySchema = new mongoose.Schema({
             waitingTime: String,
 
             wordFileUrl: String,
+            wordFileOriginalname: String,
 
             // Свойство "word" содержит само слово
             word: String,

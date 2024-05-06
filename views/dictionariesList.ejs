@@ -87,6 +87,18 @@
                                 <div class="dictionaryList_item" style="white-space: pre-line;">
                                     <p>
                                         <%= word.word %>
+                                        <span class="sndon" onclick="soundClick('http://localhost:443/uploads/<%= word.wordFileOriginalname %>')"></span>
+                                        <audio controls src="/uploads/<%= word.wordFileOriginalname %>"></audio>
+                                        <audio controls>
+                                            <source src="/uploads/<%= word.wordFileOriginalname %>" type="audio/mp3">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        
+
+
+
+                                        
+                                        
                                     </p>
                                 </div>
 
@@ -143,6 +155,14 @@
                 </div>
             </div>
             <%- include('footer.ejs') %>
+            <script>
+function soundClick(url) {
+  var audio = new Audio(); // Создаём новый элемент Audio
+  audio.src = url; // Указываем путь к звуку "клика"
+  audio.autoplay = true; // Автоматически запускаем
+}
+
+            </script>
 </body>
 
 </html>

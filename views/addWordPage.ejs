@@ -34,8 +34,16 @@
 						
 					</form>
 
-					<form class="updateDictionary" action="/words/addWord/<%= dictionary._id %>" method="POST">
+					<form class="updateDictionary" action="/words/addWord/<%= dictionary._id %>" method="POST" enctype="multipart/form-data">
 						<div class="newTerm balanceInfo" >
+							
+							
+							<!-- <form action="/upload" method="post" enctype="multipart/form-data"> -->
+								<input type="file" name="file">
+								<!-- <button class="delete-button" type="submit"><a>Загрузить файл</a></button>
+						</form> -->
+
+
 							<p class="updateDictionary_label" for="word">Термин:</p>
 						
 							<textarea id="word" name="word" required></textarea>
@@ -44,10 +52,7 @@
 							
 							<textarea id="translation" name="translation" required></textarea>
 							
-							<!-- <form action="/upload" method="post" enctype="multipart/form-data">
-								<input type="file" name="file">
-								<button class="delete-button" type="submit"><a>Загрузить файл</a></button>
-						</form> -->
+							
 						</div>
 						<button class="addNewTerm create-button">+</button>
 					
