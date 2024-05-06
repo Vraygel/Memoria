@@ -87,7 +87,7 @@
                                 <div class="dictionaryList_item" style="white-space: pre-line;">
                                     <p>
                                         <%= word.word %>
-                                        <span class="sndon" onclick="soundClick('http://localhost:443/uploads/<%= word.wordFileOriginalname %>')"></span>
+                                        <span class="sndon" onclick="soundClick('/uploads/<%= word.wordFileOriginalname %>')"></span>
                                         <audio controls src="/uploads/<%= word.wordFileOriginalname %>"></audio>
                                         <audio controls>
                                             <source src="/uploads/<%= word.wordFileOriginalname %>" type="audio/mp3">
