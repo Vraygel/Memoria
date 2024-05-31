@@ -25,6 +25,7 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "pg": "^8.11.3",
+    "play-sound": "^1.1.6",
     "serve-favicon": "^2.5.0",
     "uuid": "^9.0.1"
   }

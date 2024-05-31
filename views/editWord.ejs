@@ -16,22 +16,102 @@
 </head>
 
 <body>
-    <%- include('template.ejs') %>
-        <%- include('menu.ejs') %>
-            <div class="container">
-                <div class="wrapper">
-                    <h1>Редактирование термина</h1>
-                    <form class="updateWord" action="/words/editWord/<%= word._id %>" method="POST">
-                        <label for="word">Термин:</label>
+    <%- include('menu.ejs') %>
+        <div class="container">
+            <div class="wrapper">
+                <div class="purchase">
+
+                    <form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
+                        <!-- <a type="submit">Удалить профиль</a> -->
+                        <button class="delete-button" type="submit"><a>Новый термин</a></button>
+                    </form>
+
+                    <form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
+                        <!-- <a type="submit">Удалить профиль</a> -->
+                        <button class="delete-button" type="submit"><a>Учить термины</a></button>
+                    </form>
+
+                    <form class="deleteProfil" action="/study/repetition" method="GET">
+                        <!-- <a type="submit">Удалить профиль</a> -->
+                        <button class="delete-button" type="submit"><a>Повторять термины</a></button>
+                    </form>
+
+                </div>
+
+                <h1>Редактирование термина:
+                    <a href="/dictionaries/dictionariesList/<%= dictionary._id %>">
+
+                        <%= dictionary.name %>
+
+                    </a>
+                </h1>
+
+                <div class="newTerm balanceInfo">
+                    <div class="purchase">
+                        <% if (word.img.availability) { %>
+                            <form class="deleteProfil" action="/words/deleteWordImg/<%= word._id %>" method="POST"
+                                onsubmit="return confirm('Вы уверены?')">
+                                <button class="delete-button" type="submit"><a>Удалить изображение</a></button>
+                            </form>
+                        <% } else { %>
+                            <label class="label_fileInput" for="fileInputImg">Добавить изображение</label>
+                        <% } %>
+                        <% if (word.audio.availability) { %>
+                            <form class="deleteProfil" action="/words/deleteWordAudio/<%= word._id %>" method="POST"
+                                onsubmit="return confirm('Вы уверены?')">
+                                <button class="delete-button" type="submit"><a>Удалить аудио</a></button>
+                            </form>
+                        <% } else { %>
+                            <label class="label_fileInput" for="fileInputAudio">Добавить аудио</label>
+                        <% } %>
+                        <form class="deleteProfil" action="/study/studyWord/<%= word._id %>" method="GET">
+                            <button class="delete-button" type="submit"><a>Запоминать</a></button>
+                        </form>
+
+                        <form class="deleteProfil" action="/words/deleteWord/<%= word._id %>" method="POST"
+                            onsubmit="return confirm('Вы уверены?')">
+                            <button class="delete-button" type="submit"><a>Удалить
+                                    термин</a></button>
+                        </form>
+                        
+                    </div>
+
+                    <form class="updateWord" action="/words/editWord/<%= word._id %>" method="POST" enctype="multipart/form-data">
+                        <input class="fileInput" type="file" name="file" id="fileInputImg" accept=".jpg, .jpeg, .png, .gif, .bmp" maxlength="5242880">
+						<input class="fileInput" type="file" name="file" id="fileInputAudio" accept=".mp3, .wav, .ogg, .aac, .flac" maxlength="5242880">
+                        <!-- Для изображений -->
+						<!-- <input class="fileInput" type="file" name="imageFile" id="fileInputImg" accept=".jpg, .jpeg, .png, .gif, .bmp" maxlength="5242880" /> -->
+
+						<!-- Для аудиофайлов -->
+						<!-- <input class="fileInput" type="file" name="audioFile" id="fileInputAudio" accept=".mp3, .wav, .ogg, .aac, .flac" maxlength="5242880" /> -->
+                        <% if (word.img.availability) { %>
+                            <img class="wordImage wordImage_edit" id="wordImage"
+                                url="/uploads/<%= word.img.wordFileOriginalname %>"
+                                src="/image/izobrazhenie_klq4db96jdce_128.png" alt="Image">
+                            <% } %>
+                               
+                            <% if (word.audio.availability) { %>
+                                <span class="wordAudio" src="/uploads/<%= word.audio.wordFileOriginalname %>">
+                                    <img class="wordAudio wordImage_edit" src="/image/zvuk_uk29og0kj2cx_128.png" alt="Audio">
+                                </span>
+                            <% } %>
+                                
+
+                        <p class="updateDictionary_label" for="word">Термин:</p>
+
                         <textarea type="text" id="word" name="word" required><%= word.word %></textarea>
-                        <label for="translation">Определение:</label>
-                        <textarea type="text" id="translation" name="translation"
-                            required><%= word.translation %></textarea>
+
+                        <p class="updateDictionary_label" for="translation">Определение:</p>
+
+                        <textarea type="text" id="translation" name="translation" required><%= word.translation %></textarea>
                         <button class="create-button" type="submit">Сохранить</button>
                     </form>
                 </div>
             </div>
-            <%- include('footer.ejs') %>
+        </div>
+        <%- include('footer.ejs') %>
+        <%- include('template.ejs') %>
+        <script src="/js/script.js"></script>
 </body>
 
 </html>

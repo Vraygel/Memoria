@@ -19,75 +19,104 @@
 	<%- include('menu.ejs') %>
 		<div class="container">
 			<div class="wrapper">
-				<h1><%= word.enum %> Повторение слова <%= dictionary.name %></h1>
-				
-				<div class="studyWord">
-					<label for="word">Вы помните это?:</label>
-					<div style="white-space: pre-wrap;">
-						<!-- <%= dictionary %> -->
-						
-						<p><%= wordParameter %></p>
+				<div class="purchase">
+
+					<form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
+						<!-- <a type="submit">Удалить профиль</a> -->
+						<button class="delete-button" type="submit"><a>Новый термин</a></button>
+					</form>
+
+					<form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
+						<!-- <a type="submit">Удалить профиль</a> -->
+						<button class="delete-button" type="submit"><a>Учить термины</a></button>
+					</form>
+
+					<form class="deleteProfil" action="/study/repetition" method="GET">
+						<!-- <a type="submit">Удалить профиль</a> -->
+						<button class="delete-button" type="submit"><a>Повторять термины</a></button>
+					</form>
+
+				</div>
+
+				<h1><%= word.enum %> Повторение слова: <a href="/dictionaries/dictionariesList/<%= dictionary._id %>">
+
+					<%= dictionary.name %>
+
+				</a>
+			</h1>
+
+				<div class="newTerm balanceInfo">
+					<div class="purchase">
+						<form class="deleteProfil" action="/words/editWord/<%= word._id %>?dictionaryId=<%= dictionary._id %>"
+							method="GET">
+							<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
+							<button class="delete-button " type="submit"><a>Редактировать</a></button>
+						</form>
+						<form class="deleteProfil" action="/words/deleteWord/<%= word._id %>" method="POST"
+							onsubmit="return confirm('Вы уверены?')">
+							<button class="delete-button" type="submit"><a>Удалить
+									термин</a></button>
+						</form>
 					</div>
-					<!-- <input type="text" id="word" name="word" value="<%= wordParameter %>"></input> -->
-				</div>
-				<button class="create-button" id="myButtonShow">Показать ответ</button>
-				<div class="myDiv">
-					<% if(wordParameter==word.translation){ %>
-						<div class="studyWord">
-							<label for="word">Ответ:</label>
-							<div style="white-space: pre-wrap;">
-								<p><%= word.word %></p>
-							</div>
-							<!-- <input type="text" id="word" name="word" value="<%= word.word %>"></input> -->
-						</div>
-						<% } else { %>
+					<form class="updateWord" >
+						<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
+						<input type="hidden" name="complexity" value="normal">
+
+						<label for="word">Вы помните это?:</label>
+
+										<!-- <p class="updateDictionary_label" for="word">Термин:</p> -->
+
+										<textarea type="text" id="word" name="word" readonly><%= wordParameter %></textarea>
+
+										<!-- <p class="updateDictionary_label" for="translation">Определение:</p>
+
+										<textarea type="text" id="translation" name="translation" readonly><%= word.translation %></textarea>
+
+										<button class="create-button" type="submit">Запомнил</button> -->
+
+										<!-- <button class="create-button" type="submit">Сохранить</button> -->
+
+										
+					</form>
+					<button class="create-button" id="myButtonShow">Показать ответ</button>
+					<div class="myDiv">
+						<% if(wordParameter==word.translation){ %>
 							<div class="studyWord">
-								<label for="word">Ответ:</label>
-								<div style="white-space: pre-wrap;">
-									<p><%= word.translation %></p>
-								</div>
-								<!-- <input type="text" id="word" name="word" value="<%= word.translation %>"></input> -->
+								
+								<!-- <div style="white-space: pre-wrap;"> -->
+									<textarea type="text" id="translation" name="translation" readonly><%= word.word %></textarea>
+									<!-- <p><%= word.word %></p> -->
+								<!-- </div> -->
+								<!-- <input type="text" id="word" name="word" value="<%= word.word %>"></input> -->
 							</div>
-							<% } %>
+							<% } else { %>
+								<div class="studyWord">
+									<!-- <div style="white-space: pre-wrap;"> -->
+										<textarea type="text" id="translation" name="translation" readonly style="margin-top: 20px;"><%= word.translation %></textarea>
+									<!-- </div> -->
+									<!-- <input type="text" id="word" name="word" value="<%= word.translation %>"></input> -->
+								</div>
+								<% } %>
+					</div>
+					<form action="/study/studyWord/<%= word._id %>" method="POST">
+						<input type="hidden" name="wordId" value="<%= word._id %>">
+						<input type="hidden" name="complexity" value="forgot">
+						<!-- Скрытое поле для передачи значения complexity -->
+						<button class="create-button" type="submit">Не помню</button>
+					</form>
+					<form action="/study/repetition/<%= word._id %>" method="POST">
+						<input type="hidden" name="wordId" value="<%= word._id %>">
+						<input type="hidden" name="complexity" value="normal">
+						<!-- Скрытое поле для передачи значения complexity -->
+						<button class="create-button" type="submit">Помню</button>
+					</form>
 				</div>
-				<form action="/study/studyWord/<%= word._id %>" method="POST">
-					<input type="hidden" name="wordId" value="<%= word._id %>">
-					<input type="hidden" name="complexity" value="forgot">
-					<!-- Скрытое поле для передачи значения complexity -->
-					<button class="create-button" type="submit">Не помню</button>
-				</form>
-				<form action="/study/repetition/<%= word._id %>" method="POST">
-					<input type="hidden" name="wordId" value="<%= word._id %>">
-					<input type="hidden" name="complexity" value="normal">
-					<!-- Скрытое поле для передачи значения complexity -->
-					<button class="create-button" type="submit">Помню</button>
-				</form>
+				
+
 			</div>
 		</div>
 		<%- include('footer.ejs') %>
-			<script>
-
-				let button = document.getElementById("myButtonShow");
-				let div = document.querySelector(".myDiv");
-				const styles = window.getComputedStyle(div);
-
-				// Добавляем обработчик события click для кнопки
-				button.addEventListener("click", function () {
-					const display = styles.display;
-
-					// Если div скрыт, показываем его, иначе скрываем
-					if (display === "none") {
-						console.log('первый иф')
-						div.style.display = "block";
-						button.textContent = "Скрыть ответ";
-					} else {
-						console.log('второй иф');
-						div.style.display = "none";
-						button.textContent = "Показать ответ";
-					}
-				});
-
-			</script>
+			<%- include('template.ejs') %>
 			<script src="/js/script.js"></script>
 </body>
 

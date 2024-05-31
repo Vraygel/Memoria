@@ -11,38 +11,35 @@
     <meta name="author" content="Райгель Владимир Александрович VRaygel">
     <link rel="icon" href="./favicon.png" type="image/png">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Memboost <%= dictionary.name %>
-    </title>
+    <title>Memboost <%= dictionary.name %></title>
 </head>
 
 <body>
-    <%- include('template.ejs') %>
         <%- include('menu.ejs') %>
             <div class="container">
                 <div class="wrapper">
 
-                        
+                    <div class="purchase">
 
-                        <div class="purchase">
+                        <form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
+                            <!-- <a type="submit">Удалить профиль</a> -->
+                            <button class="delete-button" type="submit"><a>Новый термин</a></button>
+                        </form>
 
-                            <form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
-                                <!-- <a type="submit">Удалить профиль</a> -->
-                                <button class="delete-button" type="submit"><a>Новый термин</a></button>
-                            </form>
-
-                            <form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
-                                <!-- <a type="submit">Удалить профиль</a> -->
-                                <button class="delete-button" type="submit"><a>Учить термины</a></button>
-                            </form>
+                        <form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
+                            <!-- <a type="submit">Удалить профиль</a> -->
+                            <button class="delete-button" type="submit"><a>Учить термины</a></button>
+                        </form>
 
                         <form class="deleteProfil" action="/study/repetition" method="GET">
                             <!-- <a type="submit">Удалить профиль</a> -->
                             <button class="delete-button" type="submit"><a>Повторять термины</a></button>
                         </form>
-                        
+
                     </div>
 
-                    <h1>Термины: <%= dictionary.name %></h1>
+                    <h1>Термины: <%= dictionary.name %>
+                    </h1>
 
                     <!-- <div class="dictinaries_menu">
                         <a href="/words/addWordPage/<%= dictionary._id %>"><button>Создать</button></a>
@@ -70,47 +67,52 @@
                         <% dictionary.words.forEach(word=> { %>
 
                             <div class="dictionaryList_wrap">
-                                <%= word.enum %>
-                                <%= word.waitingTime %>
-                                <div class="purchase">
-                                    <form class="deleteProfil" action="/words/editWord/<%= word._id %>?dictionaryId=<%= dictionary._id %>"
-                                        method="GET">
-                                        <input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
-                                        <button class="delete-button newDictonaries_button" type="submit"><a>Редактировать</a></button>
-                                    </form>
-                                    <form class="deleteProfil" action="/words/deleteWord/<%= word._id %>" method="POST"
-                                        onsubmit="return confirm('Вы уверены?')">
-                                        <button class="delete-button" type="submit"><a>Удалить термин</a></button>
-                                    </form>
-                                </div>
-
-                                <div class="dictionaryList_item" style="white-space: pre-line;">
-                                    <p>
-                                        <%= word.word %>
-                                        <span class="sndon" onclick="soundClick('/uploads/<%= word.wordFileOriginalname %>')"></span>
-                                        <audio controls src="/uploads/<%= word.wordFileOriginalname %>"></audio>
-                                        <audio controls>
-                                            <source src="/uploads/<%= word.wordFileOriginalname %>" type="audio/mp3">
-                                            Your browser does not support the audio element.
-                                        </audio>
-                                        
-
-
-
-                                        
-                                        
-                                    </p>
-                                </div>
-
-                                <div class="dictionaryList_item" style="white-space: pre-line;">
-                                    <p>
-                                        <%= word.translation %>
-                                    </p>
-                                </div>
-
-
                                 
+                                        <div class="purchase">
+                                            <form class="deleteProfil" action="/study/studyWord/<%= word._id %>" method="GET">
+                                                <button class="delete-button" type="submit"><a>Запоминать</a></button>
+                                            </form>
+                                            <form class="deleteProfil"
+                                                action="/words/editWord/<%= word._id %>?dictionaryId=<%= dictionary._id %>"
+                                                method="GET">
+                                                <input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
+                                                <button class="delete-button "
+                                                    type="submit"><a>Редактировать</a></button>
+                                            </form>
+                                            <form class="deleteProfil" action="/words/deleteWord/<%= word._id %>"
+                                                method="POST" onsubmit="return confirm('Вы уверены?')">
+                                                <button class="delete-button" type="submit"><a>Удалить
+                                                        термин</a></button>
+                                            </form>
+                                        </div>
 
+                                        <div class="dictionaryList_item">
+                                            <% if (word.img.availability) { %>
+                                                    <img class="wordImage" id="wordImage" url="/uploads/<%= word.img.wordFileOriginalname %>" src="/image/izobrazhenie_klq4db96jdce_128.png" alt="Image">
+                                                <% } %>
+                                                
+                                                <% if (word.audio.availability) { %>
+                                                    <!-- <span class="sndon" onclick="soundClick('/uploads/')"></span> -->
+                                                    <span class="wordAudio" src="/uploads/<%= word.audio.wordFileOriginalname %>">
+                                                        <img class="wordAudio" src="/image/zvuk_uk29og0kj2cx_128.png" alt="Audio">
+                                                    </span>
+
+                                                <% } %>
+                                                <!-- <pre class="word word_min"><%= word.word %></pre> -->
+                                                <p class="word word_min"><%= word.word %></p> 
+                                                    <!-- <audio controls src="/uploads/<%= word.wordFileOriginalname %>"></audio> -->
+
+                                            
+                                        </div>
+
+                                        <div class="dictionaryList_item">
+                                            <p class="word word_min"><%= word.translation %></p>
+                                        </div>
+
+
+
+                                        <%= word.enum %>
+                                        <%= word.waitingTime %>
                             </div>
 
                             <% }); %>
@@ -154,15 +156,12 @@
                                     <% } %>
                 </div>
             </div>
-            <%- include('footer.ejs') %>
-            <script>
-function soundClick(url) {
-  var audio = new Audio(); // Создаём новый элемент Audio
-  audio.src = url; // Указываем путь к звуку "клика"
-  audio.autoplay = true; // Автоматически запускаем
-}
+            
 
-            </script>
+            <%- include('footer.ejs') %>
+               
+<%- include('template.ejs') %>
+<script src="/js/script.js"></script>
 </body>
 
 </html>

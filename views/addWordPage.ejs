@@ -15,17 +15,35 @@
 </head>
 
 <body>
-	<%- include('template.ejs') %>
 		<%- include('menu.ejs') %>
 			<div class="container">
 				<div class="wrapper">
 					<div class="purchase">
 
-						
+						<form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
+								<!-- <a type="submit">Удалить профиль</a> -->
+								<button class="delete-button" type="submit"><a>Новый термин</a></button>
+						</form>
 
-				
-		</div>
-					<h1>Новый термин</h1>
+						<form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
+								<!-- <a type="submit">Удалить профиль</a> -->
+								<button class="delete-button" type="submit"><a>Учить термины</a></button>
+						</form>
+
+						<form class="deleteProfil" action="/study/repetition" method="GET">
+								<!-- <a type="submit">Удалить профиль</a> -->
+								<button class="delete-button" type="submit"><a>Повторять термины</a></button>
+						</form>
+
+				</div>
+
+					<h1>Новый термин:
+						<a href="/dictionaries/dictionariesList/<%= dictionary._id %>">
+					
+							<%= dictionary.name %>
+					
+						</a>
+					</h1>
 					<p class="updateDictionary_label" for="translation">Импортировать из файла Эксель:</p>
 					<form class="" action="/words/addWordEx/<%= dictionary._id %>" method="POST" enctype="multipart/form-data">
 						<!-- <a type="submit">Удалить профиль</a> -->
@@ -34,30 +52,33 @@
 						
 					</form>
 
-					<form class="updateDictionary" action="/words/addWord/<%= dictionary._id %>" method="POST" enctype="multipart/form-data">
-						<div class="newTerm balanceInfo" >
-							
-							
-							<!-- <form action="/upload" method="post" enctype="multipart/form-data"> -->
-								<input type="file" name="file">
-								<!-- <button class="delete-button" type="submit"><a>Загрузить файл</a></button>
-						</form> -->
+					<div class="newTerm balanceInfo" >
+						
 
+						<div class="purchase">
+							<!-- <a href="#" class="fileLink" id="fileLink">добавить изображение</a> -->
+							<label class="label_fileInput" for="fileInputImg">Добавить изображение</label>
+							<label class="label_fileInput" for="fileInputAudio">Добавить аудио</label>
+						</div>
+
+
+
+
+					<form class="updateDictionary" action="/words/addWord/<%= dictionary._id %>" method="POST" enctype="multipart/form-data">
+						<input class="fileInput" type="file" name="file" id="fileInputImg" accept=".jpg, .jpeg, .png, .gif, .bmp" maxlength="5242880">
+						<input class="fileInput" type="file" name="file" id="fileInputAudio" accept=".mp3, .wav, .ogg, .aac, .flac" maxlength="5242880">
 
 							<p class="updateDictionary_label" for="word">Термин:</p>
 						
 							<textarea id="word" name="word" required></textarea>
-							
+
 							<p class="updateDictionary_label" for="translation">Определение:</p>
-							
+
 							<textarea id="translation" name="translation" required></textarea>
-							
-							
+
 						</div>
 						<button class="addNewTerm create-button">+</button>
-					
 
-						
 						<button class="create-button" type="submit">Сохранить</button>
 					</form>
 				</div>
@@ -65,6 +86,8 @@
 
 			<script src="/js/script.js"></script>
 			<%- include('footer.ejs') %>
+			<%- include('template.ejs') %>
+			<script src="/js/script.js"></script>
 </body>
 
 </html>

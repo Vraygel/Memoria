@@ -15,31 +15,85 @@
 </head>
 
 <body>
-	<%- include('template.ejs') %>
-		<%- include('menu.ejs') %>
-			<div class="container">
-				<div class="wrapper">
-					<h1>Запоминание термина</h1>
-					<div class="studyWord">
-						<label for="word">Термин:</label>
-						<div style="white-space: pre-wrap;">
-							<p><%= word.word %></p>
-						</div>
-						<!-- <input type="text" id="word" name="word" value="<%= word.word %>"></input> -->
-						<label for="translation">Определение:</label>
-						<div style="white-space: pre-wrap;">
-							<p><%= word.translation %></p>
-						</div>
-						<!-- <input type="text" id="translation" name="translation" value="<%= word.translation %>"></input> -->
+
+	<%- include('menu.ejs') %>
+		<div class="container">
+			<div class="wrapper">
+				<div class="purchase">
+
+					<form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
+						<!-- <a type="submit">Удалить профиль</a> -->
+						<button class="delete-button" type="submit"><a>Новый термин</a></button>
+					</form>
+
+					<form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
+						<!-- <a type="submit">Удалить профиль</a> -->
+						<button class="delete-button" type="submit"><a>Учить термины</a></button>
+					</form>
+
+					<form class="deleteProfil" action="/study/repetition" method="GET">
+						<!-- <a type="submit">Удалить профиль</a> -->
+						<button class="delete-button" type="submit"><a>Повторять термины</a></button>
+					</form>
+
+				</div>
+				<h1>Запоминание термина: <a href="/dictionaries/dictionariesList/<%= dictionary._id %>">
+
+						<%= dictionary.name %>
+
+					</a>
+				</h1>
+				<div class="newTerm balanceInfo">
+					<div class="purchase">
+						<form class="deleteProfil" action="/words/editWord/<%= word._id %>?dictionaryId=<%= dictionary._id %>"
+							method="GET">
+							<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
+							<button class="delete-button " type="submit"><a>Редактировать</a></button>
+						</form>
+						<form class="deleteProfil" action="/words/deleteWord/<%= word._id %>" method="POST"
+							onsubmit="return confirm('Вы уверены?')">
+							<button class="delete-button" type="submit"><a>Удалить
+									термин</a></button>
+						</form>
 					</div>
-					<form action="/study/words/<%= word._id %>" method="POST">
+					<form class="updateWord" action="/study/words/<%= word._id %>" method="POST">
 						<input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
 						<input type="hidden" name="complexity" value="normal">
-						<button class="create-button" type="submit">Запомнил</button>
+						<% if (word.img.availability) { %>
+							<img class="wordImage wordImage_edit" id="wordImage" url="/uploads/<%= word.img.wordFileOriginalname %>"
+								src="/image/izobrazhenie_klq4db96jdce_128.png" alt="Image">
+							<% } %>
+
+								<% if (word.audio.availability) { %>
+									<!-- <span class="sndon" onclick="soundClick('/uploads/')"></span> -->
+									<span class="wordAudio" src="/uploads/<%= word.audio.wordFileOriginalname %>">
+										<img class="wordAudio wordImage_edit" src="/image/zvuk_uk29og0kj2cx_128.png" alt="Audio">
+									</span>
+
+									<% } %>
+
+										<p class="updateDictionary_label" for="word">Термин:</p>
+
+										<textarea type="text" id="word" name="word" readonly><%= word.word %></textarea>
+
+										<p class="updateDictionary_label" for="translation">Определение:</p>
+
+										<textarea type="text" id="translation" name="translation" readonly><%= word.translation %></textarea>
+
+										<button class="create-button" type="submit">Запомнил</button>
+
+										<!-- <button class="create-button" type="submit">Сохранить</button> -->
 					</form>
 				</div>
+
+
+
 			</div>
-			<%- include('footer.ejs') %>
+		</div>
+		<%- include('footer.ejs') %>
+
+			<%- include('template.ejs') %>
+				<script src="/js/script.js"></script>
 </body>
 
 </html>

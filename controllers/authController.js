@@ -4,7 +4,7 @@ const User = require('../models/User');
 const Dictionary = require('../models/Dictionary');
 const passport = require('passport');
 const uuid = require('uuid');
-
+const bot = require('../utils/telegramBot'); // Импорт экземпляра бота
 const { sendConfirmationEmail } = require('../utils/email');
 
 
@@ -136,7 +136,25 @@ exports.authenticateUser = async (req, res, next) => {
 
             if(dictionaries == 0){
                 return res.redirect('/user/profile');
-            } 
+            }
+
+            // Обрабатываем событие приема сообщения от бота Telegram
+            bot.on('message', async (msg) => {
+                let userId = req.user._id;
+                let userIdTelegrammMemboost = msg.text
+                console.log(msg);
+                if (user.contactinfo.chatId == msg.from.id) {
+                    console.log('Сообщение из чат бота telegramm авторизованный пользователь ' + user.userlogin + " " + msg.text);
+                } else {
+                    if (userId == userIdTelegrammMemboost) {
+                        user.contactinfo.chatId = msg.chat.id;
+                        console.log('Пользователь индетифицирован в чат-боте телеграмм id' + msg.chat.id);
+                        await user.save();
+                    } else {
+                        console.log('Сообщение из чат бота telegramm не авторизованный пользователь' + msg.text);
+                    }
+                }
+            });
 
             return res.redirect('/study/repetition'); // Перенаправляем на страницу профиля после успешной аутентификации
         });

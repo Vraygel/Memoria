@@ -2,7 +2,6 @@ const express = require('express');
 const passport = require('passport');
 
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' }); // Папка для сохранения загруженных файлов
 const session = require('express-session');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
@@ -20,12 +19,14 @@ const studyRoutes = require('./routes/studyRoutes');
 const purchaseRoutes = require('./routes/purchaseRoutes'); // Импорт роутера для покупок
 const indexRoutes = require('./routes/indexRoutes'); // 
 
+
 const isAuthenticated = require('./middleware/authenticated');
 const isAdmin = require('./middleware/isAdmin');
 const user = require('./middleware/user');
 const telEmailRegExp = require('./middleware/telEmailRegExp');
 
 const checkingDate = require('./utils/checkingDate');
+
 
 // Подключение к MongoDB
 mongoose.connect('mongodb://localhost:27017/passport-example')

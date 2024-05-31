@@ -27,12 +27,42 @@ a:hover {
 }
 
 .sndon{
-	background: transparent url(/public/image/privacy2.png) no-repeat scroll -17px -18px;
+/* background-color: #2f4f4f; */
+/* background-color: red; */
+background-image: url(/image/png-transparent-loudspeaker-sound-computer-icons-noise-symbol.png);
+background-size: cover;
 display: inline-block;
-height: 10px;
-width: 12px;
+height: 15px;
+width: 15px;
 margin-right: 6px;
 cursor: pointer;
+}
+
+.word{
+	vertical-align: top;
+	width: 100%;
+	cursor: pointer;
+	white-space: pre-line;
+  transition: height 1s ease; /* Плавное изменение высоты */
+}
+
+.word_min{
+	max-height: 50px;
+}
+
+.word_max{
+	height: auto; 
+}
+
+.wordImage, .wordAudio{
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+}
+
+.wordImage_edit{
+	margin-bottom: 10px;
 }
 
 .menu {
@@ -77,6 +107,10 @@ button {
 
 button:hover {
 	background-color: #3b444b;
+}
+
+.fileInput{
+	display: none;
 }
 
 .login-button,
@@ -179,7 +213,7 @@ textarea {
 	margin-bottom: 60px;
 	border-radius: 8px;
 	border: 2px solid #303030;
-	padding: 10px;
+	padding: 16px;
 	width: 100%;
 }
 
@@ -220,6 +254,16 @@ textarea {
 
 .delete-button:hover {
 	all: unset;
+}
+
+.label_fileInput{
+	cursor: pointer;
+	color: #C1AA96;
+	margin-left: 20px;
+}
+
+.label_fileInput:hover {
+	color: #febb38;
 }
 
 /* .header_h1 {
@@ -274,7 +318,7 @@ textarea {
 .dictionaries_h2 {
 	text-align: left;
 	margin-bottom: 0;
-	color: #eaeaea;
+	/* color: #eaeaea; */
 }
 
 .dictionary_form {
@@ -371,7 +415,7 @@ table {
 	/* position: absolute; */
 	background-color: #303030;
 	border: 1px solid #303030;
-	padding: 10px;
+	padding: 16px;
 	border-radius: 8px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 	z-index: 999;
@@ -381,6 +425,40 @@ table {
 	display: inline-block;
 	width: 100%;
 	margin-top: 20px;
+}
+
+
+#overlayImg {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3); /* затемнение */
+	z-index: 9999; /* устанавливаем поверх остальных элементов */
+}
+
+#enlargedImg {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 250px;
+	height: 250px;
+	z-index: 10000; /* устанавливаем поверх затемнения */
+}
+
+#enlargedAudio {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/* width: 100px;
+	height: 100px; */
+	z-index: 10000; /* устанавливаем поверх затемнения */
 }
 
 .overlay {
@@ -443,31 +521,29 @@ table {
 	margin-left: 20px;
 }
 
-
 .dictionaryList_wrap {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
-	border: solid 1px #ccc;
+	border: solid 2px #303030;
 	border-radius: 8px;
 	margin-bottom: 2px;
 	padding: 16px;
 }
 
 .dictionaryList_item {
-	/* padding-top: 10px; */
-	/* padding-bottom: 10px; */
 	width: 45%;
-	/* padding-left: 10px; */
-	/* padding-right: 10px; */
-	/* max-height: 100px; */
-	/* margin-bottom: 10px; */
 	overflow: auto;
 	display: flex;
+	align-items: flex-start;
+	overflow: hidden;
+	/* height: 50px; */
+
+	/* resize: vertical; */
 }
 
 .dictionaryList_wrap> :nth-child(2) {
-	margin-right: 0px;
+	/* margin-right: 0px; */
 }
 
 
