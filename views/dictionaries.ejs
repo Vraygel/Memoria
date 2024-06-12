@@ -19,93 +19,105 @@
         <%- include('menu.ejs') %>
             <div class="container">
                 <div class="wrapper">
-                    
+
 
                     <div class="purchase">
                         <form class="deleteProfil">
                             <!-- <a type="submit">Удалить профиль</a> -->
-                            <button class="delete-button newDictonaries_button" type="submit"><a>Новый раздел</a></button>
+                            <button class="delete-button newDictonaries_button" type="submit"><a>Новый
+                                    раздел</a></button>
                         </form>
                         <form class="deleteProfil" action="/study/repetition" method="GET">
                             <!-- <a type="submit">Удалить профиль</a> -->
                             <button class="delete-button" type="submit"><a>Повторять термины</a></button>
                         </form>
-                        
+
                     </div>
-                    
+
                     <h1>Разделы</h1>
-                    
+                    <div class="newTerm balanceInfo">
+
                         <!-- <h2>Создать</h2> -->
                         <% if (edit) { %>
                             <div class="newDictonaries">
-                            <form action="/dictionaries/editDictionary/<%= dictionary._id %>" method="POST">
+                                <form action="/dictionaries/editDictionary/<%= dictionary._id %>" method="POST">
 
                                     <label for="dictionaryName">Название раздела:</label>
                                     <input type="text" id="dictionaryName" name="dictionaryName" required
                                         value="<%= dictionary.name %>">
                                     <button class="create-button" type="submit">Сохранить</button>
-                            </form>
-                            <% } else { %>
-                                <div class="newDictonaries newDictonaries_none">
-                                <form action="/dictionaries" method="POST">
-                                    <label for="dictionaryName">Название нового раздела:</label>
-                                    <input type="text" id="dictionaryName" name="dictionaryName" required>
-                                    <button class="create-button" type="submit">Создать</button>
                                 </form>
-                                <% } %>
-                    </div>
-                    <% if (dictionaries.length > 0) { %>
-                        <% dictionaries.forEach(dictionary=> { %>
-
-                            <div class="dictionaryList_wrap">
-                                <div class="purchase">
-                                    <form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
-                                        <!-- <a type="submit">Удалить профиль</a> -->
-                                        <button class="delete-button" type="submit"><a>Новый термин</a></button>
-                                    </form>
-
-                                    <form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
-                                        <!-- <a type="submit">Удалить профиль</a> -->
-                                        <button class="delete-button" type="submit"><a>Учить термины</a></button>
-                                    </form>
-                                    <form class="deleteProfil" action="/dictionaries/editDictionary/<%= dictionary._id %>"
-                                        method="GET">
-                                        <!-- <a type="submit">Удалить профиль</a> -->
-                                        <button class="delete-button newDictonaries_button" type="submit"><a>Переименовать</a></button>
-                                    </form>
-                                    <form class="deleteProfil" action="/dictionaries/deleteDictionary/<%= dictionary._id %>"
-                                        method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить этот раздел?')">
-                                        <!-- <a type="submit">Удалить профиль</a> -->
-                                        <button class="delete-button" type="submit"><a>Удалить раздел</a></button>
-                                    </form>
-                                </div>
-
-                                <!-- <div class="dictionaryList_item_h1"> -->
-                                    <a href="/dictionaries/dictionariesList/<%= dictionary._id %>">
-                                        <h2 class="dictionaries_h2">
-                                            <%= dictionary.name %>
-                                        </h2>
-                                    </a>
-                                <!-- </div> -->
-
-                            </div>
-
-                            <% }); %>
                                 <% } else { %>
-                                    <p>У вас пока нет созданных разделов.</p>
-                                    <% } %>
+                                    <div class="newDictonaries newDictonaries_none">
+                                        <form action="/dictionaries" method="POST">
+                                            <label for="dictionaryName">Название нового раздела:</label>
+                                            <input type="text" id="dictionaryName" name="dictionaryName" required>
+                                            <button class="create-button" type="submit">Создать</button>
+                                        </form>
+                                        <% } %>
+                                    </div>
+                                    <% if (dictionaries.length> 0) { %>
+                                        <% dictionaries.forEach(dictionary=> { %>
+
+                                            <div class="dictionaryList_wrap">
+                                                <div class="purchase">
+                                                    <form class="deleteProfil"
+                                                        action="/words/addWordPage/<%= dictionary._id %>" method="GET">
+                                                        <!-- <a type="submit">Удалить профиль</a> -->
+                                                        <button class="delete-button" type="submit"><a>Новый
+                                                                термин</a></button>
+                                                    </form>
+
+                                                    <form class="deleteProfil"
+                                                        action="/study/words/<%= dictionary._id %>" method="GET">
+                                                        <!-- <a type="submit">Удалить профиль</a> -->
+                                                        <button class="delete-button" type="submit"><a>Учить
+                                                                термины</a></button>
+                                                    </form>
+                                                    <form class="deleteProfil"
+                                                        action="/dictionaries/editDictionary/<%= dictionary._id %>"
+                                                        method="GET">
+                                                        <!-- <a type="submit">Удалить профиль</a> -->
+                                                        <button class="delete-button newDictonaries_button"
+                                                            type="submit"><a>Переименовать</a></button>
+                                                    </form>
+                                                    <form class="deleteProfil"
+                                                        action="/dictionaries/deleteDictionary/<%= dictionary._id %>"
+                                                        method="POST"
+                                                        onsubmit="return confirm('Вы уверены, что хотите удалить этот раздел?')">
+                                                        <!-- <a type="submit">Удалить профиль</a> -->
+                                                        <button class="delete-button" type="submit"><a>Удалить
+                                                                раздел</a></button>
+                                                    </form>
+                                                </div>
+
+                                                <!-- <div class="dictionaryList_item_h1"> -->
+                                                <a href="/dictionaries/dictionariesList/<%= dictionary._id %>">
+                                                    <h2 class="dictionaries_h2">
+                                                        <%= dictionary.name %>
+                                                    </h2>
+                                                </a>
+                                                <!-- </div> -->
+
+                                            </div>
+
+                                            <% }); %>
+                                                <% } else { %>
+                                                    <p>У вас пока нет созданных разделов.</p>
+                                                    <% } %>
+                            </div>
+                    </div>
                 </div>
-            </div>
-            <script src="/js/script.js"></script>
-            <%- include('footer.ejs') %>
-                <!-- JavaScript для подтверждения удаления словаря -->
-                <script>
-                    function confirmDelete(dictionaryId) {
-                        if (confirm("Вы уверены, что хотите удалить этот словарь?")) {
-                            window.location.href = "/dictionaries/deleteDictionary?id=" + dictionaryId;
+                <script src="/js/script.js"></script>
+                <%- include('footer.ejs') %>
+                    <!-- JavaScript для подтверждения удаления словаря -->
+                    <script>
+                        function confirmDelete(dictionaryId) {
+                            if (confirm("Вы уверены, что хотите удалить этот словарь?")) {
+                                window.location.href = "/dictionaries/deleteDictionary?id=" + dictionaryId;
+                            }
                         }
-                    }
-                </script>
+                    </script>
 </body>
 
 </html>

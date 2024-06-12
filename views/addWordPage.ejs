@@ -15,79 +15,98 @@
 </head>
 
 <body>
-		<%- include('menu.ejs') %>
-			<div class="container">
-				<div class="wrapper">
-					<div class="purchase">
+	<%- include('menu.ejs') %>
+		<div class="container">
+			<div class="wrapper">
+				<div class="purchase">
 
-						<form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
-								<!-- <a type="submit">Удалить профиль</a> -->
-								<button class="delete-button" type="submit"><a>Новый термин</a></button>
-						</form>
+					<form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
+						<!-- <a type="submit">Удалить профиль</a> -->
+						<button class="delete-button" type="submit"><a>Новый термин</a></button>
+					</form>
 
-						<form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
-								<!-- <a type="submit">Удалить профиль</a> -->
-								<button class="delete-button" type="submit"><a>Учить термины</a></button>
-						</form>
+					<form class="deleteProfil" action="/study/words/<%= dictionary._id %>" method="GET">
+						<!-- <a type="submit">Удалить профиль</a> -->
+						<button class="delete-button" type="submit"><a>Учить термины</a></button>
+					</form>
 
-						<form class="deleteProfil" action="/study/repetition" method="GET">
-								<!-- <a type="submit">Удалить профиль</a> -->
-								<button class="delete-button" type="submit"><a>Повторять термины</a></button>
-						</form>
+					<form class="deleteProfil" action="/study/repetition" method="GET">
+						<!-- <a type="submit">Удалить профиль</a> -->
+						<button class="delete-button" type="submit"><a>Повторять термины</a></button>
+					</form>
 
 				</div>
 
-					<h1>Новый термин:
-						<a href="/dictionaries/dictionariesList/<%= dictionary._id %>">
-					
-							<%= dictionary.name %>
-					
-						</a>
-					</h1>
-					<p class="updateDictionary_label" for="translation">Импортировать из файла Эксель:</p>
-					<form class="" action="/words/addWordEx/<%= dictionary._id %>" method="POST" enctype="multipart/form-data">
-						<!-- <a type="submit">Удалить профиль</a> -->
-						<input type="file" name="excelFile">
-						<button class="delete-button" type="submit"><a>Сохранить</a></button>
-						
-					</form>
+				<h1>Новый термин:
+					<a href="/dictionaries/dictionariesList/<%= dictionary._id %>">
 
-					<div class="newTerm balanceInfo" >
-						
+						<%= dictionary.name %>
 
-						<div class="purchase">
-							<!-- <a href="#" class="fileLink" id="fileLink">добавить изображение</a> -->
-							<label class="label_fileInput" for="fileInputImg">Добавить изображение</label>
-							<label class="label_fileInput" for="fileInputAudio">Добавить аудио</label>
-						</div>
+					</a>
+				</h1>
+				<p class="updateDictionary_label" for="translation">Импортировать из файла Эксель:</p>
+				<form class="" action="/words/addWordEx/<%= dictionary._id %>" method="POST" enctype="multipart/form-data">
+					<!-- <a type="submit">Удалить профиль</a> -->
+					<input type="file" name="excelFile">
+					<button class="delete-button" type="submit"><a>Сохранить</a></button>
+
+				</form>
 
 
-
-
-					<form class="updateDictionary" action="/words/addWord/<%= dictionary._id %>" method="POST" enctype="multipart/form-data">
-						<input class="fileInput" type="file" name="file" id="fileInputImg" accept=".jpg, .jpeg, .png, .gif, .bmp" maxlength="5242880">
-						<input class="fileInput" type="file" name="file" id="fileInputAudio" accept=".mp3, .wav, .ogg, .aac, .flac" maxlength="5242880">
-
+				<!-- <form class="updateDictionary" action="/words/addWord/<%= dictionary._id %>" method="POST" enctype="multipart/form-data">
+					<div class="newTerm balanceInfo">
+							<div class="purchase">
+									<label class="label_fileInput" for="fileInputImg_<%= dictionary._id %>">Добавить изображение</label>
+									<label class="label_fileInput" for="fileInputAudio_<%= dictionary._id %>">Добавить аудио</label>
+							</div>
+							<input class="fileInput" type="file" name="fileImg_<%= dictionary._id %>" id="fileInputImg_<%= dictionary._id %>" accept=".jpg, .jpeg, .png, .gif, .bmp" maxlength="5242880">
+							<input class="fileInput" type="file" name="fileAudio_<%= dictionary._id %>" id="fileInputAudio_<%= dictionary._id %>" accept=".mp3, .wav, .ogg, .aac, .flac" maxlength="5242880">
 							<p class="updateDictionary_label" for="word">Термин:</p>
-						
 							<textarea id="word" name="word" required></textarea>
-
 							<p class="updateDictionary_label" for="translation">Определение:</p>
-
 							<textarea id="translation" name="translation" required></textarea>
+					</div>
+					<button class="addNewTerm create-button" dictionary="<%= dictionary._id %>">+</button>
+					<button class="create-button" type="submit">Сохранить</button>
+			</form>
+			 -->
 
-						</div>
+
+					<form class="updateDictionary" action="/words/addWord/<%= dictionary._id %>" method="POST"
+						enctype="multipart/form-data">
+						<div class="newTerm balanceInfo">
+							<div class="purchase">
+								
+								<label class="label_fileInput" for="fileInputImg">Добавить изображение</label>
+								<label class="label_fileInput" for="fileInputAudio">Добавить аудио</label>
+							</div>
+
+						<input class="fileInput" type="file" name="file" id="fileInputImg" accept=".jpg, .jpeg, .png, .gif, .bmp"
+							maxlength="5242880">
+						<input class="fileInput" type="file" name="file" id="fileInputAudio" accept=".mp3, .wav, .ogg, .aac, .flac"
+							maxlength="5242880">
+
+						<p class="updateDictionary_label" for="word">Термин:</p>
+
+						<textarea id="word" name="word" required></textarea>
+
+						<p class="updateDictionary_label" for="translation">Определение:</p>
+
+						<textarea id="translation" name="translation" required></textarea>
+
+					</div>
 						<button class="addNewTerm create-button">+</button>
 
 						<button class="create-button" type="submit">Сохранить</button>
 					</form>
-				</div>
+				
 			</div>
+		</div>
 
-			<script src="/js/script.js"></script>
-			<%- include('footer.ejs') %>
+		<script src="/js/script.js"></script>
+		<%- include('footer.ejs') %>
 			<%- include('template.ejs') %>
-			<script src="/js/script.js"></script>
+				<script src="/js/script.js"></script>
 </body>
 
 </html>

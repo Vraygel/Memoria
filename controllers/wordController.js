@@ -43,6 +43,71 @@ exports.addWordPage = async (req, res) => {
 };
 
 // Контроллер для добавления нового слова в словарь
+
+// exports.addWord = async (req, res) => {
+//     try {
+//         // Находим словарь по ID
+//         const dictionary = await Dictionary.findById(req.params.id);
+//         const id = req.params.id;
+//         if (!dictionary) {
+//             req.flash('message', 'Раздел не найден');
+//             return res.redirect('/dictionaries');
+//         }
+
+//         // Находим пользователя по его ID
+//         const user = await User.findById(req.user._id);
+//         if (!user) {
+//             req.flash('message', 'Пользователь не найден');
+//             return res.redirect('/user/profile');
+//         }
+
+//         const files = req.files;
+
+//         let img = {};
+//         let audio = {};
+
+//         if (files && files.length > 0) {
+//             for (const file of files) {
+//                 if (file.fieldname === `fileImg_${id}` && (file.mimetype.startsWith('image/'))) {
+//                     img = {
+//                         availability: true,
+//                         wordFileUrl: file.path,
+//                         wordFileOriginalname: file.originalname,
+//                         wordFileMimetype: file.mimetype,
+//                     };
+//                 } else if (file.fieldname === `fileAudio_${id}` && (file.mimetype.startsWith('audio/'))) {
+//                     audio = {
+//                         availability: true,
+//                         wordFileUrl: file.path,
+//                         wordFileOriginalname: file.originalname,
+//                         wordFileMimetype: file.mimetype,
+//                     };
+//                 }
+//             }
+//         }
+
+//         dictionary.words.push({ enum: 'new', reminder: false, expectation: 'wait', waitingTime: 0, img, audio, word: req.body.word, translation: req.body.translation });
+
+//         user.words.wordsCreated += 1;
+//         dictionary.quantityWords += 1;
+
+//         await user.save();
+//         await dictionary.save();
+
+//         req.flash('message', 'Термин добавлен');
+//         res.redirect(`/dictionaries/dictionariesList/${id}`);
+//     } catch (error) {
+//         console.error(error);
+//         req.flash('message', 'Что-то пошло не так. Попробуйте ещё раз');
+//         res.redirect('/dictionaries');
+//     }
+// };
+
+
+
+
+
+// Контроллер для добавления нового слова в словарь моя старая версия
 exports.addWord = async (req, res) => {
     try {
         // Находим словарь по ID

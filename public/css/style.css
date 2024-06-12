@@ -39,11 +39,13 @@ cursor: pointer;
 }
 
 .word{
+	font-size: 1.2em;
 	vertical-align: top;
 	width: 100%;
 	cursor: pointer;
 	white-space: pre-line;
   transition: height 1s ease; /* Плавное изменение высоты */
+	color: #C1AA96;
 }
 
 .word_min{

@@ -82,40 +82,67 @@ function closeTooltipAfterDelay() {
 
 
 
-// document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
 
-// // Получаем кнопку "Добавить новый термин"
-// const addButton = document.querySelector('.addNewTerm');
+// Получаем кнопку "Добавить новый термин"
+const addButton = document.querySelector('.addNewTerm');
 
-// // Функция для добавления нового блока newTerm
-// function addNewTermBlock(event) {
-//     event.preventDefault(); // Предотвращаем стандартное поведение кнопки submit
+// Функция для добавления нового блока newTerm
+function addNewTermBlock(event) {
+    event.preventDefault(); // Предотвращаем стандартное поведение кнопки submit
 
-//     // Создаем новый элемент div с классом newTerm
-//     const newTermDiv = document.createElement('div');
-//     newTermDiv.classList.add('newTerm');
-// 		newTermDiv.classList.add('balanceInfo');
+    // Создаем новый элемент div с классом newTerm
+    const newTermDiv = document.createElement('div');
+    newTermDiv.classList.add('newTerm');
+		newTermDiv.classList.add('balanceInfo');
+		let id = addButton.getAttribute('dictionary')
 		
-//     // Добавляем HTML-разметку нового блока
-//     newTermDiv.innerHTML = `
-//         <p class="updateDictionary_label" for="word">Термин:</p>
-//         <textarea id="word" name="word" required></textarea>
-//         <p class="updateDictionary_label" for="translation">Определение:</p>
-//         <textarea id="translation" name="translation" required></textarea>
-// 				<button class="deleteNewTerm create-button">-</button>
-//     `;
+    // Добавляем HTML-разметку нового блока
+    newTermDiv.innerHTML = `
+				<div class="purchase">
+					<label class="label_fileInput" for="fileInputImg_${id}">Добавить изображение</label>
+					<label class="label_fileInput" for="fileInputAudio_${id}">Добавить аудио</label>
+				</div>
+        <p class="updateDictionary_label" for="word">Термин:</p>
+        <textarea id="word" name="word" required></textarea>
+        <p class="updateDictionary_label" for="translation">Определение:</p>
+        <textarea id="translation" name="translation" required></textarea>
+				<button class="deleteNewTerm create-button">-</button>
+    `;
 
-//     // Вставляем новый блок newTerm перед кнопкой "Сохранить"
-//     const form = document.querySelector('.updateDictionary');
-//     form.insertBefore(newTermDiv, addButton);
+    // Вставляем новый блок newTerm перед кнопкой "Сохранить"
+    const form = document.querySelector('.updateDictionary');
+    form.insertBefore(newTermDiv, addButton);
 
-// 		deleteTermBlockFunc()
-// }
+		deleteTermBlockFunc()
+}
 
-// // Назначаем обработчик события на кнопку "Добавить новый термин"
-// addButton.addEventListener('click', addNewTermBlock);
+// Назначаем обработчик события на кнопку "Добавить новый термин"
+addButton.addEventListener('click', addNewTermBlock);
 
-// })
+function deleteTermBlockFunc() {
+	const deleteButtons = document.querySelectorAll('.deleteNewTerm');
+
+	// Функция для удаления блока newTerm
+	function deleteTermBlock(event) {
+		event.preventDefault(); // Предотвращаем стандартное поведение кнопки
+
+		// Получаем родительский элемент (блок newTerm)
+		const termBlock = this.parentNode;
+
+		// Удаляем блок newTerm из DOM
+		termBlock.remove();
+	}
+
+	// Назначаем обработчик события для каждой кнопки "Удалить новый термин"
+	deleteButtons.forEach(button => {
+		button.addEventListener('click', deleteTermBlock);
+	});
+}
+
+
+
+})
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -167,25 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-	function deleteTermBlockFunc() {
-		const deleteButtons = document.querySelectorAll('.deleteNewTerm');
 
-		// Функция для удаления блока newTerm
-		function deleteTermBlock(event) {
-			event.preventDefault(); // Предотвращаем стандартное поведение кнопки
-
-			// Получаем родительский элемент (блок newTerm)
-			const termBlock = this.parentNode;
-
-			// Удаляем блок newTerm из DOM
-			termBlock.remove();
-		}
-
-		// Назначаем обработчик события для каждой кнопки "Удалить новый термин"
-		deleteButtons.forEach(button => {
-			button.addEventListener('click', deleteTermBlock);
-		});
-	}
 
 	// Получаем ссылку на элементы
 	const popup = document.getElementById('popup');
@@ -208,9 +217,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		});
 	}
-
-
-
 
 	// Скрытие шаблона через 5 секунд
 	setTimeout(hidePopup, 1000);
