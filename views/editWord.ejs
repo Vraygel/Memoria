@@ -44,10 +44,13 @@
 					</div>
 
 					<label class="section__label" for="new_term">Термин:</label>
-					<textarea class="section__desc" id="new_term" name="word" required=""><%= word.word %></textarea>
+					<textarea class="section__desc" id="new_term" name="word"><%= word.word %></textarea>
 
 					<label class="section__label" for="new_definition">Определение:</label>
-					<textarea class="section__desc" id="translation" name="translation" required=""><%= word.translation %></textarea>
+					<textarea class="section__desc" id="translation" name="translation"><%= word.translation %></textarea>
+
+					<label class="section__label" for="term__link">Ссылка:</label>
+					<input class="sections__form-input" id="term__link" name="term__link">
 
 				</div>
 

@@ -95,7 +95,9 @@
                     </li>
                     <% }); %>
                 </ul>
-    
+                <% } else { %>
+                    <p>В этом разделе нет терминов.</p>
+                <% } %>
             </section>
 
 
@@ -103,11 +105,8 @@
 
 
            
-            <% } else { %>
-                <p>В этом разделе нет терминов.</p>
-                <% } %>
 
-            <%- include('footer.ejs') %>
+<%- include('footer.ejs') %>
                
 <%- include('template.ejs') %>
 <script src="/js/script.js"></script>
