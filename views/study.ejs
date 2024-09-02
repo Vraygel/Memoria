@@ -21,7 +21,7 @@
 			<div class="wrapper">
 				<div class="purchase">
 
-					<form class="deleteProfil" action="/words/addWordPage/<%= dictionary._id %>" method="GET">
+					<form class="deleteProfil" action="/words/addTerm/<%= dictionary._id %>" method="GET">
 						<!-- <a type="submit">Удалить профиль</a> -->
 						<button class="delete-button" type="submit"><a>Новый термин</a></button>
 					</form>
@@ -37,7 +37,7 @@
 					</form>
 
 				</div>
-				<h1> Запоминание терминов: <a href="/dictionaries/dictionariesList/<%= dictionary._id %>">
+				<h1> Запоминание терминов: <a href="/words/termList/<%= dictionary._id %>">
 
 						<%= dictionary.name %>
 

@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 // const upload = multer({ dest: 'public/uploads/' }); // Папка для сохранения загруженных файлов
-const wordController = require('../controllers/wordController');
+const path = require('path');
+const termController = require('../controllers/termController');
 
 
 // Настройка хранилища для сохранения файлов
@@ -19,33 +20,44 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 // Роут для отображения страницы добавления нового слова в словарь
-router.get('/addWordPage/:id', wordController.addWordPage);
+router.get('/addTerm/:id', termController.addTerm);
+
+
+
 
 // Роут для обновления словаря
-router.post('/addWord/:id', upload.array('file'), wordController.addWord);
+router.post('/addWord/:id', upload.array('file'), termController.addWord);
 
 // Роут для обновления словаря из эксель
-router.post('/addWordEx/:id', upload.single('excelFile'), wordController.addWordEx);
+router.post('/addWordEx/:id', upload.single('excelFile'), termController.addWordEx);
 
 // Роут для загрузки файла в термин словаря
-// router.post('/addWordFile/:id', upload.single('file'), wordController.addWordFile);
+// router.post('/addWordFile/:id', upload.single('file'), termController.addWordFile);
 
 // Роут для отображения страницы редактирования слова
-router.get('/editWord/:id', wordController.editWordPage);
+router.get('/editWord/:id', termController.editWordPage);
 
 // Роут для обновления данных термина
-router.post('/editWord/:id', upload.array('file'), wordController.updateWord);
+router.post('/editWord/:id', upload.array('file'), termController.updateWord);
 
 // Роут для удаления слова из словаря
-router.post('/deleteWord/:id', wordController.deleteWord);
+// router.post('/deleteWord/:id', termController.deleteWord);
+
+// Роут для отображения страницы удаления слова из словаря
+router.get('/deleteWord/:id', termController.deleteWord);
 
 //Роут для удаления изображения из термина
-router.post('/deleteWordImg/:id', wordController.deleteWordImg);
+router.post('/deleteWordImg/:id', termController.deleteWordImg);
 
 //Роут для удаления аудио из термина
-router.post('/deleteWordAudio/:id', wordController.deleteWordAudio);
+router.post('/deleteWordAudio/:id', termController.deleteWordAudio);
 
 // Роут для проигрывания файла
 // router.get('/playAudio/:id', wordController.playAudio);
 
+// Роут для получения данных о словаре по его ID
+router.get('/termList/:id', express.static(path.join(__dirname, 'uploads')), termController.getDictionaryById);
+
 module.exports = router;
+
+

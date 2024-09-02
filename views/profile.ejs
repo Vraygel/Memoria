@@ -17,72 +17,97 @@
 <body>
     <%- include('template.ejs') %>
         <%- include('menu.ejs') %>
-            <div class="container">
-                <div class="wrapper">
-                    <div class="header_h1">
-                        <form class="deleteProfil" action="/user/deleteProfile" method="POST"
-                            onsubmit="return confirm('Вы уверены?')">
-                            <!-- <a type="submit">Удалить профиль</a> -->
-                            <button class="delete-button" type="submit"><a>Удалить профиль</a></button>
-                        </form>
-                        <h1>
-                            <%= user.username %>
-                        </h1>
-                    </div>
-                    <div class="balanceInfo">
-                        <!-- <div class="purchase">
-                            <a href="/purchase">Купить</a>
-                        </div> -->
-                        <p>Баланс: <%= user.balance.memoCoin %> MemoCoin</p>
-                        <!-- <p>Разделов могу создать: <%= user.dictionaries.dictionariesMax %></p> -->
-                        <!-- <p>Терминов могу создать: <%= user.words.wordsMax %></p> -->
-                    </div>
-                    <form class="deleteProfil" action="/password/updateUserPassword" method="GET">
-                            <!-- <a type="submit">Удалить профиль</a> -->
+
+            <div class="section section_login">
+
+                <nav class="sections__nav">
+                    <ul class="section__nav-list flex">
+                        <li><a class="sections__nav-link" href="" onclick="return confirm('Вы уверены?')">Удалить
+                                профиль</a></li>
+                        <li><a class="sections__nav-link" href="/study/repetition">Изменить пароль</a></li>
+                        <li><a class="sections__nav-link" href="/auth/logout">Выйти</a></li>
+                    </ul>
+                </nav>
+
+                <h1 class="sections__title_invisible">Интервальное повторение:
+                    Ключ к Эффективному Запоминанию Иностранных Языков</h1>
+                <h2 class="sections__title">
+                    <%= user.username %>
+                </h2>
+
+                <!-- <form class="deleteProfil" action="/user/deleteProfile" method="POST"
+                                onsubmit="return confirm('Вы уверены?')">
+                                <a type="submit">Удалить профиль</a>
+                                <button class="delete-button" type="submit"><a>Удалить профиль</a></button>
+                            </form> -->
+
+                <!-- <div class="balanceInfo"><p>Баланс: 1000000 MemoCoin</p></div> -->
+
+                <!-- <form class="deleteProfil" action="/password/updateUserPassword" method="GET">
+                            <a type="submit">Удалить профиль</a>
                             <button class="delete-button" type="submit"><a>Изменить пароль</a></button>
-                        </form>
-                    <form class="profilInfo" action="/user/updateUserProfil" method="post">
-                        <h2>Контакты</h2>
-                        <label for="username">Имя:</label>
-                        <input type="text" id="username" name="username" value="<%= user.username %>" placeholder="Имя">
-                        <label for="useremail">Email: <% if (user.contactinfo.email.confirmation) { %>
-                            <p style="display: none;">Email подтверждён</p>
+                        </form> -->
+
+
+                <form class="sections__form flex" action="/user/updateUserProfil" method="post">
+                    <h2 class="index__title_secondary">Контакты</h2>
+
+                    <label class="sections__form-label" for="username">Имя:</label>
+                    <input class="sections__form-input" type="text" id="username" name="username" value=""
+                        placeholder="Имя">
+
+                    <label class="sections__form-label" for="useremail">
+                        Email: <% if (user.contactinfo.email.confirmation) { %>
+                            подтверждён
                             <% } else { %>
                                 не подтверждён
-                                <% } %></label>
-                       
-                                    <input type="text" id="useremail" name="useremail"
-                                        value="<%= user.contactinfo.email.email %>" placeholder="Email">
-                                    <label for="phoneNumber">Телефон:</label>
-                                    <input class="last-input" type="text" id="phoneNumber" name="phoneNumber"
-                                        value="<%= user.contactinfo.phoneNumber %>" placeholder="Телефон">
-                                    <h2>Настройки оповещений</h2>
-                                    <p class="updateAlerts">
-                                        <input class="updateAlerts_checkbox" type="checkbox" name="email" <% if
-                                            (user.alerts.email) { %> checked <% } %>>
-                                            Оповещение по Email
-                                    </p><br>
-                                    <p class="updateAlerts">
-                                        <input class="updateAlerts_checkbox telegram-checkbox" type="checkbox"
-                                            name="telegramm" <% if (user.alerts.telegramm) { %> checked <% } %>>
-                                            <!-- <input type="checkbox" name="telegramm" > -->
-                                            Оповещение по Telegramm
-                                    </p>
-                                    <div class="telegrammTooltip" id="telegrammTooltip">
-                                        <p>
-                                            <%= user.username %>, чтобы подписаться на уведомления в Telegramm,
-                                                отправьте
-                                                сообщение "<%= user.id %>" (без кавычек) в чат-бот Telegramm <a style="color:#febb38"
-                                                        href="https://t.me/MemoriaBot_bot"
-                                                        target="_blank">MemoriaBot_bot</a>
-                                        </p>
-                                        <!-- <button class="closeTooltip" id="closeTooltip">Закрыть</button> -->
-                                    </div>
-                                    <button class="edit-button" type="submit">Сохранить профиль</button>
+                                <% } %>
+                    </label>
+                    <input class="sections__form-input" type="text" id="useremail" name="useremail"
+                        value="vraygel@mail.ru" placeholder="Email">
 
-                    </form>
-                    <a href="/auth/logout"><button class="edit-button" type="submit">Выйти</button></a>
-                </div>
+                    <!-- <label class="sections__form-label" for="phoneNumber">Телефон:</label>
+                            <input class="sections__form-input" type="text" id="phoneNumber" name="phoneNumber" value=""
+                                placeholder="Телефон"> -->
+
+                    <h2 class="index__title_secondary">Настройки оповещений</h2>
+
+
+                    <div class="section__form-inner flex">
+                        <label class="sections__form-label sections__form-label-margin-right">Оповещение по
+                            Email</label>
+                        <div class="sections__form-checkbox-container slideThree">
+                            <input type="checkbox" id="slideThreeEmail" name="email" <% if (user.alerts.email) { %>
+                            checked <% } %> />
+                                <label class="sections__form-checkbox" for="slideThreeEmail"></label>
+                        </div>
+                    </div>
+
+                    <div class="section__form-inner flex">
+                        <label class="sections__form-label sections__form-label-margin-right">Оповещение по
+                            Telegramm</label>
+                        <div class="sections__form-checkbox-container slideThree">
+                            <input class="sections__form-checkbox-telegramm" type="checkbox" id="slideThreeTelegramm"
+                                name="telegramm" <% if (user.alerts.telegramm) { %> checked <% } %> />
+                                <label class="sections__form-checkbox" for="slideThreeTelegramm"></label>
+                        </div>
+                    </div>
+
+                    <div class="telegrammTooltip none" id="telegrammTooltip">
+                        <p>
+                            Владимир, чтобы подписаться на уведомления в Telegramm,
+                            отправьте
+                            сообщение "86198d44-3992-4c80-9d61-243abe371b58" (без кавычек) в чат-бот Telegramm <a
+                                class="sections__link" href="https://t.me/MemoriaBot_bot"
+                                target="_blank">MemoriaBot_bot</a>
+                        </p>
+                        <!-- <button class="closeTooltip" id="closeTooltip">Закрыть</button> -->
+                    </div>
+
+                    <button class="sections__form-btn" type="submit">Сохранить профиль</button>
+
+                </form>
+
             </div>
 
             <script src="/js/script.js"></script>

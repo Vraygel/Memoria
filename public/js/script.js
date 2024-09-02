@@ -2,310 +2,264 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-function countdown(targetDate) {
-	// Функция для форматирования времени
-	function formatTime(milliseconds) {
-			const seconds = Math.floor((milliseconds / 1000) % 60);
-			const minutes = Math.floor((milliseconds / (1000 * 60)) % 60);
-			const hours = Math.floor((milliseconds / (1000 * 60 * 60)) % 24);
-			const days = Math.floor((milliseconds / (1000 * 60 * 60 * 24)) % 30);
-			const months = Math.floor((milliseconds / (1000 * 60 * 60 * 24 * 30)));
 
-			return `${months} мес., ${days} дн., ${hours} ч., ${minutes} мин., ${seconds} сек.`;
-	}
 
-	// Функция для обновления времени на странице
-	function updateCountdown() {
-			const currentTime = new Date();
-			const difference = targetDate - currentTime;
-			if (difference <= 0) {
-					clearInterval(timer);
-					console.log("Событие уже произошло");
-					return;
+
+// перенести в приложение
+
+let glossary = document.querySelectorAll('.glossary');
+
+if (glossary) {
+	for (const text of glossary) {
+		text.addEventListener('click', () => {
+			for (const children of text.children) {
+				console.log(children);
+				
+				children.classList.toggle('glossary__text_visible')
 			}
-			console.log("Осталось времени:", formatTime(difference));
+	
+	
+		})
 	}
-
-	// Обновляем счетчик каждую секунду
-	const timer = setInterval(updateCountdown, 1000);
 }
 
+// автоширина в textarea
+const sectionDesc = document.querySelectorAll('.section__desc');
 
-	const telegramCheckbox = document.querySelector('.telegram-checkbox');
-	
-	const tooltip = document.getElementById('telegrammTooltip');
-
-	if (telegramCheckbox) {
-		telegramCheckbox.addEventListener('change', function () {
-			console.log('lsadkf a;sdlfk as;dlfsd');
-				if (telegramCheckbox.checked) {
-						// Показываем всплывающую подсказку
-						tooltip.style.display = 'block';
-						// Вызываем функцию для автоматического закрытия сообщения
-					closeTooltipAfterDelay();
-				} else {
-						// Скрываем всплывающую подсказку
-						tooltip.style.display = 'none';
-				}
+if (sectionDesc) {
+	for (const textarea of sectionDesc) {
+		textarea.addEventListener('input', function () {
+			autoResizeTextarea(textarea);
 		});
 	}
+}
 
-	
+function autoResizeTextarea(textarea) {
+	textarea.style.height = 'auto'; // Сначала сбрасываем высоту
+	textarea.style.height = textarea.scrollHeight + 'px'; // Устанавливаем высоту в зависимости от содержания
 
-	// Находим кнопку закрытия и всплывающее сообщение
-const closeBtn = document.getElementById('closeTooltip');
-// const tooltip = document.getElementById('telegrammTooltip');
-
-if (closeBtn) {
-	// Добавляем обработчик события для кнопки закрытия
-	closeBtn.addEventListener('click', function () {
-		tooltip.style.display = 'none'; // Скрываем всплывающее сообщение при клике на кнопку
-	});
 }
 
 
-
-// Функция для автоматического закрытия сообщения через 15 секунд
-function closeTooltipAfterDelay() {
-	setTimeout(function () {
-			tooltip.style.display = 'none'; // Скрываем всплывающее сообщение после 15 секунд
-	}, 15000);
-}
-
-
-});
-
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
 
 // Получаем кнопку "Добавить новый термин"
-const addButton = document.querySelector('.addNewTerm');
+const addFormButton = document.querySelector('.section__btn-add_form');
 
-// Функция для добавления нового блока newTerm
-function addNewTermBlock(event) {
-    event.preventDefault(); // Предотвращаем стандартное поведение кнопки submit
+if (addFormButton) {
+	// Функция для добавления нового блока newTerm
+	function addNewTermBlock(event) {
+		event.preventDefault(); // Предотвращаем стандартное поведение кнопки submit
 
-    // Создаем новый элемент div с классом newTerm
-    const newTermDiv = document.createElement('div');
-    newTermDiv.classList.add('newTerm');
-		newTermDiv.classList.add('balanceInfo');
-		let id = addButton.getAttribute('dictionary')
-		
-    // Добавляем HTML-разметку нового блока
-    newTermDiv.innerHTML = `
-				<div class="purchase">
-					<label class="label_fileInput" for="fileInputImg_${id}">Добавить изображение</label>
-					<label class="label_fileInput" for="fileInputAudio_${id}">Добавить аудио</label>
+		// Создаем новый элемент div с классом newTerm
+		const newTermDiv = document.createElement('div');
+		newTermDiv.classList.add('section__form--wrapper');
+		let id = addFormButton.getAttribute('dictionary')
+
+		// Добавляем HTML-разметку нового блока
+		newTermDiv.innerHTML = `
+				<div class="section__form--inner">
+
+					<label class="section__form--label-file" for="fileInputImg_${id}">Добавить изображение</label>
+					<label class="section__form--label-file" for="fileInputAudio_${id}">Добавить аудио</label>
+					
+					<input class="section__form--input-file fileInput" type="file" name="file" id="fileInputImg"
+							accept=".jpg, .jpeg, .png, .gif, .bmp" maxlength="5242880">
+					<input class="section__form--input-file fileInput" type="file" name="file" id="fileInputAudio"
+						accept=".mp3, .wav, .ogg, .aac, .flac" maxlength="5242880">
 				</div>
-        <p class="updateDictionary_label" for="word">Термин:</p>
-        <textarea id="word" name="word" required></textarea>
-        <p class="updateDictionary_label" for="translation">Определение:</p>
-        <textarea id="translation" name="translation" required></textarea>
-				<button class="deleteNewTerm create-button">-</button>
+
+				<label class="section__label" for="new_term">Термин:</label>
+				<textarea class="section__desc" id="new_term" name="word" required=""></textarea>
+
+				<label class="section__label" for="new_definition">Определение:</label>
+				<textarea class="section__desc" id="translation" name="translation" required=""></textarea>
+				<button class="section__btn section__btn_wide section__btn-del_form deleteNewTerm create-button">-</button>
     `;
 
-    // Вставляем новый блок newTerm перед кнопкой "Сохранить"
-    const form = document.querySelector('.updateDictionary');
-    form.insertBefore(newTermDiv, addButton);
+		// Вставляем новый блок newTerm перед кнопкой "Сохранить"
+		const form = document.querySelector('.updateDictionary');
+		form.insertBefore(newTermDiv, addFormButton);
 
 		deleteTermBlockFunc()
-}
-
-// Назначаем обработчик события на кнопку "Добавить новый термин"
-addButton.addEventListener('click', addNewTermBlock);
-
-function deleteTermBlockFunc() {
-	const deleteButtons = document.querySelectorAll('.deleteNewTerm');
-
-	// Функция для удаления блока newTerm
-	function deleteTermBlock(event) {
-		event.preventDefault(); // Предотвращаем стандартное поведение кнопки
-
-		// Получаем родительский элемент (блок newTerm)
-		const termBlock = this.parentNode;
-
-		// Удаляем блок newTerm из DOM
-		termBlock.remove();
 	}
 
-	// Назначаем обработчик события для каждой кнопки "Удалить новый термин"
-	deleteButtons.forEach(button => {
-		button.addEventListener('click', deleteTermBlock);
+	// Назначаем обработчик события на кнопку "Добавить новый термин"
+	addFormButton.addEventListener('click', addNewTermBlock);
+
+	function deleteTermBlockFunc() {
+		const deleteFormButtons = document.querySelectorAll('.section__btn-del_form');
+
+		// Функция для удаления блока newTerm
+		function deleteTermBlock(event) {
+			event.preventDefault(); // Предотвращаем стандартное поведение кнопки
+
+			// Получаем родительский элемент (блок newTerm)
+			const termBlock = this.parentNode;
+
+			// Удаляем блок newTerm из DOM
+			termBlock.remove();
+		}
+
+		// Назначаем обработчик события для каждой кнопки "Удалить новый термин"
+		deleteFormButtons.forEach(button => {
+			button.addEventListener('click', deleteTermBlock);
+		});
+	}
+
+}
+
+
+
+
+let headerItemLogin = document.querySelector('.header__item-login')
+let headerItemSignup = document.querySelector('.header__item-signup')
+
+if (headerItemLogin) {
+	headerItemLogin.addEventListener('click', () => {
+		let login = document.querySelector('.login')
+		// login.classList.toggle('form-rotate') 
+		let formRegister = document.querySelector('.container')
+		formRegister.classList.toggle('form-rotate')
+		let headerItemInner = document.querySelector('.header__item-inner')
+		headerItemInner.classList.toggle('header__item-inner-rotate')
+	})
+
+	let togglePassword = document.querySelectorAll('.toggle-password')
+
+	for (const button of togglePassword) {
+		button.addEventListener('click', (event) => {
+			togglePasswordFunc(event.target)
+		})
+	}
+
+	// togglePassword
+
+	function togglePasswordFunc(button) {
+		const passwordInput = button.previousElementSibling
+		const toggleButton = document.querySelector('.toggle-password');
+
+		if (passwordInput.type === 'password') {
+			passwordInput.type = 'text';
+			toggleButton.textContent = 'Скрыть';
+		} else {
+			passwordInput.type = 'password';
+			toggleButton.textContent = 'Показать';
+		}
+	}
+}
+
+
+
+
+
+
+// Функция для проверки ввода Email
+let sectionsFormInputEmail = document.querySelector('.sections__form-input-email')
+
+if (sectionsFormInputEmail) {
+	sectionsFormInputEmail.addEventListener('input', (event) => {
+		validateEmail(event.target)
+	})
+}
+
+
+
+
+
+function validateEmail(input) {
+	const phoneNumberInput = input.value;
+	const phoneErrorMessage = document.getElementById('emailErrorMessage');
+
+	if (!phoneNumberInput.match(/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu)) {
+		phoneErrorMessage.style.display = 'inline-block';
+	} else {
+		phoneErrorMessage.style.display = 'none';
+	}
+}
+
+
+
+// Функция для проверки пароля
+
+
+let errorMessagePassword = document.querySelector('.sections__form-error-message-password')
+// errorMessagePassword.style.display = 'none';
+
+let inputPasswordConfirm = document.querySelector('.sections__form-password-first')
+let inputPassword = document.querySelector('.sections__form-password-second')
+
+let password = document.querySelectorAll('.sections__form-password')
+
+for (const input of password) {
+	input.addEventListener('input', (event) => {
+		console.log(inputPasswordConfirm.value);
+		console.log(inputPassword.value);
+		if (inputPasswordConfirm.value == inputPassword.value) {
+			errorMessagePassword.style.display = 'none';
+		} else {
+			errorMessagePassword.style.display = 'inline-block';
+		}
+	})
+}
+
+
+let sectionsFormCheckboxTelegramm = document.querySelector('.sections__form-checkbox-telegramm')
+
+if (sectionsFormCheckboxTelegramm) {
+	sectionsFormCheckboxTelegramm.addEventListener("change", function () {
+		if (sectionsFormCheckboxTelegramm.checked) {
+			// Ваш код или действие, если чекбокс отмечен
+			let telegrammTooltip = document.querySelector('.telegrammTooltip')
+			telegrammTooltip.style.display = 'block'
+			setTimeout(() => {
+				telegrammTooltip.style.display = 'none'
+			}, 10000);
+		} else {
+			telegrammTooltip.style.display = 'none'
+		}
 	});
 }
 
+// Получаем ссылку на элементы
+const popup = document.getElementById('popup');
+const closeButton = document.getElementById('closeButton');
+
+if (popup) {
+	// Функция для скрытия шаблона
+	function hidePopup() {
+		popup.style.display = 'none';
+	}
 
 
-})
+	// Обработчик клика по кнопке "Закрыть"
+	closeButton.addEventListener('click', hidePopup);
 
-
-document.addEventListener('DOMContentLoaded', function () {
-
-	const word = document.querySelectorAll('.word');
-	if (word) {
-		for (const p of word) {
-			p.addEventListener('click', function() {
-				event.target.classList.toggle('word_max')
-				event.target.classList.toggle('word_min')
-			// this.style.height = 'auto'; /* Изменяем высоту на "авто" */
-		 });
+	// Обработчик клика в любом месте кроме шаблона
+	document.addEventListener('click', function (event) {
+		if (!popup.contains(event.target)) {
+			hidePopup();
 		}
-		
-	}
-	
-
-	let newDictonaries = document.querySelector('.newDictonaries ')
-	let newDictonaries_button = document.querySelector('.newDictonaries_button')
-
-	if (newDictonaries_button) {
-		newDictonaries_button.addEventListener('click', (event) => {
-			event.preventDefault()
-			if (newDictonaries) {
-				newDictonaries.classList.toggle('newDictonaries_none')
-			}
-
-		})
-	}
-
-
-	let gifImage = document.querySelectorAll('.wordImage');
-
-	for (const gifImageItem of gifImage) {
-
-		gifImageItem.addEventListener('mouseenter', (event) => {
-
-			let src = event.target.src;
-
-			// Заменяем путь к изображению на само изображение, чтобы запустить воспроизведение
-			event.target.src = src;
-
-		})
-	}
-
-
-
-
-
-
-
-
-
-	// Получаем ссылку на элементы
-	const popup = document.getElementById('popup');
-	const closeButton = document.getElementById('closeButton');
-
-	if (popup) {
-		// Функция для скрытия шаблона
-		function hidePopup() {
-			popup.style.display = 'none';
-		}
-
-
-		// Обработчик клика по кнопке "Закрыть"
-		closeButton.addEventListener('click', hidePopup);
-
-		// Обработчик клика в любом месте кроме шаблона
-		document.addEventListener('click', function (event) {
-			if (!popup.contains(event.target)) {
-				hidePopup();
-			}
-		});
-	}
-
-	// Скрытие шаблона через 5 секунд
-	setTimeout(hidePopup, 1000);
-
-
-	const button = document.getElementById("myButtonShow");
-	let div = document.querySelector(".myDiv");
-	const styles = window.getComputedStyle(div);
-
-
-	if (button) {
-		// Добавляем обработчик события click для кнопки
-		button.addEventListener("click", function () {
-			const display = styles.display;
-
-			// Если div скрыт, показываем его, иначе скрываем
-			if (display === "none") {
-				div.style.display = "block";
-				button.textContent = "Скрыть ответ";
-			} else {
-				div.style.display = "none";
-				button.textContent = "Показать ответ";
-			}
-		});
-	}
-
-})
-
-document.addEventListener("DOMContentLoaded", function () {
-	let imageAll = document.querySelectorAll('.wordImage');
-	let audioAll = document.querySelectorAll('.wordAudio');
-	let overlay = document.createElement("div")
-	let container = document.querySelector('.container');
-	let enlargedImg;
-	let enlargedAudio;
-
-	for (const audio of audioAll) {
-
-    audio.addEventListener('click', () => {
-				overlay.textContent = ''
-        overlay.id = "overlayImg";
-        container.appendChild(overlay);
-
-				enlargedAudio = document.createElement("audio");
-				enlargedAudio.id = "enlargedAudio";
-				enlargedAudio.controls = ""
-				enlargedAudio.setAttribute('controls', true);
-
-let url = audio.getAttribute('src')
-				enlargedAudio.src = url;
-				overlay.appendChild(enlargedAudio);
-
-				overlay.style.display = "block";
-				enlargedAudio.style.display = "block";
-
-    });
+	});
 }
 
-	function showEnlargedImg(event) {
-			overlay.textContent = ''
-			overlay.id = "overlayImg";
-			container.appendChild(overlay);
+// Скрытие шаблона через 5 секунд
+setTimeout(hidePopup, 1000);
 
-			enlargedImg = document.createElement("img");
-			enlargedImg.id = "enlargedImg";
 
-			let url = event.target.getAttribute('url')
-			enlargedImg.src = url; // нужен урл изображения из словаря
-			overlay.appendChild(enlargedImg);
+let sectionsNavLinkDelete = document.querySelectorAll('.sections__nav-link-delete')
+for (const link of sectionsNavLinkDelete) {
+	link.addEventListener('click', (event) => {
+		let dictionary = event.target.getAttribute('dictionary')
+		confirmDelete(dictionary)
+	})
 
-			overlay.style.display = "block";
-			enlargedImg.style.display = "block";
+}
+
+function confirmDelete(dictionaryId) {
+	if (confirm("Вы уверены, что хотите удалить этот словарь?")) {
+		window.location.href = "/dictionaries/deleteGlossary/" + dictionaryId;
 	}
-
-	function hideEnlargedImg() {
-			overlay.textContent = ''
-			overlay.style.display = "none";
-			enlargedImg.style.display = "none";
-	}
-
-	for (const image of imageAll) {
-			// image.removeEventListener("click", showEnlargedImg); // Удаляем предыдущий обработчик
-			image.addEventListener("click", showEnlargedImg); // Добавляем новый обработчик
-	}
-
-	overlay.addEventListener("click", hideEnlargedImg);
+}
 
 
-});
-
-
-
+})

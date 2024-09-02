@@ -1,4 +1,4 @@
-<nav class="menu">
+<!-- <nav class="menu">
 
 	<% if (typeof user==='undefined' ) { %>
 		<% var user=false; %>
@@ -15,4 +15,27 @@
 								<a href="/auth/login"><button>Вход</button></a>
 								<a href="/auth/register"><button>Регистрация</button></a>
 								<% } %>
-</nav>
+</nav> -->
+
+<header class="header">
+	<nav class="header__nav">
+
+		<ul class="header__list flex">
+			<% if (typeof user==='undefined' ) { %>
+				<% var user=false; %>
+					<% } %>
+			<li class="header__item header__index"><a href="/" class="header__link header__link-index">Главная</a></li>
+			<% if (user) { %>
+			<li class="header__item header__sections"><a class="header__link" href="/dictionaries">Разделы</a></li>
+			<li class="header__item"><a class="header__link" href="/user/profile" >Профиль</a></li>
+			<% if (user.userstatus=='admin' ) { %>
+			<li class="header__item"><a href="/admin" class="header__link">Админ</a></li>
+			<% } %>
+			<% } else { %>
+			<li class="header__item">
+					<a class="header__link" href="/auth/register">Авторизация</a>
+			</li>
+			<% } %>
+		</ul>
+	</nav>
+</header>

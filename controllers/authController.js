@@ -110,10 +110,15 @@ exports.registerUser = async (req, res) => {
 // Аутентификация пользователя
 exports.authenticateUser = async (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
+        console.log(info);
+        
         if (err) { // Если произошла ошибка аутентификации
             return next(err);
         }
         if (!user) { // Если пользователь не найден или аутентификация не удалась
+            console.log(user);
+            console.log('пользователь не найден или аутентификация не удалась');
+            
             return res.redirect('/auth/login'); // Перенаправляем на страницу входа с сообщением об ошибке
         }
         // Если аутентификация прошла успешно
@@ -185,4 +190,3 @@ exports.logoutUser = (req, res) => {
         res.redirect('/');
     });
 };
-

@@ -2,31 +2,31 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const dictionaryController = require('../controllers/dictionaryController');
+const glossaryController = require('../controllers/glossaryController');
 
-// Роут для страницы со словарями пользователя
-router.get('/', dictionaryController.dictionariesPage);
+
+// Роут для для отображения страницы создания нового раздела
+router.get('/createGlossary/', glossaryController.createGlossaryPage);
 
 // Роут для создания нового словаря
-router.post('/', dictionaryController.createDictionary);
-
-// Роут для удаления словаря
-router.post('/deleteDictionary/:id', dictionaryController.deleteDictionary);
-
+router.post('/', glossaryController.createGlossary);
 
 // Роут для отображения страницы редактирования словаря
-router.get('/editDictionary/:id', dictionaryController.editDictionaryPage);
+router.get('/editGlossary/:id', glossaryController.editGlossaryPage);
 
-// Роут для редактирования словаря
-router.post('/editDictionary/:id', dictionaryController.editDictionary);
+// Роут для для сохранения нового названия раздела
+router.post('/editGlossary/:id', glossaryController.editGlossary);
+
+// Роут для удаления словаря
+router.get('/deleteGlossary/:id', glossaryController.deleteGlossary);
+
+
+// Роут для страницы со словарями пользователя
+router.get('/', glossaryController.GlossarysPage);
 
 
 
-// // Роут для обновления словаря
-// router.post('/updateDictionary/:id', dictionaryController.updateDictionaryItem);
 
-// Роут для получения данных о словаре по его ID
-router.get('/dictionariesList/:id', express.static(path.join(__dirname, 'uploads')), dictionaryController.getDictionaryById);
 
 
 module.exports = router;

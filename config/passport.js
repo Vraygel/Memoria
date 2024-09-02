@@ -5,12 +5,14 @@ const bot = require('../utils/telegramBot'); // Импорт экземпляр�
 
 module.exports = function (passport) {
     passport.use(new LocalStrategy({
-        usernameField: 'userlogin',
+        usernameField: 'userlogin', // Проверьте, что это имя совпадает с полем формы
+        passwordField: 'password_login', // Проверьте, что это имя совпадает с полем формы
         passReqToCallback: true
     }, (req, userlogin, password, done) => {
         User.find({})
             .then(users => {
                 // Делайте что-то с найденными пользователями здесь
+                console.error('Пользователь авторизован');
             })
             .catch(err => {
                 console.error('Ошибка при поиске пользователей:', err);
@@ -39,7 +41,7 @@ module.exports = function (passport) {
                                         console.log('Пользователь индетифицирован в чат-боте телеграмм id' + msg.chat.id);
                                         await user.save();
                                     } else {
-                                        console.log('Сообщение из чат бота telegramm не авторизованный пользователь' + msg.text);
+                                        console.log('Сообщение из чат бота telegramm не авторизованный пользовател��' + msg.text);
                                     }
                                 }
                             });

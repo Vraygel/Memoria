@@ -85,48 +85,48 @@ async function checkingDate(req, res, next) {
 			});
 		});
 
-		checkMonthChange() 
-		// Проверяем, прошел ли новый месяц
-		async function checkMonthChange() {
+		// checkMonthChange() 
+		// // Проверяем, прошел ли новый месяц
+		// async function checkMonthChange() {
 
-			const users = await User.find();
-			// Получаем текущую дату
-			const today = new Date();
+		// 	const users = await User.find();
+		// 	// Получаем текущую дату
+		// 	const today = new Date();
 
-			users.forEach(async user => {
-				let currentDate = user.dateRegistration
+		// 	users.forEach(async user => {
+		// 		let currentDate = user.dateRegistration
 
 				
 
-				// Сравниваем число месяца текущей даты с числом месяца сохраненной даты
-			if (today.getDate() !== currentDate.getDate()) {
-				// Если числа месяца не совпадают, то вызываем вашу функцию
-				yourFunction();
+		// 		// Сравниваем число месяца текущей даты с числом месяца сохраненной даты
+		// 	if (today.getDate() !== currentDate.getDate()) {
+		// 		// Если числа месяца не совпадают, то вызываем вашу функцию
+		// 		yourFunction();
 
-				// Обновляем currentDate на текущую дату
-				// currentDate = today;
-			} else {
-				console.log('Рано ещё')
-			}
+		// 		// Обновляем currentDate на текущую дату
+		// 		// currentDate = today;
+		// 	} else {
+		// 		console.log('Рано ещё')
+		// 	}
 
-				// Функция, которую нужно вызвать, если прошел новый месяц
-		function yourFunction() {
-			console.log(currentDate)
-			// Ваш код здесь
-			// Инициализация переменной currentDate
+		// 		// Функция, которую нужно вызвать, если прошел новый месяц
+		// function yourFunction() {
+		// 	console.log(currentDate)
+		// 	// Ваш код здесь
+		// 	// Инициализация переменной currentDate
 		
-		}
+		// }
 
 		
 
-		})
+		// })
 
 
 			
 			
 
 			
-		}
+		// }
 
 	
 

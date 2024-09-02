@@ -11,22 +11,27 @@ const dictionarySchema = new mongoose.Schema({
     // Свойство "isPublic" указывает, является ли словарь общедоступным или приватным
     isPublic: Boolean,
 
-    quantityWords: Number,
-
     // Свойство "words" представляет собой массив объектов, каждый из которых содержит информацию о слове в словаре
     words: [
-        {
+        {   
+            // Свойство "time" дата создания термина
+            time: String,
+            
+            // Свойство "dateCreated" дата (отформатированная) создания термина
+            dateCreated: String,
+
             // Свойство "enum" представляет собой перечислимый тип, который может содержать строковые значения
             enum: String,
 
             // Свойство "reminder" указывает, было ли отправлено напоминание о слове
             reminder: Boolean,
 
-            // Свойство "expectation" хранит информацию о том, что запущен обратный отсчет до повторения варианты: (waited - отчет законче. wait - отчет не начанался)
+            // Свойство "expectation" хранит информацию о том, что запущен обратный отсчет до повторения варианты: (waited - отчет закончен. wait - отчет не начанался)
             expectation: String,
 
             // Свойство "waitingTime" указывает время ожидания перед повторным изучением слова
             waitingTime: String,
+            formattedDate: String,
             img:{
                 availability: Boolean,
                 wordFileUrl: String,
@@ -44,7 +49,9 @@ const dictionarySchema = new mongoose.Schema({
             word: String,
 
             // Свойство "translation" содержит перевод слова
-            translation: String
+            translation: String,
+            // Свойство "word" содержит само слово
+            termLink: String
         }
     ]
 });

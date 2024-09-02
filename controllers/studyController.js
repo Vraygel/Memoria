@@ -10,7 +10,7 @@ exports.showStudyPage = async (req, res) => {
 		
 		const dictionaryId = req.params.id;
 		const dictionary = await Dictionary.findById(dictionaryId);
-		console.log(dictionary)
+		// console.log(dictionary)
 		if (!dictionary) {
 			// Если словарь не найден, возвращаем страницу с сообщением об ошибке
 			req.flash('message', 'Словарь не найден');
@@ -153,6 +153,10 @@ exports.repeatWord = async (req, res) => {
 		const newDate = new Date(Date.now() + setTime);
 		dictionary.words[wordIndex].expectation = 'wait';
 		dictionary.words[wordIndex].waitingTime = newDate;
+// Форматирование даты
+const padZero = (num) => (num < 10 ? '0' + num : num);
+const formattedDate = `${padZero(newDate.getDate())}/${padZero(newDate.getMonth() + 1)}/${newDate.getFullYear()}`;
+		dictionary.words[wordIndex].formattedDate = formattedDate;
 		dictionary.words[wordIndex].reminder = false;
 		// Сохраняем обновленный словарь в базе данных
 		await dictionary.save();
@@ -348,6 +352,10 @@ exports.repetitionWord = async (req, res) => {
 		const newDate = new Date(Date.now() + setTime);
 		dictionary.words[wordIndex].expectation = 'wait';
 		dictionary.words[wordIndex].waitingTime = newDate;
+		// Форматирование даты
+const padZero = (num) => (num < 10 ? '0' + num : num);
+const formattedDate = `${padZero(newDate.getDate())}/${padZero(newDate.getMonth() + 1)}/${newDate.getFullYear()}`;
+		dictionary.words[wordIndex].formattedDate = formattedDate;
 		dictionary.words[wordIndex].reminder = false;
 
 		// Сохраняем обновленный словарь в базе данных

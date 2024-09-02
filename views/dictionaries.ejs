@@ -17,107 +17,56 @@
 <body>
     <%- include('template.ejs') %>
         <%- include('menu.ejs') %>
-            <div class="container">
-                <div class="wrapper">
+            <section class="section sections">
+                <nav class="sections__nav">
+                    <ul class="section__nav-list flex">
+                        <li><a class="sections__nav-link" href="/dictionaries/createGlossary">Новый раздел</a></li>
+                        <li><a class="sections__nav-link" href="/study/repetition">Повторять термины</a></li>
+                    </ul>
+                </nav>
 
+                <h1 class="sections__title_invisible">Интервальное повторение:
+                    Ключ к Эффективному Запоминанию Иностранных Языков</h1>
+                <h2 class="sections__title">Разделы:</h2>
+                <% if (dictionaries.length> 0) { %>
+                    <ul class="section__list">
+                    <% dictionaries.forEach(dictionary=> { %>
+                        
+                            <li class="section__list-item">
 
-                    <div class="purchase">
-                        <form class="deleteProfil">
-                            <!-- <a type="submit">Удалить профиль</a> -->
-                            <button class="delete-button newDictonaries_button" type="submit"><a>Новый
-                                    раздел</a></button>
-                        </form>
-                        <form class="deleteProfil" action="/study/repetition" method="GET">
-                            <!-- <a type="submit">Удалить профиль</a> -->
-                            <button class="delete-button" type="submit"><a>Повторять термины</a></button>
-                        </form>
+                                <nav class="sections__nav">
+                                    <ul class="section__nav-list flex">
+                                        <li><a class="sections__nav-link"
+                                                href="/dictionaries/editGlossary/<%= dictionary._id %>">Редактировать</a>
+                                        </li>
+                                        <li><a class="sections__nav-link sections__nav-link-delete"
+                                            href="/dictionaries/deleteGlossary/<%= dictionary._id %>" dictionary="<%= dictionary._id %>">Удалить</a></li>
+                                    </ul>
+                                </nav>
 
-                    </div>
+                                <ul class="sections__list-information flex">
+                                    <li><time class="sections__list-time" datetime="2023-23-15">Дата создания:
+                                            2023-23-10</time></li>
+                                    <li><span class="sections__list-quantity">Количество терминов: <%= dictionary.words.length %></span></li>
+                                </ul>
 
-                    <h1>Разделы</h1>
-                    <div class="newTerm balanceInfo">
+                                <a href="/words/termList/<%= dictionary._id %>">
+                                    <h3 class="sections__list-tertiary">
+                                        <%= dictionary.name %>
+                                    </h3>
+                                </a>
 
-                        <!-- <h2>Создать</h2> -->
-                        <% if (edit) { %>
-                            <div class="newDictonaries">
-                                <form action="/dictionaries/editDictionary/<%= dictionary._id %>" method="POST">
+                            </li>
+                        
+                        <% }); %>
+                    </ul>
+                            <% } else { %>
+                                <p>У вас пока нет созданных разделов.</p>
+                                <% } %>
+            </section>
+            <%- include('footer.ejs') %>
 
-                                    <label for="dictionaryName">Название раздела:</label>
-                                    <input type="text" id="dictionaryName" name="dictionaryName" required
-                                        value="<%= dictionary.name %>">
-                                    <button class="create-button" type="submit">Сохранить</button>
-                                </form>
-                                <% } else { %>
-                                    <div class="newDictonaries newDictonaries_none">
-                                        <form action="/dictionaries" method="POST">
-                                            <label for="dictionaryName">Название нового раздела:</label>
-                                            <input type="text" id="dictionaryName" name="dictionaryName" required>
-                                            <button class="create-button" type="submit">Создать</button>
-                                        </form>
-                                        <% } %>
-                                    </div>
-                                    <% if (dictionaries.length> 0) { %>
-                                        <% dictionaries.forEach(dictionary=> { %>
-
-                                            <div class="dictionaryList_wrap">
-                                                <div class="purchase">
-                                                    <form class="deleteProfil"
-                                                        action="/words/addWordPage/<%= dictionary._id %>" method="GET">
-                                                        <!-- <a type="submit">Удалить профиль</a> -->
-                                                        <button class="delete-button" type="submit"><a>Новый
-                                                                термин</a></button>
-                                                    </form>
-
-                                                    <form class="deleteProfil"
-                                                        action="/study/words/<%= dictionary._id %>" method="GET">
-                                                        <!-- <a type="submit">Удалить профиль</a> -->
-                                                        <button class="delete-button" type="submit"><a>Учить
-                                                                термины</a></button>
-                                                    </form>
-                                                    <form class="deleteProfil"
-                                                        action="/dictionaries/editDictionary/<%= dictionary._id %>"
-                                                        method="GET">
-                                                        <!-- <a type="submit">Удалить профиль</a> -->
-                                                        <button class="delete-button newDictonaries_button"
-                                                            type="submit"><a>Переименовать</a></button>
-                                                    </form>
-                                                    <form class="deleteProfil"
-                                                        action="/dictionaries/deleteDictionary/<%= dictionary._id %>"
-                                                        method="POST"
-                                                        onsubmit="return confirm('Вы уверены, что хотите удалить этот раздел?')">
-                                                        <!-- <a type="submit">Удалить профиль</a> -->
-                                                        <button class="delete-button" type="submit"><a>Удалить
-                                                                раздел</a></button>
-                                                    </form>
-                                                </div>
-
-                                                <!-- <div class="dictionaryList_item_h1"> -->
-                                                <a href="/dictionaries/dictionariesList/<%= dictionary._id %>">
-                                                    <h2 class="dictionaries_h2">
-                                                        <%= dictionary.name %>
-                                                    </h2>
-                                                </a>
-                                                <!-- </div> -->
-
-                                            </div>
-
-                                            <% }); %>
-                                                <% } else { %>
-                                                    <p>У вас пока нет созданных разделов.</p>
-                                                    <% } %>
-                            </div>
-                    </div>
-                </div>
                 <script src="/js/script.js"></script>
-                <%- include('footer.ejs') %>
-                    <!-- JavaScript для подтверждения удаления словаря -->
-                    <script>
-                        function confirmDelete(dictionaryId) {
-                            if (confirm("Вы уверены, что хотите удалить этот словарь?")) {
-                                window.location.href = "/dictionaries/deleteDictionary?id=" + dictionaryId;
-                            }
-                        }
-                    </script>
 </body>
 
 </html>

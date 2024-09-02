@@ -1,4 +1,4 @@
-	<% if (messages.length> 0) { %>
+	<% if (messages.length > 0) { %>
 		<div id="popup" class="overlay popup">
 			<div class="modal">
 
@@ -8,8 +8,10 @@
 				<button class="closeButton_popup" id="closeButton">Закрыть</button>
 			</div>
 		</div>
+		<script>
+			// Скрытие шаблона через 5 секунд
+			setTimeout(hidePopup, 5000);
+		</script>
 		<% } %>
-			<!-- <script>
-				// Скрытие шаблона через 5 секунд
-				setTimeout(hidePopup, 5000);
-			</script> -->
+		<script src="/js/script.js"></script>
+

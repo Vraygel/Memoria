@@ -8,9 +8,8 @@ const fs = require('fs');
 
 
 // Контроллер для отображения страницы добавления нового слова в словарь
-exports.addWordPage = async (req, res) => {
+exports.addTerm = async (req, res) => {
     try {
-
         // Находим пользователя по его ID
         const user = await User.findById(req.user._id);
         if (!user) {
@@ -18,12 +17,6 @@ exports.addWordPage = async (req, res) => {
             req.flash('message', 'Пользователь не найден');
             return res.redirect('/user/profile');
         }
-
-        // if (user.words.wordsMax == 0) {
-        //     req.flash('message', 'Вы не можете создать новый термин. Приобретите больше терминов');
-        //     console.log('Вы не можете создать новое слово. Приобретите больше слов')
-        //     return res.redirect('/dictionaries');
-        // }
 
         // Находим словарь по ID
         const dictionary = await Dictionary.findById(req.params.id);
@@ -34,77 +27,13 @@ exports.addWordPage = async (req, res) => {
         }
 
         // Отображаем страницу редактирования словаря с данными о словаре
-        res.render('addWordPage', { dictionary, messages: req.flash('message') });
+        res.render('addTerm', { messages: req.flash('message'), dictionary });
     } catch (error) {
         console.error(error);
         req.flash('message', 'Что-то пошло не так. Попробуйте ещё раз');
         res.redirect('/dictionaries');
     }
 };
-
-// Контроллер для добавления нового слова в словарь
-
-// exports.addWord = async (req, res) => {
-//     try {
-//         // Находим словарь по ID
-//         const dictionary = await Dictionary.findById(req.params.id);
-//         const id = req.params.id;
-//         if (!dictionary) {
-//             req.flash('message', 'Раздел не найден');
-//             return res.redirect('/dictionaries');
-//         }
-
-//         // Находим пользователя по его ID
-//         const user = await User.findById(req.user._id);
-//         if (!user) {
-//             req.flash('message', 'Пользователь не найден');
-//             return res.redirect('/user/profile');
-//         }
-
-//         const files = req.files;
-
-//         let img = {};
-//         let audio = {};
-
-//         if (files && files.length > 0) {
-//             for (const file of files) {
-//                 if (file.fieldname === `fileImg_${id}` && (file.mimetype.startsWith('image/'))) {
-//                     img = {
-//                         availability: true,
-//                         wordFileUrl: file.path,
-//                         wordFileOriginalname: file.originalname,
-//                         wordFileMimetype: file.mimetype,
-//                     };
-//                 } else if (file.fieldname === `fileAudio_${id}` && (file.mimetype.startsWith('audio/'))) {
-//                     audio = {
-//                         availability: true,
-//                         wordFileUrl: file.path,
-//                         wordFileOriginalname: file.originalname,
-//                         wordFileMimetype: file.mimetype,
-//                     };
-//                 }
-//             }
-//         }
-
-//         dictionary.words.push({ enum: 'new', reminder: false, expectation: 'wait', waitingTime: 0, img, audio, word: req.body.word, translation: req.body.translation });
-
-//         user.words.wordsCreated += 1;
-//         dictionary.quantityWords += 1;
-
-//         await user.save();
-//         await dictionary.save();
-
-//         req.flash('message', 'Термин добавлен');
-//         res.redirect(`/dictionaries/dictionariesList/${id}`);
-//     } catch (error) {
-//         console.error(error);
-//         req.flash('message', 'Что-то пошло не так. Попробуйте ещё раз');
-//         res.redirect('/dictionaries');
-//     }
-// };
-
-
-
 
 
 // Контроллер для добавления нового слова в словарь моя старая версия
@@ -128,8 +57,6 @@ exports.addWord = async (req, res) => {
         }
 
         // Обновляем данные словаря
-        
-        
         if (Array.isArray(req.body.word)) {
             req.body.word.forEach((word, index) => {
                 const files = req.files;
@@ -194,20 +121,31 @@ exports.addWord = async (req, res) => {
                     }
                 }
             }
-
-            dictionary.words.push({ enum: 'new', reminder: false, expectation: 'wait', waitingTime: 0, img, audio, word: req.body.word, translation: req.body.translation });
+            // Форматирование даты
+            const newDate = new Date(Date.now());
+            const padZero = (num) => (num < 10 ? '0' + num : num);
+            const formattedDate = `${padZero(newDate.getDate())}/${padZero(newDate.getMonth() + 1)}/${newDate.getFullYear()}`;
+            dictionary.words.push({
+                time: newDate,
+                dateCreated: formattedDate,
+                enum: 'new',
+                reminder: false,
+                expectation: 'wait',
+                waitingTime: 0,
+                img,
+                audio,
+                word: req.body.word,
+                translation: req.body.translation,
+                termLink: req.body.term__link
+             });
         }
 
-        user.words.wordsСreated += 1
-        dictionary.quantityWords += 1
-
-        await user.save();
         // Сохраняем обновленный словарь
         await dictionary.save();
 
         req.flash('message', 'Термин добавлен');
 
-        res.redirect(`/dictionaries/dictionariesList/${id}`);
+        res.redirect(`/words/termList/${id}`);
     } catch (error) {
         console.error(error);
         req.flash('message', 'Что-то пошло не так. Попробуйте ещё раз');
@@ -270,7 +208,7 @@ exports.addWordEx = async (req, res) => {
         await dictionary.save();
 
         req.flash('message', 'Термин добавлен');
-        res.redirect(`/dictionaries/dictionariesList/${id}`);
+        res.redirect(`/words/termList/${id}`);
 
     } catch (error) {
         console.error(error);
@@ -284,8 +222,9 @@ exports.addWordEx = async (req, res) => {
 exports.editWordPage = async (req, res) => {
     try {
         const wordId = req.params.id;
-        const dictionaryId = req.query.dictionaryId;
-        const dictionary = await Dictionary.findById(dictionaryId);
+
+        const dictionary = await Dictionary.findOne({ 'words._id': wordId });
+
         if (!dictionary) {
             // Если словарь не найден, возвращаем страницу с сообщением об ошибке
             req.flash('message', 'Раздел не найден');
@@ -298,7 +237,7 @@ exports.editWordPage = async (req, res) => {
             return res.redirect('/dictionaries');
         }
         // req.flash('message', 'Слово успешно изменено');
-        res.render('editWord', { dictionary, word, dictionaryId, messages: req.flash('message') });
+        res.render('editWord', { dictionary, word, messages: req.flash('message') });
     } catch (error) {
         console.error(error);
         req.flash('message', 'Что-то пошло не так. Попробуйте ещё раз');
@@ -309,9 +248,14 @@ exports.editWordPage = async (req, res) => {
 // Контроллер для изменения данных слова в словаре
 exports.updateWord = async (req, res) => {
     try {
+        const user = await User.findById(req.user._id);
+        if (!user) {
+            // Если пользователь не найден, выводим сообщение об ошибке и перенаправляем на страницу профиля
+            req.flash('message', 'Пользователь не найден');
+            return res.redirect('/user/profile');
+        }
         const wordId = req.params.id;
         const updatedWordData = req.body;
-        
 
         // Находим словарь, содержащий слово, по идентификатору слова
         const dictionary = await Dictionary.findOne({ 'words._id': wordId });
@@ -371,8 +315,8 @@ exports.updateWord = async (req, res) => {
 
         req.flash('message', 'Термин изменён');
         // После успешного обновления перенаправляем пользователя обратно на страницу редактирования словаря
-        res.redirect(`/dictionaries/dictionariesList/${id}`);
-        // res.redirect(`/dictionariesList`);
+        res.redirect(`/words/termList/${id}`);
+        // res.redirect(`/termList`);
     } catch (error) {
         console.error(error);
         req.flash('message', 'Что-то пошло не так. Попробуйте ещё раз');
@@ -389,17 +333,21 @@ exports.deleteWord = async (req, res) => {
             req.flash('message', 'Пользователь не найден');
             return res.redirect('/user/profile');
         }
-
         const wordId = req.params.id;
-
+        console.log("Интетификатор слова " + wordId);
+        
+        // Находим словарь, содержащий слово, по идентификатору слова
         const dictionary = await Dictionary.findOne({ 'words._id': wordId });
-
+        // console.log(dictionary);
+        
         if (!dictionary) {
             // Если словарь не найден, возвращаем страницу с сообщением об ошибке
             req.flash('message', 'Раздел не найден');
             return res.redirect('/dictionaries');
         }
 
+        const id = dictionary._id
+        
         // Находим индекс слова в массиве слов
         const wordIndex = dictionary.words.findIndex(word => word._id == wordId);
         if (wordIndex === -1) {
@@ -407,19 +355,12 @@ exports.deleteWord = async (req, res) => {
             return res.redirect('/dictionaries');
         }
 
-        // находуим урл файлов
-        console.log(dictionary);
-        
-        // console.log(dictionary.words[wordIndex]);
-        // console.log(dictionary.words[wordIndex].img);
-
         let urlImg = dictionary.words[wordIndex].img.wordFileUrl;
         let urlAudio = dictionary.words[wordIndex].audio.wordFileUrl;
         
-
         if (urlImg) {
              //удаляем файлы
-             console.log(urlImg);
+
         fs.unlink(urlImg, (err) => {
             if (err) console.error(err);
             console.log("Файл успешно удален.");
@@ -436,18 +377,11 @@ exports.deleteWord = async (req, res) => {
        // Найдите слово по его идентификатору и удалите его из словаря
         dictionary.words.splice(wordIndex, 1);
         
-        console.log(dictionary.words);
-        
-        dictionary.quantityWords -= 1
-        user.words.wordsСreated -= 1
-
-        await user.save();
         await dictionary.save();
 
-        const id = dictionary.id
         req.flash('message', 'Термин удален');
         // После успешного обновления перенаправляем пользователя обратно на страницу редактирования словаря
-        res.redirect(`/dictionaries/dictionariesList/${id}`);
+        res.redirect(`/words/termList/${id}`);
         // res.redirect(`/dictionaries`);
 
     } catch (error) {
@@ -456,6 +390,7 @@ exports.deleteWord = async (req, res) => {
         res.redirect('/dictionaries');
     }
 };
+
 
 // Контроллер для удаления изображения термина
 exports.deleteWordImg = async (req, res) => {
@@ -577,29 +512,52 @@ exports.deleteWordAudio = async (req, res) => {
     }
 };
 
-// Контроллер для отображения страницы редактирования слова
-exports.getEditWordPage = async (req, res) => {
+
+
+
+// // Контроллер для отображения страницы с терминами раздела
+exports.getDictionaryById = async (req, res) => {
     try {
-        const wordId = req.params.id;
-        const dictionaryId = req.query.dictionaryId;
+        const dictionaryId = req.params.id;
         const dictionary = await Dictionary.findById(dictionaryId);
         if (!dictionary) {
             // Если словарь не найден, возвращаем страницу с сообщением об ошибке
-            req.flash('message', 'Раздел не найден');
+            req.flash('message', 'Раздел не найден 5');
             return res.redirect('/dictionaries');
         }
-        const word = dictionary.words.id(wordId);
-        if (!word) {
-            req.flash('message', 'Термин не найден');
-            return res.redirect('/dictionaries');
-        }
-        res.render('editWord', { word, dictionaryId });
+        res.render('termList', { dictionary, dictionaryId: dictionaryId, messages: req.flash('message') });
     } catch (error) {
         console.error(error);
         req.flash('message', 'Что-то пошло не так. Попробуйте ещё раз');
         res.redirect('/dictionaries');
     }
 };
+
+
+
+// Контроллер для отображения страницы редактирования слова
+// exports.getEditWordPage = async (req, res) => {
+//     try {
+//         const wordId = req.params.id;
+//         const dictionaryId = req.query.dictionaryId;
+//         const dictionary = await Dictionary.findById(dictionaryId);
+//         if (!dictionary) {
+//             // Если словарь не найден, возвращаем страницу с сообщением об ошибке
+//             req.flash('message', 'Раздел не найден');
+//             return res.redirect('/dictionaries');
+//         }
+//         const word = dictionary.words.id(wordId);
+//         if (!word) {
+//             req.flash('message', 'Термин не найден');
+//             return res.redirect('/dictionaries');
+//         }
+//         res.render('editWord', { word, dictionaryId });
+//     } catch (error) {
+//         console.error(error);
+//         req.flash('message', 'Что-то пошло не так. Попробуйте ещё раз');
+//         res.redirect('/dictionaries');
+//     }
+// };
 
 // Контроллер для проигрывания аудиофайла
 // exports.playAudio = async (req, res) => {
@@ -639,7 +597,7 @@ exports.getEditWordPage = async (req, res) => {
 
 
         
-//         // res.redirect(`/dictionariesList`);
+//         // res.redirect(`/termList`);
 //     } catch (error) {
 //         console.error(error);
 //         req.flash('message', 'Что-то пошло не так. Попробуйте ещё раз');

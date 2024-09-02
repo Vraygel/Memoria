@@ -6,16 +6,10 @@ const userSchema = new mongoose.Schema({
 	password: String,
 	username: String,
 	userstatus: String,
-	dateRegistration: Object,
+	dateRegistration: String,
 	balance: {
 		balanceAllTime: Number,
 		memoCoin: Number,
-	},
-	dictionaries: {
-		dictionariesСreated: Number,
-	},
-	words: {
-		wordsСreated: Number,
 	},
 	contactinfo: {
 		email: {

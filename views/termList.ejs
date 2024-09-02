@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Сайт для интервального повторения информации. Поможет вам эффективно запоминать любую информацию и иностранные слова.">
+    <meta name="keywords"
+        content="интервальное повторение, запоминание информации, запоминание слов, запоминание иностранных слов, обучение, эффективное обучение, обучение с помощью интервалов, обучение с повторениями">
+    <meta name="author" content="Райгель Владимир Александрович VRaygel">
+    <link rel="icon" href="./favicon.png" type="image/png">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Memboost <%= dictionary.name %></title>
+</head>
+
+<body>
+        <%- include('menu.ejs') %>
+
+                    <section class="section glossarys">
+                        <nav class="sections__nav">
+                            <ul class="section__nav-list flex">
+                                <li><a class="sections__nav-link" href="/words/addTerm/<%= dictionary._id %>">Новый термин</a></li>
+                                <li><a class="sections__nav-link" href="">Импорт Excel</a></li>
+                            </ul>
+                        </nav>
+            
+                        <h1 class="sections__title_invisible">Интервальное повторение:
+                            Ключ к Эффективному Запоминанию Иностранных Языков</h1>
+            
+                        <h2 class="sections__title">Термины <%= dictionary.name %>:</h2>
+
+                        <ul class="section__list">
+                    <% if (dictionary.words.length> 0) { %>
+                        <% dictionary.words.forEach(word=> { %>
+
+                         
+                                
+                                        <!-- <div class="purchase">
+                                            <form class="deleteProfil" action="/study/studyWord/<%= word._id %>" method="GET">
+                                                <button class="delete-button" type="submit"><a>Запоминать</a></button>
+                                            </form>
+                                            <form class="deleteProfil"
+                                                action="/words/editWord/<%= word._id %>?dictionaryId=<%= dictionary._id %>"
+                                                method="GET">
+                                                <input type="hidden" name="dictionaryId" value="<%= dictionary._id %>">
+                                                <button class="delete-button "
+                                                    type="submit"><a>Редактировать</a></button>
+                                            </form>
+                                            <form class="deleteProfil" action="/words/deleteWord/<%= word._id %>"
+                                                method="POST" onsubmit="return confirm('Вы уверены?')">
+                                                <button class="delete-button" type="submit"><a>Удалить
+                                                        термин</a></button>
+                                            </form>
+                                        </div> -->
+
+                                            <!-- <% if (word.img.availability) { %>
+                                                    <img class="wordImage" id="wordImage" url="/uploads/<%= word.img.wordFileOriginalname %>" src="/image/izobrazhenie_klq4db96jdce_128.png" alt="Image">
+                                                <% } %>
+                                                
+                                                <% if (word.audio.availability) { %>
+                                                    <span class="wordAudio" src="/uploads/<%= word.audio.wordFileOriginalname %>">
+                                                        <img class="wordAudio" src="/image/zvuk_uk29og0kj2cx_128.png" alt="Audio">
+                                                    </span>
+
+                                                <% } %> -->
+
+                
+                    <li class="section__list-item">
+                        <nav class="sections__nav">
+                            <ul class="section__nav-list flex">
+                                <% if (word.enum == 'new') { %>
+                                <li><a class="sections__nav-link" href="/study/studyWord/<%= word._id %>">Учить</a></li>
+                                <% } %>
+                                
+                                <li><a class="sections__nav-link" href="/words/editWord/<%= word._id %>">Редактировать</a></li>
+                                <li><a class="sections__nav-link sections__nav-link-delete" href="/words/deleteWord/<%= word._id %>">Удалить</a></li>
+                            </ul>
+                        </nav>
+    
+                        <ul class="sections__list-information flex">
+                            <li><time class="sections__list-time" datetime="2023-23-15">Дата создания: <%= word.dateCreated %></time></li>
+                            <li class="sections__list_last-item"><time class="sections__list-time" datetime="2023-23-15">Дата следующего
+                                    повторения: <%= word.formattedDate %></time></li>
+                        </ul>
+                        <% if (word.termLink) { %>
+                            <a class="sections__link sections__link-margin" href="<%= word.termLink %>">Перейти по ссылке</a>
+                        <% } %>
+                            
+                        <div class="glossary flex">
+                            <p class="glossary__term glossary__text"><%= word.word %></p>
+                            <p class="glossary__definition glossary__text"><%= word.translation %></p>
+                            
+                        </div>
+                    </li>
+                    <% }); %>
+                </ul>
+    
+            </section>
+
+
+
+
+
+           
+            <% } else { %>
+                <p>В этом разделе нет терминов.</p>
+                <% } %>
+
+            <%- include('footer.ejs') %>
+               
+<%- include('template.ejs') %>
+<script src="/js/script.js"></script>
+</body>
+
+</html>

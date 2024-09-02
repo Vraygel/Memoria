@@ -17,18 +17,69 @@
 <body>
     <%- include('template.ejs') %>
         <%- include('menu.ejs') %>
-            <div class="container">
-                <h1>Авторизация</h1>
-                <form class="login" action="/auth/login" method="post">
-                    <label for="email">Логин:</label>
-                    <input type="text" name="userlogin" placeholder="userlogin" required>
-                    <label for="email">Пароль:</label>
-                    <input type="password" name="password" placeholder="Password" autocomplete="current-password"
-                        required>
-                    <a class="forgot-password" href="/password/forgotPassword">Забыли пароль?</a>
-                    <button class="login-button" type="submit">Вход</button>
-                </form>
+        <div class="section section_login">
+            <div class="header__item-inner header__item-login">
+                <a class="header__link header__link-login" href="#">Регистрация</a>
+                <a class="header__link header__link-signup" href="#">Авторизация</a>
             </div>
+
+            <div class="container">
+
+                <form class="section__form section__form-login" action="/auth/login" method="post">
+                    <h2 class="sections__title">Авторизация:</h2>
+                    <label class="sections__form-label" for="userlogin">Логин:</label>
+                    <input class="sections__form-input" type="text" name="userlogin" placeholder="Логин" required="">
+
+
+                    <div class="section__form-password-container flex">
+                        <label class="sections__form-label" for="password">Пароль:</label>
+                        <input class="sections__form-input" id="password" type="password" name="password_login" placeholder="Пароль"
+                            required="">
+                        <button type="button" class="toggle-password">Показать</button>
+                    </div>
+
+                    <a class="sections__link sections__link-forgot" href="/password/forgotPassword">Забыли пароль?</a>
+                    <button class="sections__form-btn" type="submit">Авторизоваться</button>
+                </form>
+
+
+                <form class="section__form section__form-register" action="/auth/register" method="post">
+                    <h2 class="sections__title">Регистрация:</h2>
+                    <label class="sections__form-label" for="username">Имя:</label>
+                    <input class="sections__form-input" type="text" name="username" placeholder="Имя" required="">
+                    <label class="sections__form-label" for="userlogin">Логин:</label>
+                    <input class="sections__form-input" type="text" name="userlogin" placeholder="Логин" required="">
+
+                    <div class="section__form-email-container flex">
+                        <label class="sections__form-label" for="email">Email:</label>
+                        <input class="sections__form-input sections__form-input-email" type="email" name="email" placeholder="Email"
+                            id="email">
+                        <span class="sections__form-error-message" id="emailErrorMessage">Некорректный формат email</span>
+                    </div>
+
+                    <div class="section__form-password-container flex">
+                        <label class="sections__form-label" for="password">Пароль:</label>
+                        <input class="sections__form-input sections__form-password sections__form-password-first" type="password"
+                            name="password" placeholder="Пароль" required="">
+                        <button type="button" class="toggle-password">Показать</button>
+                    </div>
+
+                    <div class="section__form-password-container flex">
+                        <label class="sections__form-label" for="password_confirm">Проверка пароля:</label>
+                        <!-- <span class="sections__form-error-message sections__form-error-message-password">Пароли не совпадают</span> -->
+                        <input class="sections__form-input sections__form-password sections__form-password-second" type="password"
+                            name="password_confirm" placeholder="Пароль" required="">
+                        <button type="button" class="toggle-password">Показать</button>
+                    </div>
+
+
+                    <button class="sections__form-btn" type="submit">Зарегистрироваться</button>
+                </form>
+
+
+            </div>
+        </div>
+
             <%- include('footer.ejs') %>
 </body>
 

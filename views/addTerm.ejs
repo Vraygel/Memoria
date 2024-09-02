@@ -11,7 +11,7 @@
 	<meta name="author" content="Райгель Владимир Александрович VRaygel">
 	<link rel="icon" href="./favicon.png" type="image/png">
 	<link rel="stylesheet" href="/css/style.css">
-	<title>Memboost Редактировать термин</title>
+	<title>Memboost Добавить новый термин</title>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 			<h2 class="sections__title">Новый термин: <%= dictionary.name %></h2>
 
 
-			<form class="section__form--add-new-term updateDictionary" action="/words/editWord/<%= word._id %>"
+			<form class="section__form--add-new-term updateDictionary" action="/words/addWord/<%= dictionary._id %>"
 				method="POST" enctype="multipart/form-data">
 				<div class="section__form--wrapper">
 
@@ -44,13 +44,18 @@
 					</div>
 
 					<label class="section__label" for="new_term">Термин:</label>
-					<textarea class="section__desc" id="new_term" name="word" required=""><%= word.word %></textarea>
+					<textarea class="section__desc" id="new_term" name="word" ></textarea>
 
-					<label class="section__label" for="new_definition">Определение:</label>
-					<textarea class="section__desc" id="translation" name="translation" required=""><%= word.translation %></textarea>
+					<label class="section__label" for="translation">Определение:</label>
+					<textarea class="section__desc" id="translation" name="translation"></textarea>
+
+					<label class="section__label" for="term__link">Ссылка:</label>
+					<input class="sections__form-input" id="term__link" name="term__link">
+
 
 				</div>
 
+				<button class="section__btn section__btn_wide section__btn-add_form">+</button>
 				<button class="section__btn section__btn_wide" type="submit">Сохранить</button>
 
 			</form>
