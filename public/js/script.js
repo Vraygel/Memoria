@@ -4,17 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-	let hamburger = document.querySelector('.hamburger')
-
-	hamburger.addEventListener('click', () => {
-		toggleMenu(hamburger)
-	})
-	
-	function toggleMenu(hamburger) {
-		hamburger.classList.toggle('is-active');
-	}
-	
-
 // перенести в приложение
 
 let glossary = document.querySelectorAll('.glossary');
