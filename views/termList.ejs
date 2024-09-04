@@ -9,7 +9,7 @@
     <meta name="keywords"
         content="интервальное повторение, запоминание информации, запоминание слов, запоминание иностранных слов, обучение, эффективное обучение, обучение с помощью интервалов, обучение с повторениями">
     <meta name="author" content="Райгель Владимир Александрович VRaygel">
-    <link rel="icon" href="./favicon.png" type="image/png">
+    <link rel="icon" href="/image/favicon.ico" type="image/png">
     <link rel="stylesheet" href="/css/style.css">
     <title>Memboost <%= dictionary.name %></title>
 </head>
@@ -84,7 +84,7 @@
                                     повторения: <%= word.formattedDate %></time></li>
                         </ul>
                         <% if (word.termLink) { %>
-                            <a class="sections__link sections__link-margin" href="<%= word.termLink %>">Перейти по ссылке</a>
+                            <a class="sections__link sections__link-margin" href="<%= word.termLink %>" target="_blank">Перейти по ссылке</a>
                         <% } %>
                             
                         <div class="glossary flex">
