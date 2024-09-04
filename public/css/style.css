@@ -713,6 +713,10 @@ margin-bottom: 40px;
 		font-size: 2vw;
 	}
 
+	.section__form-login, .section__form-register, .section__form-password {
+     width: 100%;
+}
+
 }
 
 @media screen and (min-width: 340px) and (max-width: 767px) {
@@ -722,6 +726,10 @@ margin-bottom: 40px;
 		font-size: 3vw;
 
 	}
+
+	.section__form-login, .section__form-register, .section__form-password {
+		width: 100%;
+}
 }
 
 @media screen and (max-width: 339px) {
@@ -729,4 +737,8 @@ margin-bottom: 40px;
 		width: 100%;
 		font-size: 4.71vw;
 	}
+
+	.section__form-login, .section__form-register, .section__form-password {
+		width: 100%;
+}
 }
