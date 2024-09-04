@@ -65,6 +65,7 @@ body {
  text-align: center;
  padding: 10px 20px;
  background-color: #535353;
+ font-size: 16px;
  border: none;
  border-radius: 8px;
  cursor: pointer;
@@ -423,8 +424,15 @@ margin-bottom: 40px;
  flex-direction: column;
  border: 2px solid #222222;
  border-radius: 8px;
+
+ 
+
+
+ /* transition: all 600ms ease-out;  */
  -webkit-backface-visibility: hidden;
  backface-visibility: hidden;
+
+ /* transform-style: preserve-3d; */
 }
 
 .form-rotate {
@@ -696,48 +704,6 @@ margin-bottom: 40px;
 }
 
 
-.hamburger {
-	cursor: pointer;
-	width: 40px;
-	height: 30px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	transition: all 0.3s ease-in-out;
-}
-
-.line {
-	height: 5px;
-	background-color: #333;
-	transition: all 0.3s ease-in-out;
-}
-
-#hamburger-11.is-active {
-	animation: smallbig 0.6s forwards;
-}
-
-@keyframes smallbig {
-	0%, 100% {
-			transform: scale(1);
-	}
-	50% {
-			transform: scale(0);
-	}
-}
-
-#hamburger-11.is-active .line:nth-child(2) {
-	opacity: 0;
-}
-
-#hamburger-11.is-active .line:nth-child(1) {
-	transform: translateY(13px) rotate(45deg);
-}
-
-#hamburger-11.is-active .line:nth-child(3) {
-	transform: translateY(-13px) rotate(-45deg);
-}
-
-
 
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
@@ -746,10 +712,6 @@ margin-bottom: 40px;
 		width: 100%;
 		font-size: 2vw;
 	}
-
-	.section__form-login, .section__form-register, .section__form-password {
-		width: 100%;
-	 }
 
 }
 
@@ -760,10 +722,6 @@ margin-bottom: 40px;
 		font-size: 3vw;
 
 	}
-
-	.section__form-login, .section__form-register, .section__form-password {
-		width: 100%;
-	 }
 }
 
 @media screen and (max-width: 339px) {
@@ -771,8 +729,4 @@ margin-bottom: 40px;
 		width: 100%;
 		font-size: 4.71vw;
 	}
-
-	.section__form-login, .section__form-register, .section__form-password {
-		width: 100%;
-	 }
 }
